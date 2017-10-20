@@ -1,0 +1,23 @@
+TITLE:
+Title: JFF LCA 2017 EFA Up to 6 Factors;
+DATA:
+FILE = "../mplus/03_Analyses_141a038a200881837de99056ea9679ef.dat";
+ 
+VARIABLE:
+NAMES = id mastercompR nextcompR rubricR onlinecompR projcredR interncredR smallgrpR
+     teachdifR choosehowR retakeR demolearnR adviceR trackprogR ontimeR prepgradR; 
+ MISSING=.;
+ 
+  Missing are all (-99, -9, -8, -1);
+  IDVARIABLE is id;
+  ! removed givlecturR;
+  !Categorical = progcompR;
+  !mastercompR;
+  !nextcompR;
+  !samecompR;
+  !futureR;
+  !shareexampR;
+  !gradeworkR;
+  !rubricR;
+ANALYSIS:
+TYPE =  EFA 1 6;

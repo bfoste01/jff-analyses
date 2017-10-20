@@ -1,6 +1,15 @@
 ---
 title: "02_Data Munging"
-output: html_notebook
+author: "Brandon Foster, Ph.D."
+date: "`r format(Sys.time(), '%d %B, %Y, %H:%M')`"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    theme: paper
+  html_notebook:
+    number_sections: yes
+    toc: yes
 ---
 
 This script should walk the user through all of the steps necessary to clean and transform the final data frames for any analyses. 
@@ -9,23 +18,14 @@ This script should walk the user through all of the steps necessary to clean and
  knitr::opts_knit$set(root.dir = 'rmds')
  ```
 
-```{r}
+```{r, messages=FALSE, warning=FALSE}
 # Load the csv data and tidy it ----
-read_csv("data/.csv") %>%
-  select() %>%
-  filter() %>%
-  mutate() %>%
-  dmap_if(is.character, factor) %>%
+efa.data <- spss.dat %>%
+  dplyr::select(id, mastercompR, nextcompR, rubricR, onlinecompR, projcredR, interncredR,
+  smallgrpR, teachdifR, choosehowR, retakeR, demolearnR, adviceR, trackprogR, ontimeR, prepgradR)
+
 # Save the tidy-ed data ----
-  saveRDS(file = "data/tidy.rds")
-
-# Load the tidy-ed data ----
-readRDS("data/tidy.rds") %>%
-# Transform the data
-
-# Save the transformed data ----
-saveRDS("data/transformed.rds")
-
+  saveRDS(efa.data, file = "../data/efa.tidy.rds")
 ```
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
