@@ -1,0 +1,28 @@
+---
+title: "01_Data Import"
+author: "NAME"
+date: "`r format(Sys.time(), '%d %B, %Y, %H:%M')`"
+knit: (function(inputFile, encoding) { 
+      out_dir <- 'reports';
+      rmarkdown::render(inputFile,
+                        encoding=encoding, 
+                        output_file=file.path(dirname(inputFile), out_dir, 'analysis.html')) })
+output:
+  html_document:
+  	theme: paper
+    number_sections: yes
+    toc: yes
+---
+
+This notebook should walk the user through the steps taken to import all of the raw data files. Despite this script typically being quite short, I find it useful to present it in the format of an R Notebook for easier reading. 
+
+```{r}
+# Import the raw data in csv ----
+read_csv("data/") %>%
+  write.csv("data/", row.names = F)
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
