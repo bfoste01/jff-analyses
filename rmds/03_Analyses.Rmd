@@ -3,10 +3,12 @@ title: "03_Analyses"
 author: "Brandon Foster, Ph.D."
 date: "`r format(Sys.time(), '%d %B, %Y, %H:%M')`"
 output:
-  html_document:
-    df_print: paged
-    toc: yes
-    theme: paper
+  rmdformats::html_clean:
+    self_contained: true
+    thumbnails: true
+    lightbox: true
+    gallery: false
+    highlight: tango
   html_notebook:
     number_sections: yes
     toc: yes
@@ -22,7 +24,7 @@ results <- list()
 readRDS("../data/efa.tidy.rds") -> efa.data
 
 # Load packages ----
-pacman::p_load(MplusAutomation, GPArotation, corrplot)
+pacman::p_load(MplusAutomation, GPArotation, corrplot, psych, tidyverse)
 
 # Specific munging and transformations ----
 items <- efa.data %>% 
@@ -30,11 +32,18 @@ items <- efa.data %>%
 
 # standardize items
 d_items = as.data.frame(scale(items))
+
+# Document options ----
+panderOptions('digits', 2)
+panderOptions('round', 2)
+panderOptions('keep.trailing.zeros', TRUE)
 ```
 
 # Descriptives & Graphics
 
-```{r, descriptives, warning=FALSE, message=FALSE, echo=TRUE, tidy=TRUE}
+Let's take a look at the descriptive statistics for each item in the analysis. 
+
+```{r, descriptives.items, warning=FALSE, message=FALSE, echo=TRUE, tidy=TRUE}
 # Descriptives ----
 
 # item descriptives
@@ -44,14 +53,14 @@ items <- efa.data %>%
 # descriptives
 item.stats <- describe(items)
 pander(item.stats)
+```
 
-# correlations
-item.cors <- lowerCor(items)
-pander(item.cors)
-
+Next, let's examine some visualizations for the correlation matrices. 
+```{r, descriptives.cors, warning=FALSE, message=FALSE, echo=TRUE, tidy=TRUE}
 # Graphics ----
 
 # munge the correlation matricies 
+source("../functions/functions.R")
 cormat <- reorder_cormat(item.cors)
 upper_tri <- get_upper_tri(cormat)
 
@@ -59,7 +68,6 @@ upper_tri <- get_upper_tri(cormat)
 melted_cormat <- melt(upper_tri, na.rm = TRUE)
 
 # Create a ggheatmap
-source("../functions/functions.R")
 p.items.heatmap <- ggplot(melted_cormat, aes(Var2, Var1, fill = value))+
  geom_tile(color = "white")+
  scale_fill_gradient2(low = "red", high = "green", 
@@ -76,6 +84,8 @@ results <- list(p.items.heatmap)
 corrplot(cor(na.omit(items)), order = "hclust", tl.col='black', tl.cex=.75) 
 ```
 
+Results generally show that all items are moderately related. Further, the givelecture item is completely uncorrelated with all other items in the measure. 
+
 # Exploratory Factor Analysis
 
 The following code will run an EFA analyses of the item level data in MPlus. R interfaces with MPlus via the 'MplusAutomation' package. As such, the code to execute the exploratory factor analyses is written in MPlus notation. The code that follows will examine the potential for up to 6 factors. The rotation utilized assumes that factors are correlated. 
@@ -88,42 +98,226 @@ The model described below shows the unidimensional model with maximum likelihood
 efa.1 <- fa(d_items, 1, fm="ml")
 efa.1
 ```
+
 The loading pattern in the unidimensional solution shows a moderate degree of variation, with two items having loadings greater than .70 (e.g., trackprogR and ontimeR). For these items, almost 60% of the variance in these items can be attributed to the factor model. Most of the items have loadings around .50 (see h2 in the output for the communalities). Only one item show a loading below .30, which is givelecture, and is actually negatively (i.e., -.15) associated with the factor, meaning it is likely not related to the central construct. The proportion of the total variation explained by the three factors is 30%. The uniqueness value for most items is > .70, indicating that the variance accounted for in most of the items is unaccounted for by the unidimensional factor structure. There is likely a better factor solution that explains the correlation matrix for the items. 
 
 ## Multiple Factors EFA
+
+Now let's look at some multidimensional EFA models to see we can establish the proper number of factors to retain in subsequent analyses. 
+
 ```{r, efa.multiple, messages=FALSE, warning=FALSE, tidy=FALSE}
-# find factor solutions for 1-6 factors using a oblimin rotation
+# find factor solutions for 2-6 factors using a oblimin rotation
 efa.2.6.oblimin <- lapply(2:6, function(x) {fa(d_items, nfactors=x, fm="ml", rotate = "oblimin")})
 efa.2 <- efa.2.6.oblimin[[2]]
+efa.2
 efa.3 <- efa.2.6.oblimin[[3]]
+efa.3
 efa.4 <- efa.2.6.oblimin[[4]]
+efa.4
 efa.5 <- efa.2.6.oblimin[[5]]
+efa.5
 ```
-Tie for 4 to 5 factors
+Results show that either a 4 or 5 factor model best fits the data. 
 
 ## Bifactor Model
-```{r, efa.bifac.4, messages=FALSE, warning=FALSE, tidy=TRUE}
+
+The results above indicate that a four to five factor model best replicated the correlation matrix for the items. However, because these factors are theoretically related to a larger "implementation" factor, it is appropriate to examine how each item might relate to its own specific factor, and the larger second-order factor. As such, the bifactor model is appropriate to examine. In the bifactor model, for each item, the general factor and first-order structure compete to account for the variance in the item. First-order factors are assumed to not correlate. 
+
+Questions you can answer with a bifactor model: 
+
+- How unidimensional vs. multidimensional is the instrument?
+
+- Is it permissible to model an instrument as unidimensional in the presence of some unidimensonality?
+
+- Is the raw total score a reliable enough measure of the general factor? Are the raw subscale scores reliable enough to be a measure of the specific factor. 
+
+Run the factor models
+```{r, efa.bifac, messages=FALSE, warning=FALSE, tidy=TRUE}
 # Bifactor EFA models ----
 # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2981404/
 # general factor for all variables and a set of residualized group factors (Schmid and Leiman (1957))
 efa.4.5.bifac <- lapply(4:5, function(x) {omega(d_items, nfactors=x, sl=TRUE)})
 efa.4.bifac <- efa.4.5.bifac[[1]]
 efa.5.bifac <- efa.4.5.bifac[[2]]
-
-test.4<-omega(d_items, nfactors=4, sl=TRUE)
-fa.diagram(test.4,cut=.4,digits=2)
 ```
-4 factor bifactor model fits best
+
+### Model Fit
+Results from the model fit table below show that the bifactor model with 4-first order factors fit the data best, as it showed the lowest BIC and RMSEA values. 
+
+```{r, efa.bifac.model.fit, messages=FALSE, warning=FALSE, tidy=TRUE}
+# Compile model statistics ----
+efa.bifac.fit <- tibble(
+  Model = c("Bifactor with 4 first-order factors", "Bifactor with 5 first-order factors"),
+  RMSEA = c(efa.4.bifac[6]$schmid$RMSEA[1], efa.5.bifac[6]$schmid$RMSEA[1]),
+  "Lower RMSEA" = c(efa.4.bifac[6]$schmid$RMSEA[2], efa.5.bifac[6]$schmid$RMSEA[2]),
+  "Upper RMSEA" = c(efa.4.bifac[6]$schmid$RMSEA[3], efa.5.bifac[6]$schmid$RMSEA[3]), 
+  BIC = c(efa.4.bifac[6]$schmid$BIC, efa.5.bifac[6]$schmid$BIC),
+  "Explained Common Variance" = c(efa.4.bifac$ECV, efa.5.bifac$ECV)
+)
+
+# convert table to markdown
+t.efa.bifac.fit <- pander(efa.bifac.fit)
+t.efa.bifac.fit
+```
+
+### Model Estimated Reliability
+
+Examining the model estimated reliabilities are useful for understanding whether the instruments total and subscale scores represent their respective constructs.
+
+**Omega Total** = Proportion of the total score variance that can be attributed to to all common factors. It also can be interpreted as the reliability of the multidimensional total composite score. 
+
+**Omega Subscale** = Proportion of subscale score variability that can be attributed to all common factors (i.e., the general + the specific factor). 
+
+**Omega Hierarchical** = The proportion of the total score variance that can be attributed to the general factor *after* accounting for for all specific factors. Degree to which the total score reflects the target dimension (shoot for .75). 
+
+**Omega Hierarchical Subscale** = The proportion of unique variance that can be accounted for by the specific factor *after* accounting for the general factor. Is an indicator of the degree to which the subscale score measures the target dimension. 
+
+```{r, efa.bifac.model.rel, messages=FALSE, warning=FALSE, tidy=TRUE}
+# Compile model reliabilities ----
+efa.bifac.rel <- efa.4.bifac$omega.group %>%
+  rename("Omega Total" = total, "Omega Hierarchical" = general)
+efa.bifac.rel
+
+# convert table to markdown
+efa.bifac.rel <- pander(efa.bifac.rel)
+efa.bifac.rel
+```
+
+Results show that in general a total score will adequately represent the second-order factor. Of particular note are the \omega Hierarchical values for the subscales, which show that Factor 1 and Factor 4 contain a moderate degree of factor specific variability, with values > .50. The moderate \omega Hierarchical values for these factors indicates that total scores for these subscales contains some unique factor-specific information.  
+
+## Examining the 4 first-order factors in depth
+
+Hints that you might have a bifactor model: 
+
+- Are correlations of subscale scores > .3.
+
+- First order factor loadings > .5. 
+
+- Ratio of first eigen value to second eigenvalue is > 3. 
+
+
+Interpreting: 
+
+- Explained Common Variance of the general factor is an indication of how unidimensional the measure is. Quinn (2014) suggests that ECV > .90 suggests a 1-factor model, ECV < .70 indicators that the subscores might have some value, and an ECV = 0 is completely multidimensional. 
+
+- Look at general vs. specific loadings (what is the balance between the two?)
+
+```{r, efa.bifac.4, messages=FALSE, warning=FALSE, tidy=TRUE}
+# print results for the 4 factor bifactor model 
+efa.4.bifac
+```
+
+```{r, efa.bifac.4.iecv, messages=FALSE, warning=FALSE, tidy=TRUE, echo=FALSE}
+# Calculate IECV for the model ----
+
+# create table for IECV
+iecv.efa.4.bifac <- tibble(
+  item = colnames(items), 
+  G = efa.4.bifac[6]$schmid$sl[,1],
+  F1= efa.4.bifac[6]$schmid$orthog[,1],
+  F2= efa.4.bifac[6]$schmid$orthog[,2],
+  F3= efa.4.bifac[6]$schmid$orthog[,3],
+  F4= efa.4.bifac[6]$schmid$orthog[,4])
+# set values < .20 to missing
+iecv.efa.4.bifac[ iecv.efa.4.bifac <= .20 ] <- NA
+
+# calculate the IECV and add to the dataframe
+iecv.efa.4.bifac <- add_column(iecv.efa.4.bifac, 
+IECV.F1 = iecv.efa.4.bifac$G^2/(iecv.efa.4.bifac$G^2+iecv.efa.4.bifac$F1^2),
+IECV.F2 = iecv.efa.4.bifac$G^2/(iecv.efa.4.bifac$G^2+iecv.efa.4.bifac$F2^2),
+IECV.F3 = iecv.efa.4.bifac$G^2/(iecv.efa.4.bifac$G^2+iecv.efa.4.bifac$F3^2),
+IECV.F4 = iecv.efa.4.bifac$G^2/(iecv.efa.4.bifac$G^2+iecv.efa.4.bifac$F4^2)) 
+
+# create table of IECV for reports
+t.iecv.efa.4.bifac<- pander(iecv.efa.4.bifac)
+```
+
+```{r, efa.bifac.5, messages=FALSE, warning=FALSE, tidy=TRUE, echo=FALSE}
+# print results for the 4 factor bifactor model 
+efa.5.bifac
+
+# Calculate IECV for the model ----
+
+# create table for IECV
+iecv.efa.5.bifac <- tibble(
+  item = colnames(items), 
+  G = efa.5.bifac[6]$schmid$sl[,1],
+  F1= efa.5.bifac[6]$schmid$orthog[,1],
+  F2= efa.5.bifac[6]$schmid$orthog[,2],
+  F3= efa.5.bifac[6]$schmid$orthog[,3],
+  F4= efa.5.bifac[6]$schmid$orthog[,4])
+# set values < .20 to missing
+iecv.efa.5.bifac[ iecv.efa.5.bifac <= .20 ] <- NA
+
+# calculate the IECV and add to the dataframe
+iecv.efa.5.bifac <- add_column(iecv.efa.5.bifac, 
+IECV.F1 = iecv.efa.5.bifac$G^2/(iecv.efa.5.bifac$G^2+iecv.efa.5.bifac$F1^2),
+IECV.F2 = iecv.efa.5.bifac$G^2/(iecv.efa.5.bifac$G^2+iecv.efa.5.bifac$F2^2),
+IECV.F3 = iecv.efa.5.bifac$G^2/(iecv.efa.5.bifac$G^2+iecv.efa.5.bifac$F3^2),
+IECV.F4 = iecv.efa.5.bifac$G^2/(iecv.efa.5.bifac$G^2+iecv.efa.5.bifac$F4^2)) 
+
+# create table of IECV for reports
+t.iecv.efa.5.bifac<- pander(iecv.efa.5.bifac)
+```
 
 ## Second Order Model
+
+The second order factor accounts for the relationship between the factors. 
 ```{r, efa.secondOrder, messages=FALSE, warning=FALSE, tidy=TRUE}
 # correlations between the factors to represent a higher order factor (Holzinger and Swineford (1937))
 efa.4.5.secondOrder <- lapply(4:5, function(x) {omega(d_items, nfactors=x, sl=FALSE)})
-efa.4.5.secondOrder[[1]]
-efa.4.5.secondOrder[[2]]
+efa.4.secondOrder <- efa.4.5.secondOrder[[1]]
+efa.4.secondOrder
+efa.5.secondOrder <- efa.4.5.secondOrder[[2]]
+efa.5.secondOrder
 ```
+
+# Item Information
+
+*Progression through demonstration of mastery*
+
+- mastercomp:	I must show my teachers that I have mastered each competency before I can move on to the next one.
+     
+- nextcomp:	I am able to move on to the next competency when I am ready, even if other students in the course are not ready.
+     
+- rubric:	My teachers give me a rubric so that I know how I am progressing on each competency.
+
+*Anytime, anywhere learning*
+
+- onlinecomp:	I am able to complete some or all of the course requirements online.
+
+- projcred:	If I complete a project that wasn't assigned at school but is related to a course I am taking, I can earn credit for the project in that course.
+     
+- interncred:	I can earn credit for completing an internship or job-shadowing in the community.
+
+*Personalization*
+
+- givelecture:	My teachers spend most of class time giving a lecture or presentation to the whole class.
+
+- smallgroup:	My teachers work with students in small groups or individually.
+
+- teachdiff:	My teachers teach the material in several different ways in order to help students learn.
+
+*Flexible assessment*
+
+- choosehow:	I have had opportunities to choose how to show my teachers what I have learned.
+
+- retake:	If I do poorly on an assignment on the first try, I can try again later.
+
+- demolearn:	To show that I have mastered a course competency, I must demonstrate my learning in more than one way.
+
+*Ownership/agency*
+
+- advice:	When I have trouble learning something new, my teachers give me advice and strategies that help me to stick with it.
+
+- trackprog:	Teachers show students how to keep track of their progress on each of the competencies.
+
+- ontime:	Teachers show students strategies for making sure all assignments are completed on time.
+
+- prepgrad:	I know which steps to take during high school in order to prepare for what to do after I graduate.
 
 ```{r, messages=FALSE, warning=FALSE}
 # Save the results object ----
-saveRDS(results, file = "data/results.rds")
+results <- list(efa.4.bifac, t.iecv.efa.4.bifac, t.efa.bifac.fit, efa.bifac.rel)
+#saveRDS(results, file = "data/results.rds")
 ```
