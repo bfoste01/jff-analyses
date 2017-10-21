@@ -1,30 +1,22 @@
 Mplus VERSION 8 (Mac)
 MUTHEN & MUTHEN
-10/20/2017   3:57 PM
+10/20/2017   6:16 PM
 
 INPUT INSTRUCTIONS
 
   TITLE:
   Title: JFF LCA 2017 EFA Up to 6 Factors;
   DATA:
-  FILE = "../mplus/03_Analyses_141a038a200881837de99056ea9679ef.dat";
+  FILE = "../mplus/03_Analyses_d4cfd3cd1ec77f098620d877105e23da.dat";
 
   VARIABLE:
   NAMES = id mastercompR nextcompR rubricR onlinecompR projcredR interncredR smallgrpR
-       teachdifR choosehowR retakeR demolearnR adviceR trackprogR ontimeR prepgradR;
+       teachdifR choosehowR retakeR demolearnR adviceR trackprogR ontimeR prepgradR
+       givlecturR;
    MISSING=.;
 
     Missing are all (-99, -9, -8, -1);
     IDVARIABLE is id;
-    ! removed givlecturR;
-    !Categorical = progcompR;
-    !mastercompR;
-    !nextcompR;
-    !samecompR;
-    !futureR;
-    !shareexampR;
-    !gradeworkR;
-    !rubricR;
   ANALYSIS:
   TYPE =  EFA 1 6;
 
@@ -49,7 +41,7 @@ SUMMARY OF ANALYSIS
 Number of groups                                                 1
 Number of observations                                        1823
 
-Number of dependent variables                                   15
+Number of dependent variables                                   16
 Number of independent variables                                  0
 Number of continuous latent variables                            0
 
@@ -58,7 +50,7 @@ Observed dependent variables
   Continuous
    MASTERCOMP  NEXTCOMPR   RUBRICR     ONLINECOMP  PROJCREDR   INTERNCRED
    SMALLGRPR   TEACHDIFR   CHOOSEHOWR  RETAKER     DEMOLEARNR  ADVICER
-   TRACKPROGR  ONTIMER     PREPGRADR
+   TRACKPROGR  ONTIMER     PREPGRADR   GIVLECTURR
 
 Variables with special functions
 
@@ -82,14 +74,14 @@ Rotation Algorithm
   Derivative convergence criterion                       0.100D-04
 
 Input data file(s)
-  ../mplus/03_Analyses_141a038a200881837de99056ea9679ef.dat
+  ../mplus/03_Analyses_d4cfd3cd1ec77f098620d877105e23da.dat
 
 Input data format  FREE
 
 
 SUMMARY OF DATA
 
-     Number of missing data patterns           377
+     Number of missing data patterns           384
 
 
 COVARIANCE COVERAGE OF DATA
@@ -118,6 +110,7 @@ Minimum covariance coverage value   0.100
  TRACKPRO       0.829         0.820         0.862         0.742         0.597
  ONTIMER        0.843         0.835         0.878         0.756         0.612
  PREPGRAD       0.820         0.813         0.855         0.738         0.592
+ GIVLECTU       0.877         0.870         0.920         0.788         0.633
 
 
            Covariance Coverage
@@ -133,6 +126,7 @@ Minimum covariance coverage value   0.100
  TRACKPRO       0.509         0.873         0.867         0.793         0.869
  ONTIMER        0.516         0.889         0.880         0.803         0.883
  PREPGRAD       0.506         0.863         0.859         0.779         0.862
+ GIVLECTU       0.536         0.938         0.927         0.829         0.918
 
 
            Covariance Coverage
@@ -143,6 +137,13 @@ Minimum covariance coverage value   0.100
  TRACKPRO       0.804         0.864         0.890
  ONTIMER        0.813         0.879         0.875         0.907
  PREPGRAD       0.791         0.856         0.843         0.861         0.884
+ GIVLECTU       0.837         0.905         0.879         0.895         0.872
+
+
+           Covariance Coverage
+              GIVLECTU
+              ________
+ GIVLECTU       0.954
 
 
 
@@ -184,12 +185,8 @@ UNIVARIATE SAMPLE STATISTICS
             1654.000       1.145      -0.525       4.000    6.53%       2.000      3.000
      PREPGRADR             2.356      -0.308       0.000    7.51%       1.000      2.000      2.000
             1611.000       1.322      -0.618       4.000   18.06%       3.000      3.000
-
-
-     NO CONVERGENCE.  NUMBER OF ITERATIONS EXCEEDED.
-     PROBLEM OCCURRED IN EXPLORATORY FACTOR ANALYSIS WITH 6 FACTOR(S).
-
-
+     GIVLECTURR            2.564      -0.417       0.000    2.76%       2.000      2.000      3.000
+            1740.000       0.885       0.050       4.000   15.52%       3.000      3.000
 
 
 SUMMARY OF MODEL FIT INFORMATION
@@ -198,20 +195,21 @@ SUMMARY OF MODEL FIT INFORMATION
                    Number of                   Degrees of
      Model        Parameters      Chi-Square    Freedom     P-Value
 
-     1-factor          45            807.822        90       0.0000
-     2-factor          59            495.710        76       0.0000
-     3-factor          72            216.687        63       0.0000
-     4-factor          84            114.140        51       0.0000
-     5-factor          95             54.976        40       0.0577
-     6-factor         N/A
+     1-factor          48            855.363       104       0.0000
+     2-factor          63            534.598        89       0.0000
+     3-factor          77            252.141        75       0.0000
+     4-factor          90            148.217        62       0.0000
+     5-factor         102             81.879        50       0.0030
+     6-factor         113             58.903        39       0.0213
 
                                                Degrees of
      Models Compared              Chi-Square    Freedom     P-Value
 
-     1-factor against 2-factor       312.111        14       0.0000
-     2-factor against 3-factor       279.024        13       0.0000
-     3-factor against 4-factor       102.547        12       0.0000
-     4-factor against 5-factor        59.165        11       0.0000
+     1-factor against 2-factor       320.765        15       0.0000
+     2-factor against 3-factor       282.457        14       0.0000
+     3-factor against 4-factor       103.924        13       0.0000
+     4-factor against 5-factor        66.337        12       0.0000
+     5-factor against 6-factor        22.977        11       0.0178
 
 
 
@@ -221,19 +219,25 @@ RESULTS FOR EXPLORATORY FACTOR ANALYSIS
            EIGENVALUES FOR SAMPLE CORRELATION MATRIX
                   1             2             3             4             5
               ________      ________      ________      ________      ________
-                5.343         1.287         0.937         0.836         0.817
+                5.369         1.308         1.013         0.931         0.832
 
 
            EIGENVALUES FOR SAMPLE CORRELATION MATRIX
                   6             7             8             9            10
               ________      ________      ________      ________      ________
-                0.767         0.728         0.691         0.658         0.615
+                0.793         0.762         0.726         0.689         0.658
 
 
            EIGENVALUES FOR SAMPLE CORRELATION MATRIX
                  11            12            13            14            15
               ________      ________      ________      ________      ________
-                0.564         0.533         0.493         0.448         0.282
+                0.615         0.558         0.525         0.492         0.448
+
+
+           EIGENVALUES FOR SAMPLE CORRELATION MATRIX
+                 16
+              ________
+                0.282
 
 
 EXPLORATORY FACTOR ANALYSIS WITH 1 FACTOR(S):
@@ -241,71 +245,72 @@ EXPLORATORY FACTOR ANALYSIS WITH 1 FACTOR(S):
 
 MODEL FIT INFORMATION
 
-Number of Free Parameters                       45
+Number of Free Parameters                       48
 
 Loglikelihood
 
-          H0 Value                      -31496.699
-          H1 Value                      -31092.788
+          H0 Value                      -33844.550
+          H1 Value                      -33416.868
 
 Information Criteria
 
-          Akaike (AIC)                   63083.398
-          Bayesian (BIC)                 63331.269
-          Sample-Size Adjusted BIC       63188.306
+          Akaike (AIC)                   67785.100
+          Bayesian (BIC)                 68049.495
+          Sample-Size Adjusted BIC       67897.001
             (n* = (n + 2) / 24)
 
 Chi-Square Test of Model Fit
 
-          Value                            807.822
-          Degrees of Freedom                    90
+          Value                            855.363
+          Degrees of Freedom                   104
           P-Value                           0.0000
 
 RMSEA (Root Mean Square Error Of Approximation)
 
-          Estimate                           0.066
-          90 Percent C.I.                    0.062  0.070
+          Estimate                           0.063
+          90 Percent C.I.                    0.059  0.067
           Probability RMSEA <= .05           0.000
 
 CFI/TLI
 
-          CFI                                0.891
-          TLI                                0.873
+          CFI                                0.887
+          TLI                                0.869
 
 Chi-Square Test of Model Fit for the Baseline Model
 
-          Value                           6681.239
-          Degrees of Freedom                   105
+          Value                           6758.435
+          Degrees of Freedom                   120
           P-Value                           0.0000
 
 SRMR (Standardized Root Mean Square Residual)
 
-          Value                              0.048
+          Value                              0.046
 
 
 
-MINIMUM ROTATION FUNCTION VALUE       4.71779
+MINIMUM ROTATION FUNCTION VALUE       4.73823
 
 
 
            GEOMIN ROTATED LOADINGS (* significant at 5% level)
                   1
               ________
- MASTERCO       0.514*
- NEXTCOMP       0.522*
- RUBRICR        0.438*
+ MASTERCO       0.515*
+ NEXTCOMP       0.524*
+ RUBRICR        0.436*
  ONLINECO       0.394*
- PROJCRED       0.499*
- INTERNCR       0.450*
- SMALLGRP       0.526*
+ PROJCRED       0.500*
+ INTERNCR       0.452*
+ SMALLGRP       0.527*
  TEACHDIF       0.671*
- CHOOSEHO       0.542*
- RETAKER        0.417*
- DEMOLEAR       0.593*
+ CHOOSEHO       0.543*
+ RETAKER        0.418*
+ DEMOLEAR       0.592*
  ADVICER        0.654*
- TRACKPRO       0.759*
+ TRACKPRO       0.758*
  ONTIMER        0.760*
- PREPGRAD       0.502*
+ PREPGRAD       0.501*
+ GIVLECTU      -0.141*
 
 
            GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
@@ -317,19 +322,25 @@ MINIMUM ROTATION FUNCTION VALUE       4.71779
            ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-                0.736         0.727         0.808         0.845         0.751
+                0.735         0.726         0.810         0.844         0.750
 
 
            ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-                0.797         0.723         0.550         0.706         0.826
+                0.796         0.722         0.550         0.705         0.825
 
 
            ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-                0.648         0.572         0.424         0.422         0.748
+                0.650         0.573         0.425         0.423         0.749
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+                0.980
 
 
            S.E. GEOMIN ROTATED LOADINGS
@@ -350,6 +361,7 @@ MINIMUM ROTATION FUNCTION VALUE       4.71779
  TRACKPRO       0.013
  ONTIMER        0.013
  PREPGRAD       0.020
+ GIVLECTU       0.026
 
 
            S.E. GEOMIN FACTOR CORRELATIONS
@@ -376,24 +388,31 @@ MINIMUM ROTATION FUNCTION VALUE       4.71779
                 0.022         0.021         0.019         0.019         0.020
 
 
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+                0.007
+
+
            Est./S.E. GEOMIN ROTATED LOADINGS
                   1
               ________
- MASTERCO      25.608
- NEXTCOMP      26.298
- RUBRICR       20.396
- ONLINECO      16.655
- PROJCRED      21.578
- INTERNCR      17.444
- SMALLGRP      27.075
- TEACHDIF      43.638
- CHOOSEHO      27.842
- RETAKER       19.199
- DEMOLEAR      32.705
- ADVICER       40.856
- TRACKPRO      59.139
- ONTIMER       59.948
- PREPGRAD      24.626
+ MASTERCO      25.645
+ NEXTCOMP      26.437
+ RUBRICR       20.300
+ ONLINECO      16.698
+ PROJCRED      21.625
+ INTERNCR      17.508
+ SMALLGRP      27.165
+ TEACHDIF      43.682
+ CHOOSEHO      27.919
+ RETAKER       19.249
+ DEMOLEAR      32.584
+ ADVICER       40.817
+ TRACKPRO      58.992
+ ONTIMER       59.762
+ PREPGRAD      24.565
+ GIVLECTU      -5.524
 
 
            Est./S.E. GEOMIN FACTOR CORRELATIONS
@@ -405,19 +424,25 @@ MINIMUM ROTATION FUNCTION VALUE       4.71779
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-               35.633        35.082        42.979        45.430        32.588
+               35.606        34.972        43.140        45.314        32.505
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-               34.263        35.318        26.708        33.400        45.548
+               34.137        35.255        26.712        33.362        45.482
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-               30.122        27.305        21.787        21.853        36.526
+               30.213        27.348        21.841        21.907        36.626
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+              136.278
 
 
 EXPLORATORY FACTOR ANALYSIS WITH 2 FACTOR(S):
@@ -425,41 +450,41 @@ EXPLORATORY FACTOR ANALYSIS WITH 2 FACTOR(S):
 
 MODEL FIT INFORMATION
 
-Number of Free Parameters                       59
+Number of Free Parameters                       63
 
 Loglikelihood
 
-          H0 Value                      -31340.643
-          H1 Value                      -31092.788
+          H0 Value                      -33684.167
+          H1 Value                      -33416.868
 
 Information Criteria
 
-          Akaike (AIC)                   62799.287
-          Bayesian (BIC)                 63124.273
-          Sample-Size Adjusted BIC       62936.832
+          Akaike (AIC)                   67494.335
+          Bayesian (BIC)                 67841.354
+          Sample-Size Adjusted BIC       67641.205
             (n* = (n + 2) / 24)
 
 Chi-Square Test of Model Fit
 
-          Value                            495.710
-          Degrees of Freedom                    76
+          Value                            534.598
+          Degrees of Freedom                    89
           P-Value                           0.0000
 
 RMSEA (Root Mean Square Error Of Approximation)
 
-          Estimate                           0.055
-          90 Percent C.I.                    0.050  0.060
-          Probability RMSEA <= .05           0.035
+          Estimate                           0.052
+          90 Percent C.I.                    0.048  0.057
+          Probability RMSEA <= .05           0.172
 
 CFI/TLI
 
-          CFI                                0.936
-          TLI                                0.912
+          CFI                                0.933
+          TLI                                0.909
 
 Chi-Square Test of Model Fit for the Baseline Model
 
-          Value                           6681.239
-          Degrees of Freedom                   105
+          Value                           6758.435
+          Degrees of Freedom                   120
           P-Value                           0.0000
 
 SRMR (Standardized Root Mean Square Residual)
@@ -468,86 +493,94 @@ SRMR (Standardized Root Mean Square Residual)
 
 
 
-MINIMUM ROTATION FUNCTION VALUE       0.97637
+MINIMUM ROTATION FUNCTION VALUE       0.96957
 
 
 
            GEOMIN ROTATED LOADINGS (* significant at 5% level)
                   1             2
               ________      ________
- MASTERCO       0.333*        0.259*
- NEXTCOMP       0.498*        0.136*
- RUBRICR       -0.012         0.460*
- ONLINECO       0.563*       -0.050
- PROJCRED       0.623*        0.005
- INTERNCR       0.553*        0.008
- SMALLGRP       0.162*        0.409*
- TEACHDIF       0.032         0.665*
- CHOOSEHO       0.215*        0.383*
- RETAKER        0.097         0.348*
- DEMOLEAR       0.288*        0.372*
- ADVICER       -0.182*        0.834*
- TRACKPRO       0.263*        0.559*
- ONTIMER        0.109         0.690*
- PREPGRAD      -0.135         0.629*
+ MASTERCO       0.350*        0.244*
+ NEXTCOMP       0.521*        0.116
+ RUBRICR       -0.011         0.461*
+ ONLINECO       0.562*       -0.053
+ PROJCRED       0.621*        0.005
+ INTERNCR       0.556*        0.004
+ SMALLGRP       0.187*        0.390*
+ TEACHDIF       0.058         0.647*
+ CHOOSEHO       0.235*        0.367*
+ RETAKER        0.115         0.336*
+ DEMOLEAR       0.292*        0.368*
+ ADVICER       -0.152         0.815*
+ TRACKPRO       0.266*        0.557*
+ ONTIMER        0.117         0.686*
+ PREPGRAD      -0.120         0.620*
+ GIVLECTU      -0.175*       -0.003
 
 
            GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
                   1             2
               ________      ________
       1         1.000
-      2         0.633*        1.000
+      2         0.623*        1.000
 
 
            ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-                0.713         0.649         0.795         0.717         0.608
+                0.711         0.640         0.794         0.718         0.611
 
 
            ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-                0.689         0.723         0.530         0.704         0.826
+                0.688         0.722         0.531         0.702         0.826
 
 
            ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-                0.642         0.463         0.432         0.418         0.694
+                0.646         0.468         0.434         0.416         0.693
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+                0.969
 
 
            S.E. GEOMIN ROTATED LOADINGS
                   1             2
               ________      ________
- MASTERCO       0.065         0.059
- NEXTCOMP       0.060         0.060
- RUBRICR        0.036         0.031
- ONLINECO       0.046         0.050
- PROJCRED       0.033         0.021
- INTERNCR       0.046         0.043
- SMALLGRP       0.068         0.054
- TEACHDIF       0.083         0.058
- CHOOSEHO       0.067         0.055
+ MASTERCO       0.064         0.058
+ NEXTCOMP       0.059         0.060
+ RUBRICR        0.034         0.029
+ ONLINECO       0.046         0.049
+ PROJCRED       0.037         0.030
+ INTERNCR       0.041         0.034
+ SMALLGRP       0.070         0.055
+ TEACHDIF       0.091         0.063
+ CHOOSEHO       0.068         0.055
  RETAKER        0.065         0.052
- DEMOLEAR       0.072         0.060
- ADVICER        0.089         0.054
- TRACKPRO       0.087         0.067
- ONTIMER        0.096         0.068
- PREPGRAD       0.074         0.049
+ DEMOLEAR       0.072         0.059
+ ADVICER        0.098         0.061
+ TRACKPRO       0.089         0.066
+ ONTIMER        0.100         0.070
+ PREPGRAD       0.080         0.052
+ GIVLECTU       0.047         0.044
 
 
            S.E. GEOMIN FACTOR CORRELATIONS
                   1             2
               ________      ________
       1         0.000
-      2         0.054         0.000
+      2         0.064         0.000
 
 
            S.E. ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-                0.023         0.027         0.020         0.030         0.034
+                0.023         0.028         0.020         0.030         0.034
 
 
            S.E. ESTIMATED RESIDUAL VARIANCES
@@ -562,69 +595,83 @@ MINIMUM ROTATION FUNCTION VALUE       0.97637
                 0.022         0.026         0.020         0.020         0.024
 
 
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+                0.010
+
+
            Est./S.E. GEOMIN ROTATED LOADINGS
                   1             2
               ________      ________
- MASTERCO       5.134         4.417
- NEXTCOMP       8.243         2.246
- RUBRICR       -0.339        15.032
- ONLINECO      12.114        -1.007
- PROJCRED      18.844         0.236
- INTERNCR      12.020         0.192
- SMALLGRP       2.392         7.628
- TEACHDIF       0.381        11.543
- CHOOSEHO       3.212         6.992
- RETAKER        1.495         6.654
- DEMOLEAR       4.018         6.167
- ADVICER       -2.055        15.314
- TRACKPRO       3.033         8.381
- ONTIMER        1.132        10.107
- PREPGRAD      -1.828        12.900
+ MASTERCO       5.485         4.231
+ NEXTCOMP       8.818         1.935
+ RUBRICR       -0.313        15.777
+ ONLINECO      12.290        -1.080
+ PROJCRED      16.994         0.152
+ INTERNCR      13.481         0.113
+ SMALLGRP       2.685         7.110
+ TEACHDIF       0.640        10.338
+ CHOOSEHO       3.479         6.676
+ RETAKER        1.756         6.418
+ DEMOLEAR       4.083         6.191
+ ADVICER       -1.552        13.400
+ TRACKPRO       3.004         8.376
+ ONTIMER        1.171         9.832
+ PREPGRAD      -1.504        11.898
+ GIVLECTU      -3.746        -0.061
 
 
            Est./S.E. GEOMIN FACTOR CORRELATIONS
                   1             2
               ________      ________
       1         0.000
-      2        11.689         0.000
+      2         9.770         0.000
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-               31.462        23.725        40.104        24.195        17.740
+               31.240        22.939        39.702        24.323        18.034
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-               20.961        35.486        24.510        33.253        45.702
+               20.949        35.406        24.604        33.148        45.688
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-               29.142        17.487        22.120        20.796        29.185
+               29.470        17.711        22.259        20.381        29.102
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+               92.760
 
 
            FACTOR STRUCTURE
                   1             2
               ________      ________
- MASTERCO       0.497         0.469
- NEXTCOMP       0.583         0.451
- RUBRICR        0.279         0.453
- ONLINECO       0.531         0.306
- PROJCRED       0.626         0.399
- INTERNCR       0.558         0.358
- SMALLGRP       0.421         0.511
- TEACHDIF       0.453         0.685
- CHOOSEHO       0.457         0.518
- RETAKER        0.318         0.410
- DEMOLEAR       0.524         0.555
- ADVICER        0.346         0.719
- TRACKPRO       0.617         0.725
- ONTIMER        0.545         0.759
- PREPGRAD       0.263         0.544
+ MASTERCO       0.502         0.462
+ NEXTCOMP       0.593         0.441
+ RUBRICR        0.276         0.454
+ ONLINECO       0.529         0.297
+ PROJCRED       0.624         0.392
+ INTERNCR       0.559         0.351
+ SMALLGRP       0.430         0.507
+ TEACHDIF       0.461         0.683
+ CHOOSEHO       0.464         0.514
+ RETAKER        0.324         0.407
+ DEMOLEAR       0.521         0.550
+ ADVICER        0.356         0.720
+ TRACKPRO       0.613         0.723
+ ONTIMER        0.544         0.759
+ PREPGRAD       0.267         0.546
+ GIVLECTU      -0.176        -0.112
 
 
 EXPLORATORY FACTOR ANALYSIS WITH 3 FACTOR(S):
@@ -632,209 +679,231 @@ EXPLORATORY FACTOR ANALYSIS WITH 3 FACTOR(S):
 
 MODEL FIT INFORMATION
 
-Number of Free Parameters                       72
+Number of Free Parameters                       77
 
 Loglikelihood
 
-          H0 Value                      -31201.132
-          H1 Value                      -31092.788
+          H0 Value                      -33542.939
+          H1 Value                      -33416.868
 
 Information Criteria
 
-          Akaike (AIC)                   62546.263
-          Bayesian (BIC)                 62942.856
-          Sample-Size Adjusted BIC       62714.115
+          Akaike (AIC)                   67239.878
+          Bayesian (BIC)                 67664.012
+          Sample-Size Adjusted BIC       67419.387
             (n* = (n + 2) / 24)
 
 Chi-Square Test of Model Fit
 
-          Value                            216.687
-          Degrees of Freedom                    63
+          Value                            252.141
+          Degrees of Freedom                    75
           P-Value                           0.0000
 
 RMSEA (Root Mean Square Error Of Approximation)
 
-          Estimate                           0.037
-          90 Percent C.I.                    0.031  0.042
+          Estimate                           0.036
+          90 Percent C.I.                    0.031  0.041
           Probability RMSEA <= .05           1.000
 
 CFI/TLI
 
-          CFI                                0.977
-          TLI                                0.961
+          CFI                                0.973
+          TLI                                0.957
 
 Chi-Square Test of Model Fit for the Baseline Model
 
-          Value                           6681.239
-          Degrees of Freedom                   105
+          Value                           6758.435
+          Degrees of Freedom                   120
           P-Value                           0.0000
 
 SRMR (Standardized Root Mean Square Residual)
 
-          Value                              0.023
+          Value                              0.024
 
 
 
-MINIMUM ROTATION FUNCTION VALUE       0.43006
+MINIMUM ROTATION FUNCTION VALUE       0.43152
 
 
 
            GEOMIN ROTATED LOADINGS (* significant at 5% level)
                   1             2             3
               ________      ________      ________
- MASTERCO       0.437*        0.306*       -0.090
- NEXTCOMP       0.285*        0.432*        0.008
- RUBRICR        0.398*       -0.027         0.080
- ONLINECO      -0.047         0.447*        0.216*
- PROJCRED       0.033         0.484*        0.218*
- INTERNCR      -0.001         0.445*        0.221*
- SMALLGRP       0.567*        0.128*       -0.104
- TEACHDIF       0.789*        0.003        -0.092
- CHOOSEHO       0.444*        0.176*        0.016
- RETAKER        0.336*        0.085*        0.049
- DEMOLEAR       0.373*        0.247*        0.105
- ADVICER        0.797*       -0.189*        0.008
- TRACKPRO       0.009*        0.170*        0.786*
- ONTIMER        0.231        -0.001         0.643*
- PREPGRAD       0.550*       -0.141*        0.060
+ MASTERCO       0.420*        0.331*       -0.046
+ NEXTCOMP       0.526*        0.210*        0.009
+ RUBRICR        0.040         0.333*        0.139*
+ ONLINECO       0.428*       -0.054         0.189*
+ PROJCRED       0.484*        0.015         0.195*
+ INTERNCR       0.435*       -0.017         0.205*
+ SMALLGRP       0.278*        0.452*       -0.045
+ TEACHDIF       0.190*        0.642*        0.005
+ CHOOSEHO       0.281*        0.353*        0.064
+ RETAKER        0.158*        0.268*        0.094
+ DEMOLEAR       0.309*        0.288*        0.159*
+ ADVICER       -0.015         0.675*        0.107
+ TRACKPRO       0.079         0.013         0.826*
+ ONTIMER       -0.003         0.237*        0.649*
+ PREPGRAD      -0.026         0.474*        0.124
+ GIVLECTU      -0.176*       -0.063         0.029
 
 
            GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
                   1             2             3
               ________      ________      ________
       1         1.000
-      2         0.434*        1.000
-      3         0.743*        0.290*        1.000
+      2         0.284*        1.000
+      3         0.454*        0.631*        1.000
 
 
            ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-                0.666         0.620         0.798         0.729         0.632
+                0.669         0.610         0.797         0.730         0.634
 
 
            ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-                0.696         0.684         0.476         0.692         0.825
+                0.696         0.682         0.478         0.691         0.825
 
 
            ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-                0.636         0.451         0.264         0.312         0.697
+                0.642         0.449         0.237         0.331         0.696
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+                0.965
 
 
            S.E. GEOMIN ROTATED LOADINGS
                   1             2             3
               ________      ________      ________
- MASTERCO       0.084         0.050         0.065
- NEXTCOMP       0.078         0.054         0.015
- RUBRICR        0.052         0.037         0.051
- ONLINECO       0.067         0.048         0.066
- PROJCRED       0.071         0.051         0.077
- INTERNCR       0.016         0.046         0.078
- SMALLGRP       0.067         0.042         0.061
- TEACHDIF       0.062         0.013         0.065
- CHOOSEHO       0.060         0.042         0.052
- RETAKER        0.060         0.041         0.061
- DEMOLEAR       0.072         0.045         0.068
- ADVICER        0.045         0.044         0.011
- TRACKPRO       0.004         0.045         0.056
- ONTIMER        0.127         0.006         0.129
- PREPGRAD       0.066         0.042         0.061
+ MASTERCO       0.045         0.068         0.051
+ NEXTCOMP       0.041         0.068         0.010
+ RUBRICR        0.040         0.048         0.052
+ ONLINECO       0.050         0.048         0.065
+ PROJCRED       0.051         0.030         0.070
+ INTERNCR       0.057         0.036         0.074
+ SMALLGRP       0.045         0.051         0.043
+ TEACHDIF       0.047         0.034         0.010
+ CHOOSEHO       0.045         0.052         0.049
+ RETAKER        0.042         0.048         0.049
+ DEMOLEAR       0.048         0.055         0.054
+ ADVICER        0.015         0.066         0.081
+ TRACKPRO       0.089         0.012         0.078
+ ONTIMER        0.008         0.100         0.100
+ PREPGRAD       0.034         0.065         0.080
+ GIVLECTU       0.041         0.048         0.048
 
 
            S.E. GEOMIN FACTOR CORRELATIONS
                   1             2             3
               ________      ________      ________
       1         0.000
-      2         0.121         0.000
-      3         0.059         0.112         0.000
+      2         0.089         0.000
+      3         0.099         0.057         0.000
 
 
            S.E. ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-                0.026         0.030         0.020         0.029         0.033
+                0.026         0.031         0.020         0.029         0.033
 
 
            S.E. ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-                0.033         0.023         0.025         0.022         0.018
+                0.032         0.023         0.024         0.022         0.018
 
 
            S.E. ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-                0.023         0.028         0.069         0.052         0.024
+                0.022         0.028         0.071         0.044         0.024
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+                0.011
 
 
            Est./S.E. GEOMIN ROTATED LOADINGS
                   1             2             3
               ________      ________      ________
- MASTERCO       5.177         6.117        -1.396
- NEXTCOMP       3.663         7.950         0.522
- RUBRICR        7.617        -0.720         1.563
- ONLINECO      -0.701         9.343         3.258
- PROJCRED       0.466         9.525         2.821
- INTERNCR      -0.034         9.668         2.822
- SMALLGRP       8.414         3.063        -1.694
- TEACHDIF      12.711         0.208        -1.414
- CHOOSEHO       7.378         4.164         0.311
- RETAKER        5.564         2.079         0.815
- DEMOLEAR       5.200         5.455         1.549
- ADVICER       17.797        -4.278         0.689
- TRACKPRO       2.079         3.746        13.916
- ONTIMER        1.821        -0.102         4.987
- PREPGRAD       8.287        -3.372         0.992
+ MASTERCO       9.333         4.854        -0.899
+ NEXTCOMP      12.745         3.089         0.892
+ RUBRICR        1.018         6.925         2.664
+ ONLINECO       8.558        -1.120         2.898
+ PROJCRED       9.490         0.486         2.775
+ INTERNCR       7.639        -0.486         2.763
+ SMALLGRP       6.149         8.824        -1.046
+ TEACHDIF       4.022        18.853         0.504
+ CHOOSEHO       6.304         6.769         1.302
+ RETAKER        3.725         5.554         1.908
+ DEMOLEAR       6.463         5.207         2.968
+ ADVICER       -0.995        10.192         1.313
+ TRACKPRO       0.892         1.139        10.657
+ ONTIMER       -0.415         2.373         6.513
+ PREPGRAD      -0.762         7.268         1.539
+ GIVLECTU      -4.324        -1.333         0.595
 
 
            Est./S.E. GEOMIN FACTOR CORRELATIONS
                   1             2             3
               ________      ________      ________
       1         0.000
-      2         3.585         0.000
-      3        12.577         2.588         0.000
+      2         3.176         0.000
+      3         4.580        11.091         0.000
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-               25.531        20.338        40.670        25.065        19.063
+               26.020        19.979        40.411        25.420        19.465
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-               21.295        29.369        19.305        31.096        44.944
+               21.451        29.306        19.548        31.205        45.152
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-               28.087        16.336         3.844         5.985        29.337
+               28.945        16.300         3.333         7.475        29.125
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+               84.803
 
 
            FACTOR STRUCTURE
                   1             2             3
               ________      ________      ________
- MASTERCO       0.502         0.469         0.323
- NEXTCOMP       0.478         0.558         0.345
- RUBRICR        0.446         0.169         0.368
- ONLINECO       0.307         0.489         0.310
- PROJCRED       0.405         0.561         0.383
- INTERNCR       0.357         0.509         0.350
- SMALLGRP       0.545         0.344         0.355
- TEACHDIF       0.721         0.318         0.495
- CHOOSEHO       0.532         0.373         0.397
- RETAKER        0.410         0.245         0.324
- DEMOLEAR       0.558         0.439         0.454
- ADVICER        0.721         0.159         0.546
- TRACKPRO       0.667         0.402         0.842
- ONTIMER        0.709         0.286         0.815
- PREPGRAD       0.534         0.115         0.428
+ MASTERCO       0.494         0.422         0.354
+ NEXTCOMP       0.590         0.365         0.380
+ RUBRICR        0.198         0.432         0.367
+ ONLINECO       0.499         0.187         0.350
+ PROJCRED       0.577         0.275         0.424
+ INTERNCR       0.523         0.235         0.392
+ SMALLGRP       0.386         0.503         0.367
+ TEACHDIF       0.374         0.699         0.496
+ CHOOSEHO       0.410         0.473         0.414
+ RETAKER        0.276         0.372         0.335
+ DEMOLEAR       0.463         0.477         0.482
+ ADVICER        0.225         0.738         0.526
+ TRACKPRO       0.458         0.557         0.870
+ ONTIMER        0.359         0.645         0.797
+ PREPGRAD       0.165         0.544         0.410
+ GIVLECTU      -0.181        -0.095        -0.091
 
 
 EXPLORATORY FACTOR ANALYSIS WITH 4 FACTOR(S):
@@ -842,212 +911,234 @@ EXPLORATORY FACTOR ANALYSIS WITH 4 FACTOR(S):
 
 MODEL FIT INFORMATION
 
-Number of Free Parameters                       84
+Number of Free Parameters                       90
 
 Loglikelihood
 
-          H0 Value                      -31149.858
-          H1 Value                      -31092.788
+          H0 Value                      -33490.977
+          H1 Value                      -33416.868
 
 Information Criteria
 
-          Akaike (AIC)                   62467.717
-          Bayesian (BIC)                 62930.409
-          Sample-Size Adjusted BIC       62663.544
+          Akaike (AIC)                   67161.954
+          Bayesian (BIC)                 67657.695
+          Sample-Size Adjusted BIC       67371.769
             (n* = (n + 2) / 24)
 
 Chi-Square Test of Model Fit
 
-          Value                            114.140
-          Degrees of Freedom                    51
+          Value                            148.217
+          Degrees of Freedom                    62
           P-Value                           0.0000
 
 RMSEA (Root Mean Square Error Of Approximation)
 
-          Estimate                           0.026
-          90 Percent C.I.                    0.020  0.032
+          Estimate                           0.028
+          90 Percent C.I.                    0.022  0.033
           Probability RMSEA <= .05           1.000
 
 CFI/TLI
 
-          CFI                                0.990
-          TLI                                0.980
+          CFI                                0.987
+          TLI                                0.975
 
 Chi-Square Test of Model Fit for the Baseline Model
 
-          Value                           6681.239
-          Degrees of Freedom                   105
+          Value                           6758.435
+          Degrees of Freedom                   120
           P-Value                           0.0000
 
 SRMR (Standardized Root Mean Square Residual)
 
-          Value                              0.015
+          Value                              0.017
 
 
 
-MINIMUM ROTATION FUNCTION VALUE       0.52030
+MINIMUM ROTATION FUNCTION VALUE       0.54544
 
 
 
            GEOMIN ROTATED LOADINGS (* significant at 5% level)
                   1             2             3             4
               ________      ________      ________      ________
- MASTERCO       0.065         0.602*        0.034        -0.042
- NEXTCOMP       0.275*        0.440*        0.008        -0.016
- RUBRICR       -0.019         0.102         0.264*        0.167*
- ONLINECO       0.483*        0.055        -0.030         0.074
- PROJCRED       0.655*       -0.034         0.077         0.049
- INTERNCR       0.431*        0.130        -0.033         0.100
- SMALLGRP       0.300*        0.006         0.485*       -0.084*
- TEACHDIF       0.172*        0.035         0.645*        0.005
- CHOOSEHO       0.159*        0.215*        0.249*        0.064
- RETAKER       -0.067         0.334*        0.088         0.133*
- DEMOLEAR      -0.016         0.557*        0.007         0.172*
- ADVICER       -0.041         0.015         0.613*        0.190
- TRACKPRO       0.077         0.102        -0.003         0.756*
- ONTIMER        0.029        -0.030         0.231*        0.680*
- PREPGRAD      -0.049         0.010         0.426*        0.192*
+ MASTERCO       0.097         0.575*        0.042        -0.045
+ NEXTCOMP       0.309*        0.416*        0.013        -0.016
+ RUBRICR       -0.036         0.117         0.260*        0.169*
+ ONLINECO       0.476*        0.045        -0.039         0.104
+ PROJCRED       0.615*       -0.027         0.061         0.096
+ INTERNCR       0.431*        0.118        -0.038         0.126
+ SMALLGRP       0.310*       -0.005         0.485*       -0.080*
+ TEACHDIF       0.170*        0.041         0.639*        0.007
+ CHOOSEHO       0.167*        0.215*        0.247*        0.063
+ RETAKER       -0.044         0.327*        0.095         0.118
+ DEMOLEAR      -0.021         0.576*       -0.004         0.172
+ ADVICER       -0.040         0.021         0.622*        0.173
+ TRACKPRO       0.073         0.099         0.009         0.759*
+ ONTIMER        0.030        -0.031         0.252*        0.663*
+ PREPGRAD      -0.050         0.015         0.434*        0.179
+ GIVLECTU      -0.189*       -0.005        -0.077         0.054
 
 
            GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
                   1             2             3             4
               ________      ________      ________      ________
       1         1.000
-      2         0.508*        1.000
-      3         0.293*        0.628*        1.000
-      4         0.506*        0.545*        0.570*        1.000
+      2         0.488*        1.000
+      3         0.295*        0.627*        1.000
+      4         0.482*        0.537*        0.564*        1.000
 
 
            ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-                0.596         0.614         0.797         0.703         0.523
+                0.603         0.610         0.796         0.703         0.544
 
 
            ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-                0.689         0.650         0.448         0.694         0.796
+                0.686         0.645         0.452         0.693         0.797
 
 
            ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-                0.562         0.463         0.264         0.311         0.701
+                0.551         0.462         0.259         0.315         0.700
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+                0.960
 
 
            S.E. GEOMIN ROTATED LOADINGS
                   1             2             3             4
               ________      ________      ________      ________
- MASTERCO       0.072         0.086         0.049         0.038
- NEXTCOMP       0.065         0.072         0.039         0.025
- RUBRICR        0.043         0.059         0.061         0.058
- ONLINECO       0.056         0.060         0.043         0.052
- PROJCRED       0.057         0.041         0.055         0.040
- INTERNCR       0.064         0.080         0.046         0.065
- SMALLGRP       0.060         0.040         0.051         0.040
- TEACHDIF       0.063         0.044         0.040         0.032
- CHOOSEHO       0.054         0.066         0.054         0.046
- RETAKER        0.046         0.069         0.052         0.055
- DEMOLEAR       0.023         0.091         0.044         0.069
- ADVICER        0.026         0.039         0.096         0.102
- TRACKPRO       0.054         0.073         0.029         0.079
- ONTIMER        0.015         0.018         0.115         0.116
- PREPGRAD       0.040         0.048         0.090         0.096
+ MASTERCO       0.093         0.103         0.057         0.045
+ NEXTCOMP       0.071         0.087         0.041         0.022
+ RUBRICR        0.043         0.064         0.060         0.062
+ ONLINECO       0.060         0.053         0.046         0.083
+ PROJCRED       0.080         0.043         0.052         0.103
+ INTERNCR       0.069         0.076         0.048         0.084
+ SMALLGRP       0.051         0.038         0.051         0.040
+ TEACHDIF       0.057         0.044         0.042         0.033
+ CHOOSEHO       0.054         0.068         0.054         0.045
+ RETAKER        0.047         0.066         0.051         0.067
+ DEMOLEAR       0.021         0.112         0.045         0.088
+ ADVICER        0.024         0.041         0.088         0.101
+ TRACKPRO       0.055         0.075         0.032         0.074
+ ONTIMER        0.020         0.018         0.100         0.100
+ PREPGRAD       0.039         0.048         0.082         0.093
+ GIVLECTU       0.052         0.074         0.054         0.047
 
 
            S.E. GEOMIN FACTOR CORRELATIONS
                   1             2             3             4
               ________      ________      ________      ________
       1         0.000
-      2         0.056         0.000
-      3         0.082         0.048         0.000
-      4         0.048         0.069         0.051         0.000
+      2         0.061         0.000
+      3         0.079         0.050         0.000
+      4         0.087         0.071         0.054         0.000
 
 
            S.E. ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-                0.045         0.031         0.020         0.032         0.048
+                0.048         0.032         0.020         0.031         0.044
 
 
            S.E. ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-                0.032         0.029         0.032         0.022         0.023
+                0.033         0.029         0.030         0.022         0.023
 
 
            S.E. ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-                0.042         0.028         0.063         0.048         0.024
+                0.054         0.028         0.057         0.043         0.024
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+                0.013
 
 
            Est./S.E. GEOMIN ROTATED LOADINGS
                   1             2             3             4
               ________      ________      ________      ________
- MASTERCO       0.907         6.966         0.697        -1.088
- NEXTCOMP       4.210         6.152         0.201        -0.640
- RUBRICR       -0.432         1.719         4.307         2.883
- ONLINECO       8.683         0.915        -0.713         1.406
- PROJCRED      11.541        -0.822         1.410         1.229
- INTERNCR       6.713         1.631        -0.709         1.542
- SMALLGRP       5.022         0.143         9.559        -2.107
- TEACHDIF       2.729         0.785        16.002         0.155
- CHOOSEHO       2.947         3.246         4.565         1.390
- RETAKER       -1.447         4.869         1.672         2.405
- DEMOLEAR      -0.696         6.144         0.147         2.488
- ADVICER       -1.592         0.371         6.385         1.866
- TRACKPRO       1.430         1.382        -0.117         9.575
- ONTIMER        1.913        -1.611         2.013         5.850
- PREPGRAD      -1.213         0.197         4.744         1.991
+ MASTERCO       1.050         5.595         0.739        -1.013
+ NEXTCOMP       4.317         4.796         0.311        -0.735
+ RUBRICR       -0.822         1.831         4.333         2.708
+ ONLINECO       7.959         0.851        -0.848         1.246
+ PROJCRED       7.691        -0.636         1.168         0.928
+ INTERNCR       6.201         1.550        -0.794         1.495
+ SMALLGRP       6.102        -0.125         9.482        -1.981
+ TEACHDIF       2.974         0.918        15.328         0.215
+ CHOOSEHO       3.120         3.167         4.575         1.410
+ RETAKER       -0.934         4.919         1.862         1.747
+ DEMOLEAR      -1.000         5.145        -0.079         1.952
+ ADVICER       -1.671         0.516         7.039         1.710
+ TRACKPRO       1.333         1.313         0.296        10.242
+ ONTIMER        1.493        -1.678         2.528         6.602
+ PREPGRAD      -1.298         0.316         5.293         1.923
+ GIVLECTU      -3.595        -0.062        -1.434         1.144
 
 
            Est./S.E. GEOMIN FACTOR CORRELATIONS
                   1             2             3             4
               ________      ________      ________      ________
       1         0.000
-      2         9.065         0.000
-      3         3.575        12.996         0.000
-      4        10.659         7.915        11.152         0.000
+      2         7.956         0.000
+      3         3.730        12.441         0.000
+      4         5.508         7.589        10.481         0.000
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-               13.294        19.731        40.503        21.951        10.849
+               12.486        18.828        39.812        22.460        12.293
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-               21.262        22.383        14.006        31.516        33.998
+               21.078        22.066        15.235        31.287        34.849
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-               13.461        16.422         4.194         6.526        29.624
+               10.283        16.711         4.548         7.376        29.599
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+               71.228
 
 
            FACTOR STRUCTURE
                   1             2             3             4
               ________      ________      ________      ________
- MASTERCO       0.359         0.634         0.408         0.339
- NEXTCOMP       0.492         0.576         0.356         0.368
- RUBRICR        0.195         0.349         0.418         0.363
- ONLINECO       0.539         0.321         0.187         0.331
- PROJCRED       0.685         0.374         0.275         0.406
- INTERNCR       0.538         0.383         0.232         0.371
- SMALLGRP       0.402         0.417         0.528         0.347
- TEACHDIF       0.381         0.530         0.721         0.479
- CHOOSEHO       0.373         0.487         0.467         0.403
- RETAKER        0.196         0.427         0.353         0.331
- DEMOLEAR       0.356         0.646         0.449         0.471
- ADVICER        0.242         0.482         0.718         0.526
- TRACKPRO       0.511         0.551         0.514         0.849
- ONTIMER        0.426         0.501         0.608         0.810
- PREPGRAD       0.178         0.357         0.527         0.415
+ MASTERCO       0.369         0.625         0.406         0.334
+ NEXTCOMP       0.508         0.566         0.355         0.363
+ RUBRICR        0.180         0.353         0.418         0.361
+ ONLINECO       0.537         0.309         0.188         0.335
+ PROJCRED       0.666         0.363         0.279         0.411
+ INTERNCR       0.538         0.372         0.234         0.375
+ SMALLGRP       0.412         0.408         0.528         0.340
+ TEACHDIF       0.381         0.528         0.718         0.471
+ CHOOSEHO       0.375         0.485         0.466         0.398
+ RETAKER        0.201         0.429         0.354         0.326
+ DEMOLEAR       0.342         0.656         0.448         0.469
+ ADVICER        0.238         0.484         0.721         0.516
+ TRACKPRO       0.489         0.547         0.520         0.852
+ ONTIMER        0.409         0.498         0.616         0.803
+ PREPGRAD       0.172         0.359         0.530         0.408
+ GIVLECTU      -0.187        -0.116        -0.105        -0.083
 
 
 EXPLORATORY FACTOR ANALYSIS WITH 5 FACTOR(S):
@@ -1055,220 +1146,585 @@ EXPLORATORY FACTOR ANALYSIS WITH 5 FACTOR(S):
 
 MODEL FIT INFORMATION
 
-Number of Free Parameters                       95
+Number of Free Parameters                      102
 
 Loglikelihood
 
-          H0 Value                      -31120.276
-          H1 Value                      -31092.788
+          H0 Value                      -33457.808
+          H1 Value                      -33416.868
 
 Information Criteria
 
-          Akaike (AIC)                   62430.552
-          Bayesian (BIC)                 62953.835
-          Sample-Size Adjusted BIC       62652.024
+          Akaike (AIC)                   67119.616
+          Bayesian (BIC)                 67681.456
+          Sample-Size Adjusted BIC       67357.407
             (n* = (n + 2) / 24)
 
 Chi-Square Test of Model Fit
 
-          Value                             54.976
-          Degrees of Freedom                    40
-          P-Value                           0.0577
+          Value                             81.879
+          Degrees of Freedom                    50
+          P-Value                           0.0030
 
 RMSEA (Root Mean Square Error Of Approximation)
 
-          Estimate                           0.014
-          90 Percent C.I.                    0.000  0.023
+          Estimate                           0.019
+          90 Percent C.I.                    0.011  0.026
           Probability RMSEA <= .05           1.000
 
 CFI/TLI
 
-          CFI                                0.998
-          TLI                                0.994
+          CFI                                0.995
+          TLI                                0.988
 
 Chi-Square Test of Model Fit for the Baseline Model
 
-          Value                           6681.239
-          Degrees of Freedom                   105
+          Value                           6758.435
+          Degrees of Freedom                   120
           P-Value                           0.0000
 
 SRMR (Standardized Root Mean Square Residual)
 
-          Value                              0.011
+          Value                              0.014
 
 
 
-MINIMUM ROTATION FUNCTION VALUE       0.41089
+MINIMUM ROTATION FUNCTION VALUE       0.42706
 
 
 
            GEOMIN ROTATED LOADINGS (* significant at 5% level)
                   1             2             3             4             5
               ________      ________      ________      ________      ________
- MASTERCO       0.055         0.116         0.182*       -0.028         0.356*
- NEXTCOMP       2.487         0.000        -0.001         0.001         0.001
- RUBRICR       -0.010         0.000         0.248*        0.148*        0.130*
- ONLINECO       0.003         0.523*       -0.020         0.028         0.050
- PROJCRED       0.020         0.619*        0.060         0.060        -0.023
- INTERNCR      -0.014         0.506*       -0.006         0.019         0.127
- SMALLGRP       0.012         0.263*        0.499*       -0.044        -0.031
- TEACHDIF      -0.006         0.152*        0.661*        0.023         0.023
- CHOOSEHO       0.004         0.164*        0.260*        0.025         0.243*
- RETAKER        0.004        -0.023         0.134*        0.068         0.321*
- DEMOLEAR      -0.001        -0.009         0.009         0.021         0.739*
- ADVICER       -0.007        -0.050         0.550*        0.235*        0.039
- TRACKPRO      -0.005         0.160*       -0.031         0.619*        0.188*
- ONTIMER        0.017         0.016         0.073         0.851*       -0.033
- PREPGRAD       0.008        -0.068         0.371*        0.255*        0.010
+ MASTERCO       0.149         0.098         0.192*       -0.027         0.305*
+ NEXTCOMP       1.200        -0.001        -0.005         0.010         0.010
+ RUBRICR       -0.019        -0.007         0.249*        0.157*        0.135*
+ ONLINECO       0.010         0.525*       -0.021         0.031         0.045
+ PROJCRED       0.054         0.588*        0.047         0.067        -0.017
+ INTERNCR      -0.028         0.525*        0.004         0.021         0.116
+ SMALLGRP       0.030         0.245*        0.501*       -0.044        -0.038
+ TEACHDIF      -0.012         0.133         0.661*        0.030         0.029
+ CHOOSEHO       0.015         0.172*        0.273*        0.026         0.221*
+ RETAKER        0.020        -0.001         0.155*        0.068         0.280*
+ DEMOLEAR       0.021        -0.005         0.019         0.021         0.745*
+ ADVICER       -0.016        -0.057         0.559*        0.238*        0.036
+ TRACKPRO      -0.012         0.187*       -0.027         0.620*        0.173*
+ ONTIMER        0.038         0.023         0.066         0.845*       -0.039
+ PREPGRAD       0.022        -0.085         0.369*        0.258*        0.009
+ GIVLECTU      -0.060        -0.160*       -0.109*        0.018         0.095
 
 
            GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
                   1             2             3             4             5
               ________      ________      ________      ________      ________
       1         1.000
-      2         0.186         1.000
-      3         0.148         0.330*        1.000
-      4         0.141         0.481*        0.606*        1.000
-      5         0.192         0.491*        0.583*        0.570*        1.000
+      2         0.382         1.000
+      3         0.311         0.358*        1.000
+      4         0.284         0.465*        0.612*        1.000
+      5         0.351         0.459*        0.560*        0.547*        1.000
 
 
            ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-                0.701        -5.188         0.797         0.689         0.556
+                0.691        -0.449         0.796         0.688         0.568
 
 
            ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-                0.658         0.652         0.431         0.685         0.798
+                0.653         0.648         0.434         0.684         0.804
 
 
            ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-                0.434         0.478         0.333         0.210         0.704
+                0.403         0.476         0.331         0.212         0.703
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+                0.959
 
 
            S.E. GEOMIN ROTATED LOADINGS
                   1             2             3             4             5
               ________      ________      ________      ________      ________
- MASTERCO       0.126         0.065         0.058         0.036         0.072
- NEXTCOMP       4.870         0.000         0.003         0.006         0.006
- RUBRICR        0.022         0.038         0.050         0.048         0.056
- ONLINECO       0.013         0.051         0.040         0.037         0.056
- PROJCRED       0.046         0.052         0.048         0.045         0.029
- INTERNCR       0.028         0.059         0.038         0.038         0.080
- SMALLGRP       0.030         0.066         0.049         0.032         0.037
- TEACHDIF       0.012         0.068         0.050         0.026         0.034
- CHOOSEHO       0.015         0.052         0.051         0.038         0.056
- RETAKER        0.017         0.045         0.054         0.046         0.067
- DEMOLEAR       0.012         0.020         0.016         0.024         0.057
- ADVICER        0.015         0.031         0.052         0.054         0.039
- TRACKPRO       0.011         0.051         0.018         0.060         0.066
- ONTIMER        0.034         0.015         0.063         0.065         0.023
- PREPGRAD       0.019         0.041         0.051         0.051         0.041
+ MASTERCO       0.199         0.116         0.067         0.036         0.074
+ NEXTCOMP       1.019         0.003         0.013         0.026         0.025
+ RUBRICR        0.034         0.040         0.051         0.050         0.061
+ ONLINECO       0.031         0.052         0.040         0.038         0.052
+ PROJCRED       0.073         0.057         0.043         0.047         0.029
+ INTERNCR       0.023         0.057         0.040         0.039         0.081
+ SMALLGRP       0.050         0.079         0.049         0.031         0.040
+ TEACHDIF       0.015         0.070         0.054         0.029         0.033
+ CHOOSEHO       0.036         0.055         0.051         0.038         0.053
+ RETAKER        0.046         0.048         0.053         0.047         0.065
+ DEMOLEAR       0.058         0.021         0.019         0.023         0.099
+ ADVICER        0.022         0.034         0.052         0.055         0.039
+ TRACKPRO       0.020         0.058         0.021         0.071         0.079
+ ONTIMER        0.045         0.017         0.060         0.061         0.024
+ PREPGRAD       0.033         0.045         0.050         0.052         0.037
+ GIVLECTU       0.090         0.074         0.051         0.045         0.055
 
 
            S.E. GEOMIN FACTOR CORRELATIONS
                   1             2             3             4             5
               ________      ________      ________      ________      ________
       1         0.000
-      2         0.358         0.000
-      3         0.290         0.073         0.000
-      4         0.273         0.057         0.053         0.000
-      5         0.359         0.052         0.050         0.043         0.000
+      2         0.290         0.000
+      3         0.256         0.072         0.000
+      4         0.208         0.066         0.050         0.000
+      5         0.246         0.063         0.051         0.051         0.000
 
 
            S.E. ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-                0.029        24.219         0.020         0.034         0.043
+                0.047         2.418         0.020         0.034         0.042
 
 
            S.E. ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-                0.037         0.027         0.029         0.023         0.023
+                0.038         0.027         0.029         0.023         0.022
 
 
            S.E. ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-                0.069         0.026         0.033         0.054         0.024
+                0.097         0.026         0.033         0.057         0.024
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+                0.014
 
 
            Est./S.E. GEOMIN ROTATED LOADINGS
                   1             2             3             4             5
               ________      ________      ________      ________      ________
- MASTERCO       0.438         1.786         3.161        -0.787         4.930
- NEXTCOMP       0.511         0.004        -0.182         0.206         0.218
- RUBRICR       -0.465         0.013         4.942         3.093         2.314
- ONLINECO       0.262        10.160        -0.511         0.760         0.887
- PROJCRED       0.442        11.989         1.241         1.341        -0.795
- INTERNCR      -0.518         8.605        -0.154         0.500         1.592
- SMALLGRP       0.415         3.972        10.273        -1.399        -0.828
- TEACHDIF      -0.510         2.223        13.138         0.887         0.663
- CHOOSEHO       0.259         3.167         5.069         0.670         4.358
- RETAKER        0.255        -0.516         2.454         1.483         4.756
- DEMOLEAR      -0.095        -0.445         0.592         0.882        12.985
- ADVICER       -0.454        -1.611        10.511         4.385         1.006
- TRACKPRO      -0.428         3.163        -1.769        10.230         2.836
- ONTIMER        0.497         1.067         1.150        13.015        -1.426
- PREPGRAD       0.421        -1.647         7.241         4.996         0.236
+ MASTERCO       0.746         0.848         2.863        -0.757         4.113
+ NEXTCOMP       1.178        -0.449        -0.412         0.362         0.380
+ RUBRICR       -0.568        -0.175         4.917         3.106         2.215
+ ONLINECO       0.337        10.178        -0.531         0.796         0.852
+ PROJCRED       0.746        10.353         1.086         1.424        -0.568
+ INTERNCR      -1.204         9.241         0.097         0.537         1.441
+ SMALLGRP       0.596         3.096        10.259        -1.422        -0.936
+ TEACHDIF      -0.815         1.884        12.254         1.028         0.877
+ CHOOSEHO       0.407         3.119         5.376         0.682         4.142
+ RETAKER        0.430        -0.018         2.897         1.463         4.306
+ DEMOLEAR       0.365        -0.241         0.998         0.897         7.487
+ ADVICER       -0.729        -1.673        10.815         4.350         0.932
+ TRACKPRO      -0.586         3.248        -1.285         8.703         2.187
+ ONTIMER        0.832         1.363         1.100        13.773        -1.663
+ PREPGRAD       0.676        -1.867         7.444         5.009         0.246
+ GIVLECTU      -0.672        -2.163        -2.161         0.403         1.724
 
 
            Est./S.E. GEOMIN FACTOR CORRELATIONS
                   1             2             3             4             5
               ________      ________      ________      ________      ________
       1         0.000
-      2         0.521         0.000
-      3         0.512         4.504         0.000
-      4         0.515         8.444        11.384         0.000
-      5         0.535         9.490        11.565        13.353         0.000
+      2         1.316         0.000
+      3         1.213         4.937         0.000
+      4         1.364         7.072        12.335         0.000
+      5         1.427         7.261        11.053        10.822         0.000
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
               ________      ________      ________      ________      ________
-               23.789        -0.214        40.588        20.050        12.951
+               14.577        -0.186        39.807        20.184        13.576
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
               ________      ________      ________      ________      ________
-               17.865        24.366        14.831        30.401        34.506
+               17.197        24.227        15.198        30.401        35.981
 
 
            Est./S.E. ESTIMATED RESIDUAL VARIANCES
               DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
               ________      ________      ________      ________      ________
-                6.259        18.458        10.041         3.857        29.842
+                4.137        18.415        10.063         3.689        29.675
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+               67.706
 
 
            FACTOR STRUCTURE
                   1             2             3             4             5
               ________      ________      ________      ________      ________
- MASTERCO       0.168         0.348         0.419         0.349         0.514
- NEXTCOMP       2.488         0.464         0.370         0.352         0.479
- RUBRICR        0.072         0.216         0.413         0.372         0.358
- ONLINECO       0.111         0.555         0.199         0.296         0.312
- PROJCRED       0.148         0.660         0.290         0.384         0.354
- INTERNCR       0.106         0.573         0.245         0.329         0.381
- SMALLGRP       0.123         0.394         0.543         0.369         0.366
- TEACHDIF       0.128         0.391         0.738         0.509         0.495
- CHOOSEHO       0.123         0.382         0.472         0.401         0.490
- RETAKER        0.091         0.212         0.355         0.322         0.427
- DEMOLEAR       0.143         0.367         0.450         0.443         0.752
- ADVICER        0.106         0.263         0.698         0.566         0.468
- TRACKPRO       0.144         0.538         0.505         0.783         0.600
- ONTIMER        0.145         0.437         0.578         0.887         0.506
- PREPGRAD       0.088         0.183         0.510         0.454         0.339
+ MASTERCO       0.345         0.351         0.427         0.345         0.495
+ NEXTCOMP       1.204         0.464         0.378         0.351         0.432
+ RUBRICR        0.147         0.209         0.412         0.374         0.350
+ ONLINECO       0.229         0.556         0.213         0.289         0.294
+ PROJCRED       0.307         0.649         0.306         0.376         0.335
+ INTERNCR       0.220         0.579         0.261         0.323         0.361
+ SMALLGRP       0.253         0.398         0.550         0.365         0.342
+ TEACHDIF       0.262         0.391         0.739         0.509         0.472
+ CHOOSEHO       0.250         0.389         0.479         0.398         0.472
+ RETAKER        0.185         0.222         0.359         0.321         0.410
+ DEMOLEAR       0.292         0.362         0.454         0.443         0.772
+ ADVICER        0.216         0.264         0.699         0.569         0.448
+ TRACKPRO       0.288         0.541         0.513         0.782         0.579
+ ONTIMER        0.293         0.436         0.582         0.885         0.484
+ PREPGRAD       0.181         0.180         0.509         0.456         0.326
+ GIVLECTU      -0.117        -0.170        -0.121        -0.088        -0.051
 
 
-     Beginning Time:  15:57:31
-        Ending Time:  15:58:11
-       Elapsed Time:  00:00:40
+EXPLORATORY FACTOR ANALYSIS WITH 6 FACTOR(S):
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                      113
+
+Loglikelihood
+
+          H0 Value                      -33446.320
+          H1 Value                      -33416.868
+
+Information Criteria
+
+          Akaike (AIC)                   67118.639
+          Bayesian (BIC)                 67741.070
+          Sample-Size Adjusted BIC       67382.074
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                             58.903
+          Degrees of Freedom                    39
+          P-Value                           0.0213
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.017
+          90 Percent C.I.                    0.007  0.025
+          Probability RMSEA <= .05           1.000
+
+CFI/TLI
+
+          CFI                                0.997
+          TLI                                0.991
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                           6758.435
+          Degrees of Freedom                   120
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.012
+
+
+
+MINIMUM ROTATION FUNCTION VALUE       0.36705
+
+
+
+           GEOMIN ROTATED LOADINGS (* significant at 5% level)
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+ MASTERCO       0.207         0.108         0.059        -0.070         0.281*
+ NEXTCOMP       0.997*       -0.003        -0.008         0.017         0.017
+ RUBRICR       -0.024        -0.008         0.130         0.109         0.148*
+ ONLINECO       0.018         0.467*        0.075         0.081         0.023
+ PROJCRED       0.075         0.542*        0.097         0.091        -0.051
+ INTERNCR      -0.028         0.637*       -0.078        -0.036         0.053
+ SMALLGRP       0.036         0.055         0.577*       -0.007        -0.010
+ TEACHDIF      -0.014        -0.018         0.598*        0.007         0.066
+ CHOOSEHO       0.023         0.085         0.267*        0.043         0.235*
+ RETAKER        0.034         0.003         0.065         0.043         0.278*
+ DEMOLEAR       0.031        -0.009         0.001         0.049         0.747*
+ ADVICER       -0.003        -0.001         0.218         0.061         0.023
+ TRACKPRO      -0.026         0.135         0.007         0.634*        0.199*
+ ONTIMER        0.044        -0.017         0.009         0.781*       -0.008
+ PREPGRAD       0.047         0.027         0.021         0.080        -0.022
+ GIVLECTU      -0.082        -0.080        -0.167        -0.012         0.094
+
+
+           GEOMIN ROTATED LOADINGS (* significant at 5% level)
+                  6
+              ________
+ MASTERCO       0.158
+ NEXTCOMP      -0.001
+ RUBRICR        0.177
+ ONLINECO      -0.080
+ PROJCRED      -0.010
+ INTERNCR       0.146
+ SMALLGRP       0.005
+ TEACHDIF       0.186
+ CHOOSEHO       0.042
+ RETAKER        0.114
+ DEMOLEAR      -0.020
+ ADVICER        0.536
+ TRACKPRO      -0.007
+ ONTIMER        0.141
+ PREPGRAD       0.503*
+ GIVLECTU       0.047
+
+
+           GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+      1         1.000
+      2         0.442*        1.000
+      3         0.429*        0.501*        1.000
+      4         0.350*        0.476         0.590*        1.000
+      5         0.409*        0.461*        0.555*        0.505*        1.000
+      6         0.252*        0.210         0.626*        0.613*        0.529*
+
+
+           GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
+                  6
+              ________
+      6         1.000
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+                0.675        -0.011         0.796         0.695         0.566
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
+              ________      ________      ________      ________      ________
+                0.594         0.620         0.421         0.683         0.804
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
+              ________      ________      ________      ________      ________
+                0.404         0.441         0.323         0.218         0.662
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+                0.955
+
+
+           S.E. GEOMIN ROTATED LOADINGS
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+ MASTERCO       0.167         0.098         0.129         0.047         0.114
+ NEXTCOMP       0.434         0.007         0.015         0.026         0.025
+ RUBRICR        0.035         0.080         0.162         0.064         0.064
+ ONLINECO       0.034         0.095         0.113         0.081         0.040
+ PROJCRED       0.061         0.140         0.134         0.094         0.050
+ INTERNCR       0.032         0.070         0.050         0.030         0.099
+ SMALLGRP       0.041         0.102         0.063         0.041         0.044
+ TEACHDIF       0.017         0.029         0.278         0.030         0.050
+ CHOOSEHO       0.035         0.076         0.121         0.056         0.059
+ RETAKER        0.049         0.078         0.095         0.064         0.082
+ DEMOLEAR       0.048         0.031         0.026         0.036         0.101
+ ADVICER        0.029         0.052         0.308         0.100         0.072
+ TRACKPRO       0.025         0.181         0.036         0.156         0.071
+ ONTIMER        0.035         0.014         0.039         0.386         0.021
+ PREPGRAD       0.048         0.125         0.082         0.218         0.041
+ GIVLECTU       0.075         0.090         0.098         0.066         0.057
+
+
+           S.E. GEOMIN ROTATED LOADINGS
+                  6
+              ________
+ MASTERCO       0.177
+ NEXTCOMP       0.010
+ RUBRICR        0.160
+ ONLINECO       0.114
+ PROJCRED       0.026
+ INTERNCR       0.262
+ SMALLGRP       0.071
+ TEACHDIF       0.292
+ CHOOSEHO       0.158
+ RETAKER        0.140
+ DEMOLEAR       0.044
+ ADVICER        0.290
+ TRACKPRO       0.049
+ ONTIMER        0.435
+ PREPGRAD       0.184
+ GIVLECTU       0.124
+
+
+           S.E. GEOMIN FACTOR CORRELATIONS
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+      1         0.000
+      2         0.165         0.000
+      3         0.172         0.210         0.000
+      4         0.108         0.285         0.104         0.000
+      5         0.129         0.123         0.104         0.057         0.000
+      6         0.122         0.273         0.120         0.201         0.095
+
+
+           S.E. GEOMIN FACTOR CORRELATIONS
+                  6
+              ________
+      6         0.000
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+                0.043         0.834         0.020         0.034         0.047
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
+              ________      ________      ________      ________      ________
+                0.072         0.061         0.050         0.024         0.022
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
+              ________      ________      ________      ________      ________
+                0.106         0.059         0.116         0.174         0.076
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+                0.016
+
+
+           Est./S.E. GEOMIN ROTATED LOADINGS
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+ MASTERCO       1.239         1.107         0.458        -1.505         2.461
+ NEXTCOMP       2.300        -0.454        -0.555         0.631         0.689
+ RUBRICR       -0.689        -0.103         0.804         1.699         2.288
+ ONLINECO       0.550         4.907         0.661         0.992         0.562
+ PROJCRED       1.240         3.873         0.727         0.973        -1.016
+ INTERNCR      -0.864         9.131        -1.564        -1.171         0.539
+ SMALLGRP       0.861         0.539         9.174        -0.178        -0.219
+ TEACHDIF      -0.806        -0.619         2.154         0.253         1.336
+ CHOOSEHO       0.657         1.128         2.205         0.758         3.983
+ RETAKER        0.686         0.039         0.692         0.665         3.370
+ DEMOLEAR       0.656        -0.296         0.027         1.368         7.417
+ ADVICER       -0.117        -0.015         0.708         0.609         0.315
+ TRACKPRO      -1.042         0.746         0.208         4.069         2.798
+ ONTIMER        1.267        -1.199         0.216         2.026        -0.371
+ PREPGRAD       0.978         0.216         0.251         0.369        -0.519
+ GIVLECTU      -1.086        -0.889        -1.706        -0.175         1.640
+
+
+           Est./S.E. GEOMIN ROTATED LOADINGS
+                  6
+              ________
+ MASTERCO       0.894
+ NEXTCOMP      -0.123
+ RUBRICR        1.107
+ ONLINECO      -0.706
+ PROJCRED      -0.365
+ INTERNCR       0.558
+ SMALLGRP       0.067
+ TEACHDIF       0.637
+ CHOOSEHO       0.266
+ RETAKER        0.817
+ DEMOLEAR      -0.448
+ ADVICER        1.850
+ TRACKPRO      -0.137
+ ONTIMER        0.323
+ PREPGRAD       2.741
+ GIVLECTU       0.381
+
+
+           Est./S.E. GEOMIN FACTOR CORRELATIONS
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+      1         0.000
+      2         2.672         0.000
+      3         2.492         2.386         0.000
+      4         3.238         1.669         5.681         0.000
+      5         3.160         3.735         5.333         8.885         0.000
+      6         2.068         0.770         5.210         3.043         5.574
+
+
+           Est./S.E. GEOMIN FACTOR CORRELATIONS
+                  6
+              ________
+      6         0.000
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+               15.765        -0.013        39.591        20.179        12.126
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              INTERNCR      SMALLGRP      TEACHDIF      CHOOSEHO      RETAKER
+              ________      ________      ________      ________      ________
+                8.238        10.122         8.390        28.967        36.346
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              DEMOLEAR      ADVICER       TRACKPRO      ONTIMER       PREPGRAD
+              ________      ________      ________      ________      ________
+                3.830         7.426         2.786         1.252         8.762
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              GIVLECTU
+              ________
+               58.547
+
+
+           FACTOR STRUCTURE
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+ MASTERCO       0.411         0.359         0.416         0.328         0.497
+ NEXTCOMP       1.005         0.449         0.437         0.368         0.427
+ RUBRICR        0.172         0.204         0.373         0.357         0.355
+ ONLINECO       0.274         0.544         0.326         0.315         0.285
+ PROJCRED       0.365         0.642         0.421         0.401         0.325
+ INTERNCR       0.267         0.624         0.330         0.329         0.352
+ SMALLGRP       0.302         0.353         0.614         0.370         0.350
+ TEACHDIF       0.312         0.349         0.741         0.494         0.487
+ CHOOSEHO       0.297         0.367         0.502         0.393         0.476
+ RETAKER        0.220         0.223         0.332         0.305         0.411
+ DEMOLEAR       0.346         0.368         0.441         0.422         0.770
+ ADVICER        0.256         0.259         0.600         0.528         0.456
+ TRACKPRO       0.339         0.520         0.544         0.790         0.572
+ ONTIMER        0.346         0.404         0.563         0.876         0.476
+ PREPGRAD       0.214         0.192         0.405         0.419         0.328
+ GIVLECTU      -0.142        -0.152        -0.167        -0.100        -0.050
+
+
+           FACTOR STRUCTURE
+                  6
+              ________
+ MASTERCO       0.376
+ NEXTCOMP       0.264
+ RUBRICR        0.395
+ ONLINECO       0.131
+ PROJCRED       0.213
+ INTERNCR       0.231
+ SMALLGRP       0.377
+ TEACHDIF       0.593
+ CHOOSEHO       0.384
+ RETAKER        0.337
+ DEMOLEAR       0.412
+ ADVICER        0.721
+ TRACKPRO       0.514
+ ONTIMER        0.628
+ PREPGRAD       0.571
+ GIVLECTU      -0.052
+
+
+     Beginning Time:  18:16:06
+        Ending Time:  18:16:17
+       Elapsed Time:  00:00:11
 
 
 

@@ -169,7 +169,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">02_Data Munging</h1>
 <h4 class="author"><em>Brandon Foster, Ph.D.</em></h4>
-<h4 class="date"><em>20 October, 2017, 15:42</em></h4>
+<h4 class="date"><em>20 October, 2017, 18:10</em></h4>
 
 </div>
 
@@ -180,24 +180,34 @@ $(document).ready(function () {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb2FkIHRoZSB0aWR5LWVkIGRhdGEgLS0tLVxucmVhZFJEUyhcIi4uLi9kYXRhL3RpZHkucmRzXCIpICU+JVxuIyBUcmFuc2Zvcm0gdGhlIGRhdGFcbiMgU2F2ZSB0aGUgdHJhbnNmb3JtZWQgZGF0YSAtLS0tXG5zYXZlUkRTKFwiLi4vZGF0YS90cmFuc2Zvcm1lZC5yZHNcIilcblxuYGBgIn0= -->
-<pre class="r"><code># Load the tidy-ed data ----
-readRDS(&quot;.../data/tidy.rds&quot;) %&gt;%
-# Transform the data
-# Save the transformed data ----
-saveRDS(&quot;../data/transformed.rds&quot;)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb2FkIHRoZSBjc3YgZGF0YSBhbmQgdGlkeSBpdCAtLS0tXG5jb2xuYW1lcyhzcHNzLmRhdClcblxuYGBgIn0= -->
+<pre class="r"><code># Load the csv data and tidy it ----
+colnames(spss.dat)
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gZ3pmaWxlKGZpbGUsIFwicmJcIikgOiBjYW5ub3Qgb3BlbiB0aGUgY29ubmVjdGlvblxuIn0= -->
-<pre><code>Error in gzfile(file, &quot;rb&quot;) : cannot open the connection</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSBcImlkXCIgICAgICAgICAgICAgXCJTQ0hPT0xfSURcIiAgICAgIFwiZ2VuZGVyUlwiICAgICAgICBcInJhY2VSXCIgICAgICAgICAgXCJlZHVleHBlY3RSXCIgICAgXG4gWzZdIFwiZ3JhZHByZXBSXCIgICAgICBcIm9wcG1hdGVyaWFsUlwiICAgXCJvcHBleGFtUlwiICAgICAgIFwiaHdpbXBSXCIgICAgICAgICBcIm9wcGVhcm5SXCIgICAgICBcblsxMV0gXCJncmFkZXJlZlJcIiAgICAgIFwiY29sbGdyYWRlc1JcIiAgICBcImRlbW9uc3RyYXRlUlwiICAgXCJjaG9vc2VSXCIgICAgICAgIFwicGFjZVJcIiAgICAgICAgIFxuWzE2XSBcImNvbXBncmFkZVJcIiAgICAgXCJhc3NpZ25od1JcIiAgICAgIFwiZGVtcHJvZlJcIiAgICAgICBcInN0YWZmZXhwbGFpblJcIiAgXCJwcm9nY29tcFJcIiAgICAgXG5bMjFdIFwibWFzdGVyY29tcFJcIiAgICBcIm5leHRjb21wUlwiICAgICAgXCJzYW1lY29tcFJcIiAgICAgIFwiZnV0dXJlUlwiICAgICAgICBcInNoYXJlZXhhbXBSXCIgICBcblsyNl0gXCJncmFkZXdvcmtSXCIgICAgIFwicnVicmljUlwiICAgICAgICBcIm9ubGluZWNvbXBSXCIgICAgXCJwcm9qY3JlZFJcIiAgICAgIFwiaGlnaHNjaGNyZWRSXCIgIFxuWzMxXSBcImNvbGxjcmVkUlwiICAgICAgXCJpbnRlcm5jcmVkUlwiICAgIFwic2FtYXNzaWduUlwiICAgICBcImdpdmxlY3R1clJcIiAgICAgXCJzbWFsbGdycFJcIiAgICAgXG5bMzZdIFwiZXh0cmFoZWxwUlwiICAgICBcInRlYWNoZGlmUlwiICAgICAgXCJkaXNjdXNzUlwiICAgICAgIFwiZmVlZGJhY2tSXCIgICAgICBcImNob29zZWhvd1JcIiAgICBcbls0MV0gXCJjcmVhdGVtb2RlbFJcIiAgIFwidGFrZXRlc3RSXCIgICAgICBcImdpdmVwZXJmUlwiICAgICAgXCJnaXZlcHJlc2VudFJcIiAgIFwicHJvamNvbXBSXCIgICAgIFxuWzQ2XSBcInByb2pjb21tUlwiICAgICAgXCJyZXRha2VSXCIgICAgICAgIFwiZGVtb2xlYXJuUlwiICAgICBcInRyYWNrcHJvZ1JcIiAgICAgXCJvbnRpbWVSXCIgICAgICAgXG5bNTFdIFwidGFrZXJlc3BvblJcIiAgICBcInByZXBncmFkUlwiICAgICAgXCJmaW5kaW5mb1JcIiAgICAgIFwiZmluaXdvcmtSXCIgICAgICBcImhlbHBsZWFyblJcIiAgICBcbls1Nl0gXCJncm91cHdya1JcIiAgICAgIFwib3V0Y2xhc3NSXCIgICAgICBcImZlZWxyZXNwUlwiICAgICAgXCJ0cmVhdHJlc3BSXCIgICAgIFwiZGlzYWdyZWVSXCIgICAgIFxuWzYxXSBcImFkdmljZVJcIiAgICAgICAgXCJ4dHJhZWZmUlwiICAgICAgIFwibG93c2NvcmVSXCIgICAgICBcInByb3VkUlwiICAgICAgICAgXCJyZXNwZWN0ZWRSXCIgICAgXG5bNjZdIFwiZ29vZGpvYlJcIiAgICAgICBcImF0dGVudGlvblJcIiAgICAgXCJwYXJ0aWNpcGF0ZVJcIiAgIFwibW9zdGltcG9ydGFudFJcIiBcInVzZWxlc3NSXCIgICAgICBcbls3MV0gXCJ0ZWFjaGNhcmVSXCIgICAgIFwiYW55cGxhY2VSXCIgICAgICBcInRhbGt0b1JcIiAgICAgICAgXCJ1c2VmdWxSXCIgICAgICAgIFwiZmF2b3JpdGVSXCIgICAgIFxuWzc2XSBcImludGVyZXN0ZWRSXCIgICAgXCJ3YXN0ZVJcIiAgICAgICAgIFwiZHJvcG91dFJcIiAgICAgICBcIm1vcmVpbXBvcnRhbnRSXCJcbiJ9 -->
+<pre><code> [1] &quot;id&quot;             &quot;SCHOOL_ID&quot;      &quot;genderR&quot;        &quot;raceR&quot;          &quot;eduexpectR&quot;    
+ [6] &quot;gradprepR&quot;      &quot;oppmaterialR&quot;   &quot;oppexamR&quot;       &quot;hwimpR&quot;         &quot;oppearnR&quot;      
+[11] &quot;graderefR&quot;      &quot;collgradesR&quot;    &quot;demonstrateR&quot;   &quot;chooseR&quot;        &quot;paceR&quot;         
+[16] &quot;compgradeR&quot;     &quot;assignhwR&quot;      &quot;demprofR&quot;       &quot;staffexplainR&quot;  &quot;progcompR&quot;     
+[21] &quot;mastercompR&quot;    &quot;nextcompR&quot;      &quot;samecompR&quot;      &quot;futureR&quot;        &quot;shareexampR&quot;   
+[26] &quot;gradeworkR&quot;     &quot;rubricR&quot;        &quot;onlinecompR&quot;    &quot;projcredR&quot;      &quot;highschcredR&quot;  
+[31] &quot;collcredR&quot;      &quot;interncredR&quot;    &quot;samassignR&quot;     &quot;givlecturR&quot;     &quot;smallgrpR&quot;     
+[36] &quot;extrahelpR&quot;     &quot;teachdifR&quot;      &quot;discussR&quot;       &quot;feedbackR&quot;      &quot;choosehowR&quot;    
+[41] &quot;createmodelR&quot;   &quot;taketestR&quot;      &quot;giveperfR&quot;      &quot;givepresentR&quot;   &quot;projcompR&quot;     
+[46] &quot;projcommR&quot;      &quot;retakeR&quot;        &quot;demolearnR&quot;     &quot;trackprogR&quot;     &quot;ontimeR&quot;       
+[51] &quot;takeresponR&quot;    &quot;prepgradR&quot;      &quot;findinfoR&quot;      &quot;finiworkR&quot;      &quot;helplearnR&quot;    
+[56] &quot;groupwrkR&quot;      &quot;outclassR&quot;      &quot;feelrespR&quot;      &quot;treatrespR&quot;     &quot;disagreeR&quot;     
+[61] &quot;adviceR&quot;        &quot;xtraeffR&quot;       &quot;lowscoreR&quot;      &quot;proudR&quot;         &quot;respectedR&quot;    
+[66] &quot;goodjobR&quot;       &quot;attentionR&quot;     &quot;participateR&quot;   &quot;mostimportantR&quot; &quot;uselessR&quot;      
+[71] &quot;teachcareR&quot;     &quot;anyplaceR&quot;      &quot;talktoR&quot;        &quot;usefulR&quot;        &quot;favoriteR&quot;     
+[76] &quot;interestedR&quot;    &quot;wasteR&quot;         &quot;dropoutR&quot;       &quot;moreimportantR&quot;</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the toolbar or by pressing <em>Cmd+Option+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the <em>Preview</em> button or press <em>Cmd+Shift+K</em> to preview the HTML file).</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiMDJfRGF0YSBNdW5naW5nIgphdXRob3I6ICJCcmFuZG9uIEZvc3RlciwgUGguRC4iCmRhdGU6ICJgciBmb3JtYXQoU3lzLnRpbWUoKSwgJyVkICVCLCAlWSwgJUg6JU0nKWAiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgZGZfcHJpbnQ6IHBhZ2VkCiAgICB0b2M6IHllcwogICAgdGhlbWU6IHBhcGVyCiAgaHRtbF9ub3RlYm9vazoKICAgIG51bWJlcl9zZWN0aW9uczogeWVzCiAgICB0b2M6IHllcwotLS0KClRoaXMgc2NyaXB0IHNob3VsZCB3YWxrIHRoZSB1c2VyIHRocm91Z2ggYWxsIG9mIHRoZSBzdGVwcyBuZWNlc3NhcnkgdG8gY2xlYW4gYW5kIHRyYW5zZm9ybSB0aGUgZmluYWwgZGF0YSBmcmFtZXMgZm9yIGFueSBhbmFseXNlcy4gCgogYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CiBrbml0cjo6b3B0c19rbml0JHNldChyb290LmRpciA9ICdybWRzJykKIGBgYAoKYGBge3IsIG1lc3NhZ2VzPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQojIExvYWQgdGhlIGNzdiBkYXRhIGFuZCB0aWR5IGl0IC0tLS0KZWZhLmRhdGEgPC0gc3Bzcy5kYXQgJT4lCiAgZHBseXI6OnNlbGVjdChpZCwgbWFzdGVyY29tcFIsIG5leHRjb21wUiwgcnVicmljUiwgb25saW5lY29tcFIsIHByb2pjcmVkUiwgaW50ZXJuY3JlZFIsCiAgc21hbGxncnBSLCB0ZWFjaGRpZlIsIGNob29zZWhvd1IsIHJldGFrZVIsIGRlbW9sZWFyblIsIGFkdmljZVIsIHRyYWNrcHJvZ1IsIG9udGltZVIsIHByZXBncmFkUikKCiMgU2F2ZSB0aGUgdGlkeS1lZCBkYXRhIC0tLS0KICBzYXZlUkRTKGVmYS5kYXRhLCBmaWxlID0gIi4uL2RhdGEvZWZhLnRpZHkucmRzIikKYGBgCgpBZGQgYSBuZXcgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpJbnNlcnQgQ2h1bmsqIGJ1dHRvbiBvbiB0aGUgdG9vbGJhciBvciBieSBwcmVzc2luZyAqQ21kK09wdGlvbitJKi4KCldoZW4geW91IHNhdmUgdGhlIG5vdGVib29rLCBhbiBIVE1MIGZpbGUgY29udGFpbmluZyB0aGUgY29kZSBhbmQgb3V0cHV0IHdpbGwgYmUgc2F2ZWQgYWxvbmdzaWRlIGl0IChjbGljayB0aGUgKlByZXZpZXcqIGJ1dHRvbiBvciBwcmVzcyAqQ21kK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiMDJfRGF0YSBNdW5naW5nIgphdXRob3I6ICJCcmFuZG9uIEZvc3RlciwgUGguRC4iCmRhdGU6ICJgciBmb3JtYXQoU3lzLnRpbWUoKSwgJyVkICVCLCAlWSwgJUg6JU0nKWAiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgZGZfcHJpbnQ6IHBhZ2VkCiAgICB0b2M6IHllcwogICAgdGhlbWU6IHBhcGVyCiAgaHRtbF9ub3RlYm9vazoKICAgIG51bWJlcl9zZWN0aW9uczogeWVzCiAgICB0b2M6IHllcwotLS0KClRoaXMgc2NyaXB0IHNob3VsZCB3YWxrIHRoZSB1c2VyIHRocm91Z2ggYWxsIG9mIHRoZSBzdGVwcyBuZWNlc3NhcnkgdG8gY2xlYW4gYW5kIHRyYW5zZm9ybSB0aGUgZmluYWwgZGF0YSBmcmFtZXMgZm9yIGFueSBhbmFseXNlcy4gCgogYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CiBrbml0cjo6b3B0c19rbml0JHNldChyb290LmRpciA9ICdybWRzJykKIGBgYAoKYGBge3IsIG1lc3NhZ2VzPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQojIExvYWQgdGhlIGNzdiBkYXRhIGFuZCB0aWR5IGl0IC0tLS0KZWZhLmRhdGEgPC0gc3Bzcy5kYXQgJT4lCiAgZHBseXI6OnNlbGVjdChpZCwgbWFzdGVyY29tcFIsIG5leHRjb21wUiwgcnVicmljUiwgb25saW5lY29tcFIsIHByb2pjcmVkUiwgaW50ZXJuY3JlZFIsCiAgc21hbGxncnBSLCB0ZWFjaGRpZlIsIGNob29zZWhvd1IsIHJldGFrZVIsIGRlbW9sZWFyblIsIGFkdmljZVIsIHRyYWNrcHJvZ1IsIG9udGltZVIsIHByZXBncmFkUiwgZ2l2bGVjdHVyUikKCiMgU2F2ZSB0aGUgdGlkeS1lZCBkYXRhIC0tLS0KICBzYXZlUkRTKGVmYS5kYXRhLCBmaWxlID0gIi4uL2RhdGEvZWZhLnRpZHkucmRzIikKYGBgCgo=</div>
 
 
 

@@ -1,0 +1,36 @@
+Mplus VERSION 8 (Mac)
+MUTHEN & MUTHEN
+10/20/2017   6:20 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+  Title: JFF LCA 2017 EFA for 4 Factors;
+  DATA:
+  FILE = "../mplus/03_Analyses_d4cfd3cd1ec77f098620d877105e23da.dat";
+
+  VARIABLE:
+  NAMES = id mastercompR nextcompR rubricR onlinecompR projcredR interncredR smallgrpR
+       teachdifR choosehowR retakeR demolearnR adviceR trackprogR ontimeR prepgradR
+       givlecturR;
+   MISSING=.;
+
+    Missing are all (-99, -9, -8, -1);
+    IDVARIABLE is id;
+  ANALYSIS:
+  TYPE =  EFA 4;
+
+*** ERROR in ANALYSIS command
+  Incorrect number of factors for TYPE = EFA # #.
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

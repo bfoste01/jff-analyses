@@ -1,5 +1,5 @@
 TITLE:
-Title: JFF LCA 2017 EFA Up to 6 Factors;
+Title: JFF LCA 2017 EFA for 4 Factors;
 DATA:
 FILE = "../mplus/03_Analyses_d4cfd3cd1ec77f098620d877105e23da.dat";
  
@@ -12,4 +12,4 @@ NAMES = id mastercompR nextcompR rubricR onlinecompR projcredR interncredR small
   Missing are all (-99, -9, -8, -1);
   IDVARIABLE is id;
 ANALYSIS:
-TYPE =  EFA 1 6;
+TYPE =  EFA 4;
