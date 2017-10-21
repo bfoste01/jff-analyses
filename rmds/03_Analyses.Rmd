@@ -59,6 +59,9 @@ Next, let's examine some visualizations for the correlation matrices.
 ```{r, descriptives.cors, warning=FALSE, message=FALSE, echo=TRUE, tidy=TRUE}
 # Graphics ----
 
+# calculate correlations
+item.cors <- lowerCor(items)
+
 # munge the correlation matricies 
 source("../functions/functions.R")
 cormat <- reorder_cormat(item.cors)
@@ -176,14 +179,13 @@ Examining the model estimated reliabilities are useful for understanding whether
 # Compile model reliabilities ----
 efa.bifac.rel <- efa.4.bifac$omega.group %>%
   rename("Omega Total" = total, "Omega Hierarchical" = general)
-efa.bifac.rel
 
 # convert table to markdown
 efa.bifac.rel <- pander(efa.bifac.rel)
 efa.bifac.rel
 ```
 
-Results show that in general a total score will adequately represent the second-order factor. Of particular note are the \omega Hierarchical values for the subscales, which show that Factor 1 and Factor 4 contain a moderate degree of factor specific variability, with values > .50. The moderate \omega Hierarchical values for these factors indicates that total scores for these subscales contains some unique factor-specific information.  
+Results show that in general a total score will adequately represent the second-order factor. Of particular note are the Hierarchical Omega values for the subscales, which show that Factor 1 and Factor 4 contain a moderate degree of factor specific variability, with values > .50. The moderate Hierarchical Omega values for these factors indicates that total scores for these subscales contains some unique factor-specific information.  
 
 ## Examining the 4 first-order factors in depth
 
