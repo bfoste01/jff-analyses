@@ -169,7 +169,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">01_Data Import</h1>
 <h4 class="author"><em>Brandon Foster, Ph.D.</em></h4>
-<h4 class="date"><em>20 October, 2017, 15:48</em></h4>
+<h4 class="date"><em>31 October, 2017, 15:35</em></h4>
 
 </div>
 
@@ -178,9 +178,9 @@ $(document).ready(function () {
 <p>Let’s import the SPSS file.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBpbXBvcnQgc3BzcyBkYXRhXG5zcHNzLmRhdCA8LSByZWFkLnNwc3MoXCIuLi9kYXRhL0pGRl9MQ0FfSUQuc2F2XCIsIHRvLmRhdGEuZnJhbWU9VFJVRSwgdXNlLnZhbHVlLmxhYmVscyA9IEZBTFNFKVxuXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBpbXBvcnQgc3BzcyBkYXRhXG5zcHNzLmRhdCA8LSByZWFkLnNwc3MoXCIuLi9kYXRhL0pGRl9MQ0FfSUQuc2F2XCIsIHRvLmRhdGEuZnJhbWU9VFJVRSwgdXNlLnZhbHVlLmxhYmVscyA9IFRSVUUpXG5cbmBgYCJ9 -->
 <pre class="r"><code># import spss data
-spss.dat &lt;- read.spss(&quot;../data/JFF_LCA_ID.sav&quot;, to.data.frame=TRUE, use.value.labels = FALSE)
+spss.dat &lt;- read.spss(&quot;../data/JFF_LCA_ID.sav&quot;, to.data.frame=TRUE, use.value.labels = TRUE)
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiLi4vZGF0YS9KRkZfTENBX0lELnNhdjogVW5yZWNvZ25pemVkIHJlY29yZCB0eXBlIDcsIHN1YnR5cGUgMTggZW5jb3VudGVyZWQgaW4gc3lzdGVtIGZpbGVyZS1lbmNvZGluZyBmcm9tIENQMTI1MlxuIn0= -->

@@ -24,7 +24,7 @@ results <- list()
 readRDS("../data/efa.tidy.rds") -> efa.data
 
 # Load packages ----
-pacman::p_load(MplusAutomation, GPArotation, corrplot, psych, tidyverse)
+pacman::p_load(MplusAutomation, GPArotation, corrplot, psych, tidyverse, lavaan)
 
 # Specific munging and transformations ----
 items <- efa.data %>% 
@@ -110,6 +110,7 @@ Now let's look at some multidimensional EFA models to see we can establish the p
 
 ```{r, efa.multiple, messages=FALSE, warning=FALSE, tidy=FALSE}
 # find factor solutions for 2-6 factors using a oblimin rotation
+x <- c(2, 3, 4, 5)
 efa.2.6.oblimin <- lapply(2:6, function(x) {fa(d_items, nfactors=x, fm="ml", rotate = "oblimin")})
 efa.2 <- efa.2.6.oblimin[[2]]
 efa.2
@@ -322,4 +323,28 @@ efa.5.secondOrder
 # Save the results object ----
 results <- list(efa.4.bifac, t.iecv.efa.4.bifac, t.efa.bifac.fit, efa.bifac.rel)
 #saveRDS(results, file = "data/results.rds")
+```
+
+### Sandbox 
+```{r}
+# CFA second order factor 
+names(items)
+model <- '
+ProfProg =~ mastercompR + nextcompR + rubricR
+LearnAnywhere =~ onlinecompR + projcredR + interncredR
+Personalization =~ smallgrpR + teachdifR + givlecturR
+FlexibleAssessment =~ choosehowR + retakeR + demolearnR
+Ownership =~ adviceR + trackprogR + ontimeR + prepgradR
+CBL =~ NA*ProfProg + LearnAnywhere + Personalization + FlexibleAssessment + Ownership
+CBL ~~ 1*CBL
+' 
+fit.secondOrder.cont <- cfa(model, data=items, missing='fiml', std.lv=FALSE)
+summary(fit.secondOrder.cont, fit.measures=TRUE)
+
+# fit as ordered categorical 
+fit.secondOrder.ordered <- cfa(model, data=items, missing='pairwise', std.lv=FALSE, ordered = names(items))
+summary(fit, fit.measures=TRUE)
+
+# CFA bifactor
+
 ```
