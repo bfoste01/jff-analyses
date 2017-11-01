@@ -143,6 +143,7 @@ Run the factor models
 efa.4.5.bifac <- lapply(4:5, function(x) {omega(d_items, nfactors=x, sl=TRUE)})
 efa.4.bifac <- efa.4.5.bifac[[1]]
 efa.5.bifac <- efa.4.5.bifac[[2]]
+#efa.4.5.bifac[[2]]$model$lavaan
 ```
 
 ### Model Fit
@@ -329,7 +330,7 @@ results <- list(efa.4.bifac, t.iecv.efa.4.bifac, t.efa.bifac.fit, efa.bifac.rel)
 ```{r}
 # CFA second order factor 
 names(items)
-model <- '
+model.secondOrder <- '
 ProfProg =~ mastercompR + nextcompR + rubricR
 LearnAnywhere =~ onlinecompR + projcredR + interncredR
 Personalization =~ smallgrpR + teachdifR + givlecturR
@@ -338,7 +339,8 @@ Ownership =~ adviceR + trackprogR + ontimeR + prepgradR
 CBL =~ NA*ProfProg + LearnAnywhere + Personalization + FlexibleAssessment + Ownership
 CBL ~~ 1*CBL
 ' 
-fit.secondOrder.cont <- cfa(model, data=items, missing='fiml', std.lv=FALSE)
+# fit as continuous
+fit.secondOrder.cont <- cfa(model.secondOrder, data=items, missing='fiml', std.lv=FALSE)
 summary(fit.secondOrder.cont, fit.measures=TRUE)
 
 # fit as ordered categorical 
@@ -346,5 +348,23 @@ fit.secondOrder.ordered <- cfa(model, data=items, missing='pairwise', std.lv=FAL
 summary(fit, fit.measures=TRUE)
 
 # CFA bifactor
+model.biFac <- '
+G =~ mastercompR + nextcompR + rubricR + onlinecompR + projcredR + interncredR + 
+smallgrpR + teachdifR + givlecturR + choosehowR + retakeR + demolearnR +
+adviceR + trackprogR + ontimeR + prepgradR
+ProfProg =~ mastercompR + nextcompR + rubricR
+LearnAnywhere =~ onlinecompR + projcredR + interncredR
+Personalization =~ smallgrpR + teachdifR + givlecturR
+FlexibleAssessment =~ choosehowR + retakeR + demolearnR
+Ownership =~ adviceR + trackprogR + ontimeR + prepgradR
 
+' 
+# fit as continuous
+fit.biFac.cont <- cfa(model.biFac, data=items, missing='fiml', std.lv=FALSE)
+summary(fit.biFac.cont, fit.measures=TRUE)
+
+# fit as ordered categorical 
+fit.biFac.ordered <- cfa(model.biFac, data=items, missing='pairwise', std.lv=FALSE, ordered = names(items))
+summary(fit.biFac.ordered, fit.measures=TRUE)
+warnings(fit.biFac.ordered)
 ```
