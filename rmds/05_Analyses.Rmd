@@ -11,6 +11,7 @@ This document exlores different ways to visualize the response data for the CBE 
 
 # Data Vizualizations
 
+Let's import the data and selct out the items. 
 ```{r, initial, messages=FALSE, warning=FALSE, tidy=TRUE}
 # Initialize an empty list to store the results ----
 results <- list()
@@ -22,11 +23,11 @@ readRDS("../data/efa.tidy.rds") -> efa.data
 source("../functions/functions.r")
 
 # Load packages ----
-pacman::p_load(MplusAutomation, GPArotation, corrplot, psych, tidyverse, lavaan, DT, pander)
+pacman::p_load(psych, tidyverse, lavaan, pander, ggalt, ggthemes)
 
 # Specific munging and transformations ----
 items <- efa.data %>% 
-  dplyr::select(-id)
+  dplyr::select(-id, -SCHOOL_ID)
 
 # standardize items
 d_items = as.data.frame(scale(items))
@@ -37,3 +38,63 @@ panderOptions('round', 2)
 panderOptions('keep.trailing.zeros', TRUE)
 ```
 
+Let's munge some of the data by creating subscales. 
+```{r, munge, messages=FALSE, warning=FALSE, tidy=TRUE}
+items <- items %>%
+  mutate(ProfProg = mastercompR + nextcompR + rubricR,
+         LearnAnywhere = onlinecompR + projcredR + interncredR,
+         Personalization = smallgrpR + teachdifR + givlecturR,
+         FlexibleAssessment = choosehowR + retakeR + demolearnR,
+         Ownership = adviceR + trackprogR + ontimeR + prepgradR,
+         ProfProg.per = (ProfProg/15)*100,
+         LearnAnywhere.per = (LearnAnywhere/9)*100,
+         Personalization.per = (Personalization/15)*100,
+         FlexibleAssessment.per = (FlexibleAssessment/14)*100,
+         Ownership.per = (Ownership/20)*100)
+
+# descriptives for items
+pander(describe(items))
+```
+
+Let's create the plots
+```{r, plots.1, messages=FALSE, warning=FALSE, tidy=TRUE}
+# create aggregate subscales
+items.sub <- arrange(gather(items %>%
+  select(ProfProg, LearnAnywhere, Personalization, Ownership, FlexibleAssessment) %>%
+  summarise("Ownership" = mean(Ownership, na.rm = TRUE),
+            "Personalization" = mean(Personalization, na.rm = TRUE),
+            "Proficiency-based progression" = mean(ProfProg, na.rm = TRUE),
+            "Flexible assessment" = mean(FlexibleAssessment, na.rm = TRUE),
+            "Learning anytime anywhere" = mean(LearnAnywhere, na.rm = TRUE)), "subscale"), -value)
+
+# create aggregate subscales percent total
+items.sub.per <- arrange(gather(items %>%
+  select(ProfProg.per, LearnAnywhere.per, Personalization.per, Ownership.per, FlexibleAssessment.per) %>%
+  summarise("Ownership" = mean(Ownership.per, na.rm = TRUE),
+            "Personalization" = mean(Personalization.per, na.rm = TRUE),
+            "Proficiency-based progression" = mean(ProfProg.per, na.rm = TRUE),
+            "Flexible assessment" = mean(FlexibleAssessment.per, na.rm = TRUE),
+            "Learning anytime anywhere" = mean(LearnAnywhere.per, na.rm = TRUE)), "subscale"), -value)
+pander(items.sub.per)
+```
+
+Let's munge some of the data by creating subscales. 
+```{r, lolipop, messages=FALSE, warning=FALSE, tidy=TRUE, results='asis'}
+# lollipop plots
+
+# total subscale
+items.sub %>% 
+  arrange(-value) %>% 
+  ggplot(aes(x = value, y = reorder(subscale, value), label = paste0(round(value, digits = 2)))) +
+        geom_segment(aes(x = 0, y = subscale, xend = value, yend = subscale), color = "grey50") +
+        geom_point(size = 10) +
+        geom_text(color = "white", size = 2.5) + theme_fivethirtyeight()
+
+# percent of total
+items.sub.per %>% 
+  arrange(-value) %>% 
+  ggplot(aes(x = value, y = reorder(subscale, value), label = paste0(round(value, 1), "%"))) +
+        geom_segment(aes(x = 0, y = subscale, xend = 100, yend = subscale), color = "grey50") +
+        geom_point(size = 10) +
+        geom_text(color = "white", size = 2.25) + theme_fivethirtyeight()
+```

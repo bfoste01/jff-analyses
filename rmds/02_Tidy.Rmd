@@ -21,7 +21,7 @@ This script should walk the user through all of the steps necessary to clean and
 ```{r, messages=FALSE, warning=FALSE}
 # Load the csv data and tidy it ----
 efa.data <- spss.dat %>%
-  dplyr::select(id, mastercompR, nextcompR, rubricR, onlinecompR, projcredR, interncredR,
+  dplyr::select(id, SCHOOL_ID, mastercompR, nextcompR, rubricR, onlinecompR, projcredR, interncredR,
   smallgrpR, teachdifR, choosehowR, retakeR, demolearnR, adviceR, trackprogR, ontimeR, prepgradR, givlecturR)
 
 # Save the tidy-ed data ----
