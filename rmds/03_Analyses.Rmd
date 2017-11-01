@@ -349,7 +349,7 @@ summary(fit, fit.measures=TRUE)
 
 # CFA bifactor
 model.biFac <- '
-G =~ mastercompR + nextcompR + rubricR + onlinecompR + projcredR + interncredR + 
+g =~ mastercompR + nextcompR + rubricR + onlinecompR + projcredR + interncredR + 
 smallgrpR + teachdifR + givlecturR + choosehowR + retakeR + demolearnR +
 adviceR + trackprogR + ontimeR + prepgradR
 ProfProg =~ mastercompR + nextcompR + rubricR
@@ -358,13 +358,17 @@ Personalization =~ smallgrpR + teachdifR + givlecturR
 FlexibleAssessment =~ choosehowR + retakeR + demolearnR
 Ownership =~ adviceR + trackprogR + ontimeR + prepgradR
 
+# convergence issue
+demolearnR ~~ 0*demolearnR
+nextcompR ~~ 0*nextcompR
+ontimeR ~~ 0*ontimeR
 ' 
 # fit as continuous
-fit.biFac.cont <- cfa(model.biFac, data=items, missing='fiml', std.lv=FALSE)
+fit.biFac.cont <- cfa(model.biFac, data=items, missing='listwise', std.lv=TRUE, orthogonal=TRUE)
 summary(fit.biFac.cont, fit.measures=TRUE)
 
 # fit as ordered categorical 
-fit.biFac.ordered <- cfa(model.biFac, data=items, missing='pairwise', std.lv=FALSE, ordered = names(items))
+fit.biFac.ordered <- cfa(model.biFac, data=items, missing='pairwise', std.lv=TRUE, ordered = names(items))
 summary(fit.biFac.ordered, fit.measures=TRUE)
 warnings(fit.biFac.ordered)
 ```

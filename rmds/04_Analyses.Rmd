@@ -1,0 +1,107 @@
+---
+title: "04_Analyses"
+author: "Brandon Foster, Ph.D."
+date: "`r format(Sys.time(), '%d %B, %Y, %H:%M')`"
+output:
+  html_document
+---
+# Introduction
+
+This document explores the fit of several proposed models representing CBE implementation. The data used for these analyses include the student responses to 16 items on a survey. Roughly 1870 students provided responses to the 16 items. The following analyses explore 3 hypothetical models for the CBE data. Specifically, a multidimensional (i.e., correlated traits) model, a second-order factor model and a bi-factor model are utilized. Major distinctions between the three models are that that the multidimensional (i.e., correlated traits) model does not assume that the factors are subsumed by a larger dimension, the second-order factor model assumes that the lower-order factors are indicators for a larger dimension, and the bi-factor model assumes that that the items first load onto a general factors, and that the residual variances are indicators for lower order factors. 
+
+All models assume that the items in the measure represent the following factors: 
+
+- Learn Anywhere
+
+- Personalization
+
+- Flexible Assessment
+
+- Ownership
+
+Finally, curious readers can find technical information outlining the differences between the models [here](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2981404/) and [here](http://www.sciencedirect.com/science/article/pii/S0160289616301878). 
+
+# CBE implementation with a second order factor
+
+First, let's load in the tidy data for the analyses, a well as the packages necessary to install the data. *Note.* the `pacman` call in the code block below will automatically install any packages you need. 
+
+```{r, initial, messages=FALSE, warning=FALSE, tidy=TRUE}
+# Initialize an empty list to store the results ----
+results <- list()
+
+# Load the tidy data ----
+readRDS("../data/efa.tidy.rds") -> efa.data
+
+# Load any functions ----
+source("../functions/functions.r")
+
+# Load packages ----
+pacman::p_load(MplusAutomation, GPArotation, corrplot, psych, tidyverse, lavaan, DT, pander)
+
+# Specific munging and transformations ----
+items <- efa.data %>% 
+  dplyr::select(-id)
+
+# standardize items
+d_items = as.data.frame(scale(items))
+
+# Document options ----
+panderOptions('digits', 2)
+panderOptions('round', 2)
+panderOptions('keep.trailing.zeros', TRUE)
+```
+
+Now, let's build the model in [`lavaan`](http://lavaan.ugent.be), one of many SEM programs you can utilize in R. You will see in the code below that that I have identified the model by fixing the first loading from each lower-order factor to 1, while fixing the variance of the second order factor to 1. This is a combination of approaches typically used to identify models. Effects coding could also have been utilized. Fixing the factor variance of the second-order factor to 1 will allow you to compare the magnitude of standardized loadings on to each of the lower-order factors. 
+
+```{r, secondOrder.lav, messages=FALSE, warning=FALSE, tidy=TRUE}
+# CFA second order factor 
+names(items)
+model.secondOrder <- '
+# lower order model
+ProfProg =~ mastercompR + nextcompR + rubricR
+LearnAnywhere =~ onlinecompR + projcredR + interncredR
+Personalization =~ smallgrpR + teachdifR + givlecturR
+FlexibleAssessment =~ choosehowR + retakeR + demolearnR
+Ownership =~ adviceR + trackprogR + ontimeR + prepgradR
+
+# second-order factor w/ different identification method
+CBL =~ NA*ProfProg + LearnAnywhere + Personalization + FlexibleAssessment + Ownership
+CBL ~~ 1*CBL
+' 
+```
+
+## Continuous estimation
+Now, let's actually fit the CFA model. The code below will fit the CFA model specified above using FIML, and ML estimation. Note the use specific request to not standardize all latent variables by fixing their factors to 1 in the `std.lv=FALSE` call.  
+```{r, secondOrder.param.cont.1, messages=FALSE, warning=FALSE, tidy=TRUE, results='asis'}
+# fit as continuous
+fit.secondOrder.cont.1 <- cfa(model.secondOrder, data=items, missing='fiml', std.lv=FALSE)
+pander(tidy.lavaan(fit.secondOrder.cont.1, standardized=TRUE))
+```
+
+Based on the output of this model, it appears as if the specifications of the model are accurate. There are some abnormalities that should be investigated. Namely, the 'givelecture' item is negatively correlated with the factor, and we know from previous descriptive analyses it shows a 0 correlation with all other items. (RETURN TO EXPLAINING OUTPUT). 
+
+### Fit measures
+```{r, secondOrder.fit.cont.1, messages=FALSE, warning=FALSE, tidy=TRUE, results='asis'}
+fit.cont.1 <- gather(as_data_frame(fitMeasures(fit.secondOrder.cont.1))) %>%
+  add_rownames("Fit Statistic")
+pander(fit.cont.1)
+```
+The model fit statistics are all within the range of an acceptable fitting model (i.e., RMSEA < .05, CFI > .90, TLI > .90). 
+
+## Ordered categorical estimation
+
+Now, let's examine the same model, but assume the items consisted of ordered categorical data. This is likely a more tenable representation of the data, since we can't be sure that the distance between categories are equal. Lavaan will use the  `WLSMV` estimator: it will use diagonally weighted least squares (DWLS) to estimate the model parameters, but it will use the full weight matrix to compute robust standard errors, and a mean- and variance-adjusted test statistic.
+
+```{r, secondOrder.param.ord.1, messages=FALSE, warning=FALSE, tidy=TRUE, results='asis'}
+# fit as ordered
+fit.secondOrder.ordered.1 <- cfa(model.secondOrder, data=items, missing='pairwise', std.lv=FALSE, ordered = names(items))
+pander(tidy.lavaan(fit.secondOrder.ordered.1, standardized=TRUE))
+```
+
+### Fit measures
+```{r, secondOrder.fit.cat.1, messages=FALSE, warning=FALSE, tidy=TRUE, results='asis'}
+secondOrder.fit.cat.1 <- gather(as_data_frame(fitMeasures(fit.secondOrder.ordered.1))) %>%
+  add_rownames("Fit Statistic")
+pander(secondOrder.fit.cat.1)
+```
+Model fit is comparable to the continuous model, albeit slightly worse. Again, we see some of the same issues with the 'givelecture' item. 
