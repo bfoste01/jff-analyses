@@ -1,0 +1,39 @@
+---
+title: "05_Analyses"
+author: "Brandon Foster, Ph.D."
+date: "`r format(Sys.time(), '%d %B, %Y, %H:%M')`"
+output:
+  html_document
+---
+# Introduction
+
+This document exlores different ways to visualize the response data for the CBE items. 
+
+# Data Vizualizations
+
+```{r, initial, messages=FALSE, warning=FALSE, tidy=TRUE}
+# Initialize an empty list to store the results ----
+results <- list()
+
+# Load the tidy data ----
+readRDS("../data/efa.tidy.rds") -> efa.data
+
+# Load any functions ----
+source("../functions/functions.r")
+
+# Load packages ----
+pacman::p_load(MplusAutomation, GPArotation, corrplot, psych, tidyverse, lavaan, DT, pander)
+
+# Specific munging and transformations ----
+items <- efa.data %>% 
+  dplyr::select(-id)
+
+# standardize items
+d_items = as.data.frame(scale(items))
+
+# Document options ----
+panderOptions('digits', 2)
+panderOptions('round', 2)
+panderOptions('keep.trailing.zeros', TRUE)
+```
+
