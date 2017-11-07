@@ -23,7 +23,10 @@ readRDS("../data/efa.tidy.rds") -> efa.data
 source("../functions/functions.r")
 
 # Load packages ----
-pacman::p_load(psych, tidyverse, lavaan, pander, ggalt, ggthemes)
+pacman::p_load(psych, tidyverse, lavaan, pander, ggalt, ggthemes, hexbin,
+               reshape2, data.table, RColorBrewer, stringr, devtools, licorice, ggthemr)
+#devtools::install_github("Bart6114/licorice")
+#devtools::install_github('cttobin/ggthemr')
 
 # Specific munging and transformations ----
 items <- efa.data %>% 
@@ -40,7 +43,7 @@ panderOptions('keep.trailing.zeros', TRUE)
 
 Let's munge some of the data by creating subscales. 
 ```{r, munge, messages=FALSE, warning=FALSE, tidy=TRUE}
-items <- items %>%
+items <- efa.data %>%
   mutate(ProfProg = mastercompR + nextcompR + rubricR,
          LearnAnywhere = onlinecompR + projcredR + interncredR,
          Personalization = smallgrpR + teachdifR + givlecturR,
@@ -56,7 +59,7 @@ items <- items %>%
 pander(describe(items))
 ```
 
-Let's create the plots
+Aggregate up to the whole sample 
 ```{r, plots.1, messages=FALSE, warning=FALSE, tidy=TRUE}
 # create aggregate subscales
 items.sub <- arrange(gather(items %>%
@@ -97,4 +100,458 @@ items.sub.per %>%
         geom_segment(aes(x = 0, y = subscale, xend = 100, yend = subscale), color = "grey50") +
         geom_point(size = 10) +
         geom_text(color = "white", size = 2.25) + theme_fivethirtyeight()
+```
+
+# Plot Percent of Total of Subscales by School 
+```{r}
+# create aggregate subscales percent total
+items.sub.per.school <-items %>%
+  select(SCHOOL_ID, ProfProg.per, LearnAnywhere.per, Personalization.per, Ownership.per, 
+         FlexibleAssessment.per) %>%
+  group_by(SCHOOL_ID) %>%
+  summarise("Ownership" = mean(Ownership.per, na.rm = TRUE),
+            "Personalization" = mean(Personalization.per, na.rm = TRUE),
+            "Proficiency-based progression" = mean(ProfProg.per, na.rm = TRUE),
+            "Flexible assessment" = mean(FlexibleAssessment.per, na.rm = TRUE),
+            "Learning anytime anywhere" = mean(LearnAnywhere.per, na.rm = TRUE))
+
+# convert data
+items.sub.per.school <- gather(items.sub.per.school, subscale, value, -SCHOOL_ID)
+items.sub.per.school$value <- as.numeric(items.sub.school$value)
+items.sub.per.school$SCHOOL_ID <- as.factor(items.sub.school$SCHOOL_ID)
+
+# lolipop by group
+p.subPer.school <- ggplot(items.sub.per.school) + 
+  geom_linerange(aes(x = subscale, ymin = 0, ymax = 100, group = subscale), 
+                 position = position_dodge(width = 1)) +
+  geom_point(aes(x = subscale, y = value, group = subscale, color = SCHOOL_ID),
+                 position = position_dodge(width = 1)) +
+    coord_flip() +
+  ggtitle("School-level Variability in CBE", 
+    subtitle = "School average percent of total score on subscales for CBE implementation") + 
+    labs(colour = "Schools")
+
+# apply aesthetic themes to plot
+p.subPer.school.theme <- p.subPer.school + scale_color_gdocs() + theme_fivethirtyeight()
+
+# save the plot
+ggsave("../plots/p.subPer.school.theme.png", p.subPer.school.theme, width = 8, 
+    height = 5)
+```
+
+# Plot Average Total Score for Subscales by School 
+```{r}
+# create aggregate subscales by school
+items.sub.tot.school <- items %>%
+  select(SCHOOL_ID, ProfProg, LearnAnywhere, Personalization, Ownership, FlexibleAssessment) %>%
+  group_by(SCHOOL_ID) %>%
+  summarise("Ownership" = mean(Ownership, na.rm = TRUE),
+            "Personalization" = mean(Personalization, na.rm = TRUE),
+            "Proficiency-based progression" = mean(ProfProg, na.rm = TRUE),
+            "Flexible assessment" = mean(FlexibleAssessment, na.rm = TRUE),
+            "Learning anytime anywhere" = mean(LearnAnywhere, na.rm = TRUE))
+
+# convert data
+items.sub.tot.school <- gather(items.sub.tot.school, subscale, value, -SCHOOL_ID)
+items.sub.tot.school$value <- as.numeric(items.sub.tot.school$value)
+items.sub.tot.school$SCHOOL_ID <- as.factor(items.sub.tot.school$SCHOOL_ID)
+
+# lolipop by group
+p.subTot.school <- ggplot(items.sub.tot.school) + 
+  geom_linerange(aes(x = subscale, ymin = 0, ymax = value, group = subscale), 
+                 position = position_dodge(width = 1)) +
+  geom_point(aes(x = subscale, y = value, group = subscale, color = SCHOOL_ID),
+                 position = position_dodge(width = 1)) +
+    coord_flip() +
+  ggtitle("School-level Variability in CBE", 
+    subtitle = "School average total score on subscales for CBE implementation") + 
+    labs(colour = "Schools")
+
+# apply aesthetic themes to plot
+p.subTot.school.theme <- p.subTot.school + scale_color_gdocs() + theme_fivethirtyeight()
+
+# save the plot
+ggsave("../plots/p.subTot.school.theme.png", p.subTot.school.theme, width = 8, 
+    height = 5)
+```
+
+# Licorice Proficiency-based Progression
+```{r}
+# select oute items for 
+ProfProg.items <- gather(select(items, mastercompR, nextcompR, rubricR), item, value)
+
+# create count table 
+ProfProg.count <- ProfProg.items %>%
+  group_by(item)%>%
+  count(value)%>%
+  mutate(value = as.factor(value)) %>%
+  rename(question = item, 
+         count = n,
+         response = value)
+
+# recode the likert scale values
+ProfProg.count$response <- dplyr::recode_factor(ProfProg.count$response, "0" = "Never", "1" = "Seldom", 
+                                                "2" = "Sometimes", "3" = "Often", "4" = "Always")
+
+table(ProfProg.count$question)
+
+ProfProg.count$question <- dplyr::recode_factor(ProfProg.count$question, "mastercompR" = "Show proficiency", 
+                                                "nextcompR" = "Next standard", "rubricR" = "Given rubric")
+# set order for plots
+my_order <- c("Never","Seldom", "Sometimes", "Often", "Always")
+
+# set ggthemr theme
+ggthemr_reset()
+ggthemr('flat', type = 'outer', layout = 'minimal', spacing = 1.25)
+swatch()
+to_swap <- swatch()[1:5]
+
+# plot it in licorice!
+p.ProfProg <- licorice(ProfProg.count, answers_order = my_order, middle_pos = 2, type = "center", sort=T) + 
+  ggtitle("Response Variability in the  \nProficiency-based Progression Items") + 
+  labs(x = 'Questions', fill = 'Response') +
+  theme(legend.position = 'bottom')
+p.ProfProg <- p.ProfProg + scale_fill_manual(values = rev(to_swap))
+p.ProfProg
+ggsave("../plots/p.ProfProg.png", p.ProfProg, width = 8, 
+    height = 5)
+
+# plot fill
+p.ProfProg.fill <- licorice(ProfProg.count, answers_order = my_order, middle_pos = 2, 
+                            type = "fill", sort=T) + 
+  ggtitle("Response Variability in the  \nProficiency-based Progression Items") + 
+  labs(x = 'Questions', fill = 'Response') +
+  theme(legend.position = 'bottom')
+p.ProfProg.fill <- p.ProfProg.fill + scale_fill_manual(values = rev(to_swap))
+p.ProfProg.fill
+ggsave("../plots/p.ProfProg.fill.png", p.ProfProg.fill, width = 8, 
+    height = 5)
+```
+
+# Licorice Learning anytime and anywhere
+```{r}
+# select oute items for 
+LearnAnywhere.items <- gather(select(items, onlinecompR, projcredR, interncredR), item, value)
+table(LearnAnywhere.items)
+
+# create count table 
+LearnAnywhere.count <- LearnAnywhere.items %>%
+  group_by(item)%>%
+  count(value)%>%
+  mutate(value = as.factor(value)) %>%
+  rename(question = item, 
+         count = n,
+         response = value)
+
+# recode the likert scale values
+LearnAnywhere.count$response <- dplyr::recode_factor(LearnAnywhere.count$response, "0" = "No course", 
+                                                     "1" =  "Some courses", "2" = "All courses")
+
+LearnAnywhere.count$question <- dplyr::recode_factor(LearnAnywhere.count$question, "onlinecompR" = "Take 
+                                                     online", "Project credit" = "Next standard", 
+                                                     "interncredR" = "Internship")
+# set order for plots
+my_order <- c("No course","Some courses", "All courses")
+
+# set ggthemr theme
+ggthemr_reset()
+ggthemr('flat', type = 'outer', layout = 'minimal', spacing = 1.25)
+swatch()
+to_swap <- swatch()[1:5]
+
+# plot it in licorice!
+p.LearnAnywhere <- licorice(LearnAnywhere.count, answers_order = my_order, middle_pos = 2, 
+                            type = "center", sort=T) + 
+  ggtitle("Response Variability in the  \nLearning Anytime and Anywhere Items") + 
+  labs(x = 'Questions', fill = 'Response') +
+  theme(legend.position = 'bottom')
+p.LearnAnywhere <- p.LearnAnywhere + scale_fill_manual(values = rev(to_swap))
+p.LearnAnywhere
+ggsave("../plots/p.LearnAnywhere.png", p.LearnAnywhere, width = 8, 
+    height = 5)
+
+# plot fill
+p.LearnAnywhere.fill <- licorice(LearnAnywhere.count, answers_order = my_order, middle_pos = 2, 
+                            type = "fill", sort=T) + 
+  ggtitle("Response Variability in the  \nLearning Anytime and Anywhere Items") + 
+  labs(x = 'Questions', fill = 'Response') +
+  theme(legend.position = 'bottom')
+p.LearnAnywhere.fill <- p.LearnAnywhere.fill + scale_fill_manual(values = rev(to_swap))
+p.LearnAnywhere.fill
+ggsave("../plots/p.LearnAnywhere.fill.png", p.LearnAnywhere.fill, width = 8, 
+    height = 5)
+```
+
+# Licorice Personalization 
+```{r}
+# select oute items for 
+Personalization.items <- gather(select(items, smallgrpR, teachdifR, givlecturR), item, value)
+table(Personalization.items)
+
+# create count table 
+Personalization.count <- Personalization.items %>%
+  group_by(item)%>%
+  count(value)%>%
+  mutate(value = as.factor(value)) %>%
+  rename(question = item, 
+         count = n,
+         response = value)
+
+# recode the likert scale values
+Personalization.count$response <- dplyr::recode_factor(Personalization.count$response, "0" = "Never", 
+                                                       "1" = "Seldom","2" = "Sometimes", "3" = "Often", 
+                                                       "4" = "Always")
+
+Personalization.count$question <- dplyr::recode_factor(Personalization.count$question,
+                                                       "smallgrpR" = "Small group", 
+                                                       "teachdifR" = "Multiple modes", 
+                                                       "givlecturR" = "Lectured at")
+# set order for plots
+my_order <- c("Never","Seldom", "Sometimes", "Often", "Always")
+
+# set ggthemr theme
+ggthemr_reset()
+ggthemr('flat', type = 'outer', layout = 'minimal', spacing = 1.25)
+swatch()
+to_swap <- swatch()[1:5]
+
+# plot it in licorice!
+p.Personalization <- licorice(Personalization.count, answers_order = my_order, middle_pos = 2, 
+                            type = "center", sort=T) + 
+  ggtitle("Response Variability in the Personalization Items") + 
+  labs(x = 'Questions', fill = 'Response') +
+  theme(legend.position = 'bottom')
+p.Personalization <- p.Personalization + scale_fill_manual(values = rev(to_swap))
+p.Personalization
+ggsave("../plots/p.Personalization.png", p.Personalization, width = 8, 
+    height = 5)
+
+# plot fill
+p.Personalization.fill <- licorice(Personalization.count, answers_order = my_order, middle_pos = 2, 
+                            type = "fill", sort=T) + 
+  ggtitle("Response Variability in the Personalization Items") + 
+  labs(x = 'Questions', fill = 'Response') +
+  theme(legend.position = 'bottom')
+p.Personalization.fill <- p.Personalization.fill + scale_fill_manual(values = rev(to_swap))
+p.Personalization.fill
+ggsave("../plots/p.Personalization.fill.png", p.Personalization.fill, width = 8, 
+    height = 5)
+```
+
+
+# Licorice Ownership 
+```{r}
+# select oute items for 
+Ownership.items <- gather(select(items, adviceR, trackprogR, ontimeR, prepgradR), item, value)
+table(Ownership.items)
+
+# create count table 
+Ownership.count <- Ownership.items %>%
+  group_by(item)%>%
+  count(value)%>%
+  mutate(value = as.factor(value)) %>%
+  rename(question = item, 
+         count = n,
+         response = value)
+
+# recode the likert scale values
+Ownership.count$response <- dplyr::recode_factor(Ownership.count$response, "0" = "Never", 
+                                                       "1" = "Seldom","2" = "Sometimes", "3" = "Often", 
+                                                       "4" = "Always")
+
+Ownership.count$question <- dplyr::recode_factor(Ownership.count$question,
+                                                       "adviceR" = "Strategies to progress", 
+                                                       "ontimeR" = "Strategies on time", 
+                                                       "prepgradR" = "Prepare post-grad",
+                                                        "trackprogR" = "Strategies for progress" )
+# set order for plots
+my_order <- c("Never","Seldom", "Sometimes", "Often", "Always")
+
+# set ggthemr theme
+ggthemr_reset()
+ggthemr('flat', type = 'outer', layout = 'minimal', spacing = 1.25)
+swatch()
+to_swap <- swatch()[1:5]
+
+# plot it in licorice!
+p.Ownership <- licorice(Ownership.count, answers_order = my_order, middle_pos = 2, 
+                            type = "center", sort=T) + 
+  ggtitle("Response Variability in the Ownership Items") + 
+  labs(x = 'Questions', fill = 'Response') +
+  theme(legend.position = 'bottom')
+p.Ownership <- p.Ownership + scale_fill_manual(values = rev(to_swap))
+p.Ownership
+ggsave("../plots/p.Ownership.png", p.Ownership, width = 8, 
+    height = 5)
+
+# plot fill
+p.Ownership.fill <- licorice(Ownership.count, answers_order = my_order, middle_pos = 2, 
+                            type = "fill", sort=T) + 
+  ggtitle("Response Variability in the Ownership Items") + 
+  labs(x = 'Questions', fill = 'Response') +
+  theme(legend.position = 'bottom')
+p.Ownership.fill <- p.Ownership.fill + scale_fill_manual(values = rev(to_swap))
+p.Ownership.fill
+ggsave("../plots/p.Ownership.fill.png", p.Ownership.fill, width = 8, 
+    height = 5)
+```
+
+# Hexabin
+```{r}
+items.hex.tot <- gather(items %>%
+  select(ProfProg, LearnAnywhere, Personalization, FlexibleAssessment, Ownership), 
+  subscale) 
+  
+# create hexbin
+p.items.hex.tot.1 <- ggplot(items.hex.tot,aes(x=subscale,y=value)) + stat_binhex() + scale_fill_gradientn(colours=c("yellow","orange", "red"),name = "Frequency", na.value=NA) + 
+  theme_fivethirtyeight() + 
+  ylim(0, 15) 
+# calculating mean for sample per subscale
+out1 <- data.frame (with (items.hex.tot,  tapply( value, factor(subscale), mean, 
+                                                  na.rm=TRUE)))
+names(out1) <- c("meanY")
+out1$grp <- rownames (out1)
+
+# ploting mean connected with lines
+p.items.hex.tot.2 <- p.items.hex.tot.1 + geom_point (aes(grp, meanY), data = out1, pch = 19, col = "blue", cex = 3)
+
+# save the plot
+ggsave("../plots/p.items.hex.tot.1.png", p.items.hex.tot.2, width = 8, 
+    height = 5)
+```
+
+# Sandbox
+```{r}
+# select oute items for 
+ProfProg.items <- gather(na.omit(select(items, mastercompR, nextcompR, rubricR)), item, value)
+
+# create prop table 
+ProfProg.prop <- ProfProg.items %>%
+  group_by(item)%>%
+  count(value) %>%
+  mutate(prop = prop.table(n)) %>%
+  select(-n) %>%
+  spread(value, prop) 
+# rename columns 
+names(ProfProg.prop)[names(ProfProg.prop) == '0'] <- 'Never'
+names(ProfProg.prop)[names(ProfProg.prop) == '1'] <- 'Sometimes'
+names(ProfProg.prop)[names(ProfProg.prop) == '2'] <- 'Seldom'
+names(ProfProg.prop)[names(ProfProg.prop) == '3'] <- 'Often'
+names(ProfProg.prop)[names(ProfProg.prop) == '4'] <- 'Always'
+ProfProg.prop
+
+mytitle<-"\"Responses to the Proficiency-Based Progression Items\"\n"
+mylevels<-c("Never", "Sometimes", "Seldom", "Often",  "Always")
+numlevels<-length(ProfProg.prop[1,])-1
+numcenter<-ceiling(numlevels/2)+1
+ProfProg.prop$midvalues<-ProfProg.prop[,numcenter]/2
+tab2<-cbind(ProfProg.prop[,1],ProfProg.prop[,2:ceiling(numlevels/2)],
+  tab$midvalues,ProfProg.prop$midvalues,ProfProg.prop[,numcenter:numlevels+1])
+colnames(tab2)<-c("outcome",mylevels[1:floor(numlevels/2)],"midlow",
+  "midhigh",mylevels[numcenter:numlevels])
+
+
+```
+
+```{r}
+
+tab<-read_csv("../data/test.csv") # from your path, with read.csv()
+
+mytitle<-"\"What do you think will be the economic situation in your country during the next\nfew years (3-5 years) compared to the current situation?\"\n"
+mylevels<-c("Much worse", "Somewhat worse", "Almost the same", "Somewhat better",  "Much better")
+
+numlevels<-length(tab[1,])-1 #5
+numcenter<-ceiling(numlevels/2)+1 #4
+tab$midvalues<-tab[,numcenter]/2
+tab2<-cbind(tab[,1],tab[,2:ceiling(numlevels/2)],
+  tab$midvalues,tab$midvalues,tab[,numcenter:numlevels+1])
+colnames(tab2)<-c("outcome",mylevels[1:floor(numlevels/2)],"midlow",
+  "midhigh",mylevels[numcenter:numlevels])
+```
+
+```{r}
+#data <- read_csv("../data/test.csv")
+data<-read.csv("http://rnotr.com/assets/files/ab3.csv")
+library(ggplot2)
+library(reshape2)
+library(magrittr)
+library(plotly)
+
+#starting coordinates for segments
+data$s.Much.worse<-0-data$Much.worse-data$Somewhat.worse-.5*data$Almost.the.same
+data$s.Somewhat.worse<-0-data$Somewhat.worse-.5*data$Almost.the.same
+data$s.Almost.the.same<-0-.5*data$Almost.the.same
+data$s.Somewhat.better<-0+.5*data$Almost.the.same
+data$s.Much.better<-0+.5*data$Almost.the.same+data$Somewhat.better
+#order by worse categories
+data$Country<-factor(data$Country, levels = data$Country[order(-(data$s.Much.worse))])
+#to percents
+data[,2:11]<-data[,2:11]*100
+
+mdfr <- melt(data, id=c("Country"))
+mdfr<-cbind(mdfr[1:60,],mdfr[61:120,3])
+colnames(mdfr)<-c("Country","variable","value","start")
+#remove dot in levels
+mylevels<-c("Much worse","Somewhat worse","Almost the same","Somewhat better","Much better")
+mdfr$variable<-droplevels(mdfr$variable)
+levels(mdfr$variable)<-mylevels
+#custom color palette
+pal<-c("#DF4949", "#E27A3F", "#BEBEBE","#45B29D", "#334D5C")
+
+p<-ggplot(data=mdfr) +
+  geom_segment(aes(x = Country, y = start, xend = Country, yend = start+value, colour = variable,
+  text=paste("Country: ",Country,"<br>Percent: ",value,"%")), size = 6) +
+  geom_hline(yintercept = 0, color =c("#646464")) +
+  coord_flip() +
+  scale_color_manual("Response", labels = mylevels, values = pal, guide="legend") +
+  labs(title="", y="Percent",x="") +
+  scale_y_continuous(breaks=seq(-100,100,25), limits=c(-100,100)) +
+  theme(panel.background = element_rect(fill = "#ffffff"),
+        panel.grid.major = element_line(colour = "#CBCBCB"))
+p
+p + theme_fivethirtyeight()
+```
+
+
+
+# Sandbox
+# create count of missing  
+ProfProg.count.na <- ProfProg.items %>%
+  group_by(item)%>%
+  count(is.na(value)) %>%
+  rename(response = "is.na(value)",
+         question = item, 
+         count = n) %>%
+  mutate(response = as.factor(response)) 
+
+# recode logical values to not missing and missing
+ProfProg.count.na$response <- dplyr::recode(ProfProg.count.na$response, "FALSE" = "Not Missing", "TRUE" = "Missing")
+ProfProg.count.na
+
+# plot
+my_order_na <- c("Not Missing","Missing")
+
+p.na <- licorice(ProfProg.count.na, answers_order = my_order_na, middle_pos = 2, type = "fill", sort=T) + 
+  ggtitle("Response Variability in Proficiency-based Progression Items") + 
+  labs(x = 'Questions', fill = 'Response') +
+  theme(legend.position = 'bottom')
+p.na + scale_fill_manual(values = rev(to_swap))
+p.na
+  
+# combine
+library(gridExtra)
+
+grid.arrange(
+  licorice(ProfProg.count, answers_order = my_order, middle_pos = 2, type = "center", sort=T) + 
+  ggtitle("Response Variability in Proficiency-based Progression Items") + 
+  labs(x = 'Questions', fill = 'Response') +
+  theme(legend.position = 'bottom'),
+  licorice(ProfProg.count.na, answers_order = my_order_na, middle_pos = 2, type = "fill", sort=T) +
+    theme(axis.text.y=element_blank()) +
+    scale_fill_discrete(""),
+  ncol = 2,
+  widths = c(3/4,1/4)
+)
+
+
 ```
