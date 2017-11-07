@@ -211,24 +211,22 @@ to_swap <- swatch()[1:5]
 # plot it in licorice!
 p.ProfProg <- licorice(ProfProg.count, answers_order = my_order, middle_pos = 2.5, 
                        type = "center", sort=T) + 
-  ggtitle("Variability in the Responses to Items") + 
-  labs(x = 'Questions', fill = 'Response') +
+  ggtitle("Proficiency-based Progression") + 
+  labs(x = 'Questions', fill = 'Response', subtitle = 'Variability in the Responses to Items') +
   theme(legend.position = 'bottom')
 p.ProfProg <- p.ProfProg + scale_fill_manual(values = rev(to_swap))
 p.ProfProg
-ggsave("../plots/p.ProfProg.png", p.ProfProg, width = 8, 
-    height = 5)
+ggsave("../plots/p.ProfProg.png", p.ProfProg, width = 13.3 , height = 7.13)
 
 # plot fill
 p.ProfProg.fill <- licorice(ProfProg.count, answers_order = my_order, middle_pos = 2, 
                             type = "fill", sort=T) + 
-  ggtitle("Variability in the Responses to Items") + 
-  labs(x = 'Questions', fill = 'Response') +
+  ggtitle("Proficiency-based Progression") + 
+  labs(x = 'Questions', fill = 'Response', subtitle = 'Variability in the Responses to Items') +
   theme(legend.position = 'bottom')
 p.ProfProg.fill <- p.ProfProg.fill + scale_fill_manual(values = rev(to_swap))
 p.ProfProg.fill
-ggsave("../plots/p.ProfProg.fill.png", p.ProfProg.fill, width = 8, 
-    height = 5)
+ggsave("../plots/p.ProfProg.fill.png", p.ProfProg.fill, width = 13.3 , height = 7.13)
 ```
 
 # Licorice Learning anytime and anywhere
@@ -266,24 +264,22 @@ to_swap <- swatch()[1:5]
 # plot it in licorice!
 p.LearnAnywhere <- licorice(LearnAnywhere.count, answers_order = my_order, middle_pos = 1.5, 
                             type = "center", sort=T) + 
-  ggtitle("Variability in the Responses to Items") + 
-  labs(x = 'Questions', fill = 'Response') +
+  ggtitle("Learning Anytime and Anywhere") + 
+  labs(x = 'Questions', fill = 'Response', subtitle = 'Variability in the Responses to Items') +
   theme(legend.position = 'bottom')
 p.LearnAnywhere <- p.LearnAnywhere + scale_fill_manual(values = rev(to_swap))
 p.LearnAnywhere
-ggsave("../plots/p.LearnAnywhere.png", p.LearnAnywhere, width = 8, 
-    height = 5)
+ggsave("../plots/p.LearnAnywhere.png", p.LearnAnywhere, width = 13.3 , height = 7.13)
 
 # plot fill
 p.LearnAnywhere.fill <- licorice(LearnAnywhere.count, answers_order = my_order, middle_pos = 2, 
                             type = "fill", sort=T) + 
-  ggtitle("Variability in the Responses to Items") + 
-  labs(x = 'Questions', fill = 'Response') +
+  ggtitle("Learning Anytime and Anywhere") + 
+  labs(x = 'Questions', fill = 'Response', subtitle = 'Variability in the Responses to Items') +
   theme(legend.position = 'bottom')
 p.LearnAnywhere.fill <- p.LearnAnywhere.fill + scale_fill_manual(values = rev(to_swap))
 p.LearnAnywhere.fill
-ggsave("../plots/p.LearnAnywhere.fill.png", p.LearnAnywhere.fill, width = 8, 
-    height = 5)
+ggsave("../plots/p.LearnAnywhere.fill.png", p.LearnAnywhere.fill, width = 13.3 , height = 7.13)
 ```
 
 # Licorice Personalization 
@@ -322,24 +318,22 @@ to_swap <- swatch()[1:5]
 # plot it in licorice!
 p.Personalization <- licorice(Personalization.count, answers_order = my_order, middle_pos = 2.5, 
                             type = "center", sort=T) + 
-  ggtitle("Variability in the Responses to Items") + 
-  labs(x = 'Questions', fill = 'Response') +
+  ggtitle("Personalization") + 
+  labs(x = 'Questions', fill = 'Response', subtitle = 'Variability in the Responses to Items') +
   theme(legend.position = 'bottom')
 p.Personalization <- p.Personalization + scale_fill_manual(values = rev(to_swap))
 p.Personalization
-ggsave("../plots/p.Personalization.png", p.Personalization, width = 8, 
-    height = 5)
+ggsave("../plots/p.Personalization.png", p.Personalization, width = 13.3 , height = 7.13)
 
 # plot fill
 p.Personalization.fill <- licorice(Personalization.count, answers_order = my_order, middle_pos = 2, 
                             type = "fill", sort=T) + 
-  ggtitle("Variability in the Responses to Items") + 
-  labs(x = 'Questions', fill = 'Response') +
+  ggtitle("Personalization") + 
+  labs(x = 'Questions', fill = 'Response', subtitle = 'Variability in the Responses to Items') +
   theme(legend.position = 'bottom')
 p.Personalization.fill <- p.Personalization.fill + scale_fill_manual(values = rev(to_swap))
 p.Personalization.fill
-ggsave("../plots/p.Personalization.fill.png", p.Personalization.fill, width = 8, 
-    height = 5)
+ggsave("../plots/p.Personalization.fill.png", p.Personalization.fill, width = 13.3 , height = 7.13)
 ```
 
 
@@ -380,24 +374,22 @@ to_swap <- swatch()[1:5]
 # plot it in licorice!
 p.Ownership <- licorice(Ownership.count, answers_order = my_order, middle_pos = 2.5, 
                             type = "center", sort=T) + 
-  ggtitle("Variability in the Responses to Items") + 
-  labs(x = 'Questions', fill = 'Response') +
+  ggtitle("Ownership") + 
+  labs(x = 'Questions', fill = 'Response', subtitle = 'Variability in the Responses to Items') +
   theme(legend.position = 'bottom')
 p.Ownership <- p.Ownership + scale_fill_manual(values = rev(to_swap))
 p.Ownership
-ggsave("../plots/p.Ownership.png", p.Ownership, width = 8, 
-    height = 5)
+ggsave("../plots/p.Ownership.png", p.Ownership, width = 13.3 , height = 7.13)
 
 # plot fill
 p.Ownership.fill <- licorice(Ownership.count, answers_order = my_order, middle_pos = 1, 
                             type = "fill", sort=T) + 
-  ggtitle("Variability in the Responses to Items") + 
-  labs(x = 'Questions', fill = 'Response') +
+  ggtitle("Ownership") + 
+  labs(x = 'Questions', fill = 'Response', subtitle = 'Variability in the Responses to Items') +
   theme(legend.position = 'bottom')
 p.Ownership.fill <- p.Ownership.fill + scale_fill_manual(values = rev(to_swap))
 p.Ownership.fill
-ggsave("../plots/p.Ownership.fill.png", p.Ownership.fill, width = 8, 
-    height = 5)
+ggsave("../plots/p.Ownership.fill.png", p.Ownership.fill, width = 13.3 , height = 7.13)
 ```
 
 # Licorice Flexible Assessment  
@@ -436,24 +428,22 @@ to_swap <- swatch()[1:5]
 # plot it in licorice!
 p.Flexible <- licorice(Flexible.count, answers_order = my_order, middle_pos = 2.5, 
                             type = "center", sort=T) + 
-  ggtitle("Variability in the Responses to Items") + 
+  ggtitle("Flexible Assessment") + 
   labs(x = 'Questions', fill = 'Response') +
   theme(legend.position = 'bottom')
 p.Flexible <- p.Flexible + scale_fill_manual(values = rev(to_swap))
 p.Flexible
-ggsave("../plots/p.Flexible.png", p.Flexible, width = 8, 
-    height = 5)
+ggsave("../plots/p.Flexible.png", p.Flexible, width = 13.3 , height = 7.13)
 
 # plot fill
 p.Flexible.fill <- licorice(Flexible.count, answers_order = my_order, middle_pos = 1, 
                             type = "fill", sort=T) + 
-  ggtitle("Variability in the Responses to Items") + 
+  ggtitle("Flexible Assessment") + 
   labs(x = 'Questions', fill = 'Response') +
   theme(legend.position = 'bottom')
 p.Flexible.fill <- p.Flexible.fill + scale_fill_manual(values = rev(to_swap))
 p.Flexible.fill
-ggsave("../plots/p.Flexible.fill.png", p.Flexible.fill, width = 8, 
-    height = 5)
+ggsave("../plots/p.Flexible.fill.png", p.Flexible.fill, width = 13.3 , height = 7.13)
 
 # select oute items for final flexible assessment item
 
@@ -512,12 +502,17 @@ ggsave("../plots/p.Flexible.fill.2.png", p.Flexible.fill.2, width = 8,
 # NA Proficiency-based Progression 
 ```{r}
 # create count of missing 
-items.long <- gather(items)
+items.long <- items %>%
+  select(adviceR, ontimeR, prepgradR, trackprogR, smallgrpR, teachdifR, givlecturR,
+         onlinecompR, projcredR, interncredR, mastercompR, nextcompR, rubricR, retakeR,
+         demolearnR, choosehowR) %>%
+  gather(items)
+
 items.na <- items.long %>%
-  group_by(key)%>%
+  group_by(items)%>%
   count(is.na(value)) %>%
   rename(response = "is.na(value)",
-         question = key, 
+         question = items, 
          count = n) %>%
   mutate(response = as.factor(response)) 
 
@@ -556,11 +551,96 @@ my_order_na <- c("Missing","Not Missing")
 p.na <- licorice(items.na, answers_order = my_order_na, middle_pos = 1, 
                  type = "center", sort=TRUE) + 
   ggtitle("Percent Missing for All CBE Items") + 
-  labs(x = 'Questions') +
+  labs(x = 'Questions', subtitle = "Responses from the November 2017 Survey Administration") +
   theme(legend.position = 'bottom')
 p.na <- p.na + scale_fill_manual(values = rev(to_swap))
 
-ggsave("../plots/p.na.png", p.na, width = 8, height = 5)
+ggsave("../plots/p.na.png", p.na, width = 13.3 , height = 7.13)
 
 ```
-  
+
+# Grid Extra
+```{r}
+# select oute items for 
+Flexible.items <- gather(select(items, retakeR, demolearnR), item, value)
+table(Ownership.items)
+
+# create count table 
+Flexible.count <- Flexible.items %>%
+  group_by(item)%>%
+  count(value)%>%
+  mutate(value = as.factor(value)) %>%
+  rename(question = item, 
+         count = n,
+         response = value)
+
+# recode the likert scale values
+Flexible.count$response <- dplyr::recode_factor(Flexible.count$response, "0" = "Never", 
+                                                       "1" = "Seldom","2" = "Sometimes", "3" = "Often", 
+                                                       "4" = "Always")
+
+Flexible.count$question <- dplyr::recode_factor(Flexible.count$question,
+                                                       "retakeR" = "Retry assessments", 
+                                                       "demolearnR" = "Demonstrate learning")
+
+# set order for plots
+my_order <- c("Never","Seldom", "Sometimes", "Often", "Always")
+
+# set ggthemr theme
+ggthemr_reset()
+ggthemr('flat', type = 'outer', layout = 'minimal', spacing = 1.25)
+swatch()
+to_swap <- swatch()[1:5]
+
+# plot it in licorice!
+p.Flexible <- licorice(Flexible.count, answers_order = my_order, middle_pos = 2.5, 
+                            type = "center", sort=T) + 
+  ggtitle("Flexible Assessment") + 
+  labs(subtitle = 'Variability in the Responses to Items') +
+  theme(legend.position = 'bottom')
+p.Flexible <- p.Flexible + scale_fill_manual(values = rev(to_swap))
+p.Flexible
+ggsave("../plots/p.Flexible.png", p.Flexible, width = 13.3 , height = 7.13)
+
+Flexible.items.2 <- gather(select(items, choosehowR), item, value)
+table(Flexible.items.2)
+
+# create count table 
+Flexible.count.2 <- Flexible.items.2 %>%
+  group_by(item)%>%
+  count(value)%>%
+  mutate(value = as.factor(value)) %>%
+  rename(question = item, 
+         count = n,
+         response = value)
+
+# recode the likert scale values
+Flexible.count.2$response <- dplyr::recode_factor(Flexible.count.2$response, "0" = "Not at all", 
+                                                       "1" = "1 to 2 times", "2" = "3 to 4 times", 
+                                                       "3" = "5 or more times")
+
+Flexible.count.2$question <- dplyr::recode_factor(Flexible.count.2$question,
+                                                       "choosehowR" = "Show learning")
+
+# set order for plots
+my_order <- c("Not at all","1 to 2 times", "3 to 4 times", "5 or more times")
+
+# set ggthemr theme
+ggthemr_reset()
+ggthemr('flat', type = 'outer', layout = 'minimal', spacing = 1.25)
+swatch()
+to_swap <- swatch()[1:5]
+
+# plot it in licorice!
+p.Flexible.2 <- licorice(Flexible.count.2, answers_order = my_order, middle_pos = 1, 
+                            type = "center", sort=T) + 
+  labs(fill = 'Response') +
+  theme(legend.position = 'bottom')
+p.Flexible.2 <- p.Flexible.2 + scale_fill_manual(values = rev(to_swap))
+p.Flexible.2
+ggsave("../plots/p.Flexible.2.png", p.Flexible.2, width = 13.3 , height = 7.13)
+
+p.flex.grid <- grid.arrange(p.Flexible, p.Flexible.2, nrow=2, heights = 2:1)
+ggsave("../plots/p.flex.grid.png", p.flex.grid, width = 13.3)
+
+```
