@@ -550,7 +550,7 @@ my_order_na <- c("Missing","Not Missing")
 
 p.na <- licorice(items.na, answers_order = my_order_na, middle_pos = 1, 
                  type = "center", sort=TRUE) + 
-  ggtitle("Percent Missing for All CBE Items") + 
+  ggtitle("Response Rate for All CBE Items") + 
   labs(x = 'Questions', subtitle = "Responses from the November 2017 Survey Administration") +
   theme(legend.position = 'bottom')
 p.na <- p.na + scale_fill_manual(values = rev(to_swap))
