@@ -1,0 +1,55 @@
+---
+title: "07_Descriptives: Initial Descriptives of JFF Data by School"
+author: "Brandon Foster, Ph.D."
+date: "`r format(Sys.time(), '%d %B, %Y, %H:%M')`"
+output:
+  html_document:
+    theme: paper
+    code_folding: hide
+---
+Descriptives that follow are also separately reported, and aggregated by school. 
+
+Import the data: 
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE, error=FALSE, echo=FALSE, results="hide"}
+# Load packages ----
+#install.packages("pacman")
+pacman::p_load(tidyverse, devtools, ggthemr, readr, skimr, knitr)
+
+# Load the tidy data ----
+admin <- readRDS("../data/admin.rds") # final data from Noman
+assessment <- readRDS("../data/assessment.RDS")
+#john.data <- readRDS("../data/john-cleaned.RDS")
+engagement <- readRDS("../data/engagement-items.RDS")
+pbe <- readRDS("../data/pbe-items.RDS")
+```
+
+# Grouped descriptives
+
+The following tabs report descriptive statistics grouped by school-level. 
+
+Let's splice the data by district. 
+
+##PBE survey items: 
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE}
+pbe.survey %>% dplyr::group_by(School_ID) %>% skim()
+```
+
+##PBE survey items for LCA: 
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE}
+pbe.survey.lc.items %>% dplyr::group_by(School_ID) %>% skim()
+```
+
+##Assessment items: 
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE}
+assessment %>% dplyr::group_by(School_ID) %>% skim()
+```
+
+Other administrative items:
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE}
+#admin %>% dplyr::group_by(School_ID) %>% skim()
+```
+
+## Engagement items:
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE}
+engagement %>% dplyr::group_by(School_ID) %>% skim()
+```

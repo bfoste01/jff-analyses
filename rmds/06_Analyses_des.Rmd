@@ -1,0 +1,133 @@
+---
+title: "06_Descriptives: Initial Descriptives of JFF Data"
+author: "Brandon Foster, Ph.D."
+date: "`r format(Sys.time(), '%d %B, %Y, %H:%M')`"
+output:
+  html_document:
+    theme: paper
+    code_folding: hide
+---
+
+# Introduction
+
+The following document is a quick descriptive exploration of the compiled JFF survey data. Variables have been separated into conceptually related frames. In addition, descriptives are also separately reported, and aggregated by school. Questions and to-dos are provided at the end of this document. 
+
+Import the data: 
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE, error=FALSE, echo=FALSE, results="hide"}
+# Load packages ----
+#install.packages("pacman")
+pacman::p_load(tidyverse, devtools, ggthemer, readr, skimr, knitr, GGally)
+
+# Load the tidy data ----
+admin <- readRDS("../data/admin.rds") # final data from Noman
+assessment <- readRDS("../data/assessment.RDS")
+#john.data <- readRDS("../data/john-cleaned.RDS")
+engagement <- readRDS("../data/engagement-items.RDS")
+pbe <- readRDS("../data/pbe-items.RDS")
+
+# Load necessary functions ----
+source("../functions/functions.r")
+```
+
+# Quick descriptives {.tabset .tabset-fade .tabset-pills}
+The following tabs report descriptive statistics at the individual student-level. 
+
+PBE items for LCA:
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE}
+skim(pbe)
+```
+
+Correlation plot of the PBE items:
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE}
+# create correlation matrix
+pbe_cormat <- round(cor(pbe[-1,2], use = "complete.obs"), 2)
+
+# munge for cleaner plotting
+pbe_upper_tri <- get_upper_tri(pbe_cormat)
+
+# create correlation heat map using "GGally" https://briatte.github.io/ggcorr/
+ggcorr(pbe[-1], low = "red", mid = "white", high = "blue", 
+       hjust = 0.75, size = 3, color = "grey50")
+```
+
+Engagement:
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE}
+skim(engagement)
+```
+
+Correlation plot of the engagement items:
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE}
+# create correlation matrix
+engagement_cormat <- round(cor(engagement[-1,2], use = "complete.obs"), 2)
+
+# munge for cleaner plotting
+engagement_upper_tri <- get_upper_tri(engagement_cormat)
+
+# create correlation heat map using "GGally" https://briatte.github.io/ggcorr/
+ggcorr(engagement[-1], low = "red", mid = "white", high = "blue", 
+       hjust = 0.75, size = 3, color = "grey50")
+```
+
+Assessment:
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE}
+skim(assessment)
+```
+
+Admin:
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE}
+# create freq tables for each categorical variable (not an elegant code solution)
+# gender
+na.omit(admin) %>%
+  count(genderR) %>%
+  mutate(prop = prop.table(n))
+
+# race
+na.omit(admin) %>%
+  count(raceR) %>%
+  mutate(prop = prop.table(n))
+
+# grade
+na.omit(admin) %>%
+  count(Grade) %>%
+  mutate(prop = prop.table(n))
+
+# Enrolled2015
+na.omit(admin) %>%
+  count(Enrolled2015) %>%
+  mutate(prop = prop.table(n))
+
+# Enrolled2014
+na.omit(admin) %>%
+  count(Enrolled2014) %>%
+  mutate(prop = prop.table(n))
+
+# Enrolled2013
+na.omit(admin) %>%
+  count(Enrolled2013) %>%
+  mutate(prop = prop.table(n))
+
+# Enrolled2012
+na.omit(admin) %>%
+  count(Enrolled2012) %>%
+  mutate(prop = prop.table(n))
+
+# FRL
+na.omit(admin) %>%
+  count(FRL) %>%
+  mutate(prop = prop.table(n))
+
+# IEP
+na.omit(admin) %>%
+  count(IEP) %>%
+  mutate(prop = prop.table(n))
+
+# Graduated
+na.omit(admin) %>%
+  count(Graduated) %>%
+  mutate(prop = prop.table(n))
+
+# skim the numeric variables
+skim(select(admin, Daysabsent_2016, Unexcused_daysabsent_2016, Days_present2016))
+```
+
+

@@ -1,0 +1,109 @@
+---
+title: "08_Replication: Mplus code to replicate prior LCA"
+author: "Brandon Foster, Ph.D."
+date: "`r format(Sys.time(), '%d %B, %Y, %H:%M')`"
+output:
+  html_document:
+    theme: paper
+    code_folding: hide
+---
+
+# Introduction
+
+The following document is an attempt to replicate the original work building and LCA model with the final dataset created moving out of the data collection phase. 
+
+
+# Analysis
+
+Import the data: 
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE, error=FALSE, echo=FALSE, results="hide"}
+# Load packages ----
+#install.packages("pacman")
+pacman::p_load(tidyverse, devtools, ggthemer, readr, skimr, knitr, GGally, MplusAutomation)
+
+# Load the tidy data ----
+pbe <- readRDS("../data/pbe-items.RDS")
+
+# load file from John
+original.dat <- readRDS("../data/spss-from-john.rds")
+
+# Load necessary functions ----
+
+```
+
+Set up the model to work with `MPlusAutomation` to run with the new data:
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE, error=FALSE, echo=FALSE, results="hide"}
+# https://cran.r-project.org/web/packages/MplusAutomation/vignettes/Vignette.pdf
+pathmodel <- mplusObject(TITLE = "Title: JFF LCA 2017 with new data;", 
+                         ANALYSIS = "TYPE = Mixture COMPLEX;\n  
+                         ESTIMATOR = MLR;", 
+                         OUTPUT = "tech1 tech8 tech11 tech14;", 
+                         VARIABLE = "CLUSTER = SCHOOL_ID;\n  
+                         CLASSES = c(3);\n  
+                         Missing are all (-99, -9, -8, -1);\n  
+                         CLASSES = c(3);\n  
+                         IDVARIABLE is Student_ID;\n  
+                        !Categorical = progcompR;\n  
+                        !mastercompR;\n  !nextcompR;\n  
+                        !samecompR;\n  
+                        !futureR;\n  
+                        !shareexampR;\n  
+                        !gradeworkR;\n  
+                        !rubricR;", 
+                         SAVEDATA = "file is m1.data.csv;\n  SAVE = CPROBABILITIES;", 
+                         usevariables = c("Student_ID", "School_ID", "mastercompR", 
+                                          "nextcompR", "rubricR", "onlinecompR", 
+                                          "projcredR", "interncredR", "smallgrpR", 
+                                          "teachdifR", "givlecturR", "choosehowR", 
+                                          "retakeR", "demolearnR", "adviceR", 
+                                          "trackprogR", "ontimeR", "prepgradR"), 
+                        rdata = pbe)
+
+
+# examine the mplus model syntax str(pathmodel, max.level = 1, nchar.max =
+# 30)
+
+# run the model
+lcaRep_mplus <- mplusModeler(pathmodel, dataout = c("../data/2018-1-19-lca-rep.csv"),
+                         modelout = c("../mplus/2018-1-19-lca-rep.inp"), 
+                         run = TRUE)
+```
+
+Set up the model to run in `MPlusAutomation` with the original data: 
+```{r, messages=FALSE, warning=FALSE, tidy=TRUE, error=FALSE, echo=FALSE, results="hide"}
+# https://cran.r-project.org/web/packages/MplusAutomation/vignettes/Vignette.pdf
+pathmodel_orig <- mplusObject(TITLE = "Title: JFF LCA 2017 with original data;", 
+                         ANALYSIS = "TYPE = Mixture COMPLEX;\n  
+                         ESTIMATOR = MLR;", 
+                         OUTPUT = "tech1 tech8 tech11 tech14;", 
+                         VARIABLE = "CLUSTER = SCHOOL_ID;\n  
+                         CLASSES = c(3);\n  
+                         Missing are all (-99, -9, -8, -1);\n  
+                         CLASSES = c(3);\n  
+                         IDVARIABLE is id;\n  
+                        !Categorical = progcompR;\n  
+                        !mastercompR;\n  !nextcompR;\n  
+                        !samecompR;\n  
+                        !futureR;\n  
+                        !shareexampR;\n  
+                        !gradeworkR;\n  
+                        !rubricR;", 
+                         SAVEDATA = "file is m1.data.csv;\n  SAVE = CPROBABILITIES;", 
+                         usevariables = c("id", "SCHOOL_ID", "mastercompR", 
+                                          "nextcompR", "rubricR", "onlinecompR", 
+                                          "projcredR", "interncredR", "smallgrpR", 
+                                          "teachdifR", "givlecturR", "choosehowR", 
+                                          "retakeR", "demolearnR", "adviceR", 
+                                          "trackprogR", "ontimeR", "prepgradR"), 
+                        rdata = original.dat)
+
+
+# examine the mplus model syntax str(pathmodel, max.level = 1, nchar.max =
+# 30)
+
+# run the model
+lcaOrig_mplus <- mplusModeler(pathmodel_orig, 
+                              dataout = c("../data/2018-1-19-lca-orig.csv"),
+                              modelout = c("../mplus/2018-1-19-lca-orig.inp"), 
+                              run = TRUE)
+```

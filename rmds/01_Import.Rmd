@@ -13,10 +13,18 @@ output:
 ---
 Let's import the SPSS file. 
 ```{r}
-# load packages
-pacman::p_load(tidyr, foreign, pander, ggplot2, ggthemes, readr, reshape2) 
+# load packages ---
+pacman::p_load(tidyr, readr) 
 
-# import spss data
+# import data ---
+# spss data from Jon
 spss.dat <- read.spss("../data/JFF_LCA_ID.sav", to.data.frame=TRUE, use.value.labels = FALSE)
+
+# csv data from Noman (late stage)
+noman.dat <- read_csv("../data/Final_File.csv")
+
+# save RDS ---
+saveRDS(noman.dat, "../data/2018-1-17-final-file.rds") # final data from Noman
+saveRDS(spss.dat, "../data/spss-from-john.RDS")
 ```
 
