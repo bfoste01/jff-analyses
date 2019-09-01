@@ -1,0 +1,43 @@
+TITLE:
+Title: JFF LCA 2017 with original data;
+DATA:
+FILE = "../data/2018-1-19-lca-orig.csv";
+ 
+VARIABLE:
+NAMES = id SCHOOL_ID mastercompR nextcompR rubricR onlinecompR projcredR interncredR
+     smallgrpR teachdifR givlecturR choosehowR retakeR demolearnR adviceR trackprogR
+     ontimeR prepgradR; 
+ MISSING=.;
+ CLUSTER = SCHOOL_ID;
+  
+                         CLASSES = c(3);
+  
+                         Missing are all (-99, -9, -8, -1);
+  
+                         CLASSES = c(3);
+  
+                         IDVARIABLE is id;
+  
+                        !Categorical = progcompR;
+  
+                        !mastercompR;
+  !nextcompR;
+  
+                        !samecompR;
+  
+                        !futureR;
+  
+                        !shareexampR;
+  
+                        !gradeworkR;
+  
+                        !rubricR;
+ANALYSIS:
+TYPE = Mixture COMPLEX;
+  
+                         ESTIMATOR = MLR;
+OUTPUT:
+tech1 tech8 tech11 tech14;
+SAVEDATA:
+file is m1.data.csv;
+  SAVE = CPROBABILITIES;

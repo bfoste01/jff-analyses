@@ -1,0 +1,2975 @@
+Mplus VERSION 8 (Mac)
+MUTHEN & MUTHEN
+01/18/2018  12:57 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+  Title: JFF LCA 2017;
+  DATA:
+  FILE = "../data/2018-1-19-lca-rep.csv";
+
+  VARIABLE:
+  NAMES = Student_ID School_ID mastercompR nextcompR rubricR onlinecompR projcredR
+       interncredR smallgrpR teachdifR givlecturR choosehowR retakeR demolearnR
+       adviceR trackprogR ontimeR prepgradR;
+   MISSING=.;
+   CLUSTER = SCHOOL_ID;
+
+                           CLASSES = c(3);
+
+                           Missing are all (-99, -9, -8, -1);
+
+                           CLASSES = c(3);
+
+                           IDVARIABLE is Student_ID;
+
+                          !Categorical = progcompR;
+
+                          !mastercompR;
+    !nextcompR;
+
+                          !samecompR;
+
+                          !futureR;
+
+                          !shareexampR;
+
+                          !gradeworkR;
+
+                          !rubricR;
+  ANALYSIS:
+  TYPE = Mixture COMPLEX;
+
+                           ESTIMATOR = MLR;
+  OUTPUT:
+  tech1 tech8 tech11 tech14;
+  SAVEDATA:
+  file is m1.data.csv;
+    SAVE = CPROBABILITIES;
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING in MODEL command
+  All variables are uncorrelated with all other variables within class.
+  Check that this is what is intended.
+*** WARNING in OUTPUT command
+  TECH14 option is not available for TYPE=MIXTURE COMPLEX.
+  Request for TECH14 is ignored.
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  127
+   4 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+JFF LCA 2017;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1823
+
+Number of dependent variables                                   16
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Continuous
+   MASTERCOMP  NEXTCOMPR   RUBRICR     ONLINECOMP  PROJCREDR   INTERNCRED
+   SMALLGRPR   TEACHDIFR   GIVLECTURR  CHOOSEHOWR  RETAKER     DEMOLEARNR
+   ADVICER     TRACKPROGR  ONTIMER     PREPGRADR
+
+Categorical latent variables
+   C
+
+Variables with special functions
+
+  Cluster variable      SCHOOL_I
+  ID variable           STUDENT_
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-06
+    Relative loglikelihood change                        0.100D-06
+    Derivative                                           0.100D-05
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-05
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-05
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Random Starts Specifications
+  Number of initial stage random starts                         20
+  Number of final stage optimizations                            4
+  Number of initial stage iterations                            10
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+
+Input data file(s)
+  ../data/2018-1-19-lca-rep.csv
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns           384
+     Number of y missing data patterns         384
+     Number of u missing data patterns           0
+     Number of clusters          11
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR Y
+
+
+           Covariance Coverage
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+ MASTERCO       0.903
+ NEXTCOMP       0.853         0.897
+ RUBRICR        0.879         0.872         0.950
+ ONLINECO       0.745         0.740         0.777         0.807
+ PROJCRED       0.606         0.609         0.628         0.580         0.647
+ INTERNCR       0.513         0.510         0.533         0.489         0.436
+ SMALLGRP       0.873         0.866         0.912         0.783         0.630
+ TEACHDIF       0.863         0.859         0.906         0.772         0.627
+ GIVLECTU       0.877         0.870         0.920         0.788         0.633
+ CHOOSEHO       0.786         0.782         0.817         0.704         0.588
+ RETAKER        0.862         0.855         0.903         0.770         0.623
+ DEMOLEAR       0.798         0.789         0.828         0.709         0.580
+ ADVICER        0.846         0.835         0.887         0.759         0.613
+ TRACKPRO       0.829         0.820         0.862         0.742         0.597
+ ONTIMER        0.843         0.835         0.878         0.756         0.612
+ PREPGRAD       0.820         0.813         0.855         0.738         0.592
+
+
+           Covariance Coverage
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+ INTERNCR       0.548
+ SMALLGRP       0.535         0.947
+ TEACHDIF       0.534         0.922         0.936
+ GIVLECTU       0.536         0.938         0.927         0.954
+ CHOOSEHO       0.495         0.829         0.823         0.829         0.848
+ RETAKER        0.526         0.912         0.904         0.918         0.821
+ DEMOLEAR       0.495         0.832         0.827         0.837         0.765
+ ADVICER        0.518         0.897         0.889         0.905         0.813
+ TRACKPRO       0.509         0.873         0.867         0.879         0.793
+ ONTIMER        0.516         0.889         0.880         0.895         0.803
+ PREPGRAD       0.506         0.863         0.859         0.872         0.779
+
+
+           Covariance Coverage
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+ RETAKER        0.940
+ DEMOLEAR       0.845         0.854
+ ADVICER        0.895         0.820         0.921
+ TRACKPRO       0.869         0.804         0.864         0.890
+ ONTIMER        0.883         0.813         0.879         0.875         0.907
+ PREPGRAD       0.862         0.791         0.856         0.843         0.861
+
+
+           Covariance Coverage
+              PREPGRAD
+              ________
+ PREPGRAD       0.884
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     MASTERCOMPR           2.137      -0.197       0.000   15.97%       1.000      2.000      2.000
+            1647.000       1.742      -1.055       4.000   18.09%       3.000      3.000
+     NEXTCOMPR             1.362       0.526       0.000   38.51%       0.000      1.000      1.000
+            1636.000       1.796      -0.969       4.000    8.68%       2.000      3.000
+     RUBRICR               2.302      -0.342       0.000    8.61%       1.000      2.000      2.000
+            1731.000       1.284      -0.505       4.000   15.14%       3.000      3.000
+     ONLINECOMPR           0.791       0.284       0.000   35.62%       0.000      1.000      1.000
+            1471.000       0.459      -0.846       2.000   14.68%       1.000      1.000
+     PROJCREDR             0.392       1.274       0.000   67.03%       0.000      0.000      0.000
+            1180.000       0.362       0.561       2.000    6.19%       0.000      1.000
+     INTERNCREDR           0.754       0.432       0.000   43.04%       0.000      0.000      1.000
+             999.000       0.554      -1.095       2.000   18.42%       1.000      1.000
+     SMALLGRPR             1.607       0.213       0.000   15.76%       1.000      1.000      2.000
+            1726.000       1.059      -0.339       4.000    4.35%       2.000      2.000
+     TEACHDIFR             1.806       0.073       0.000   16.11%       1.000      2.000      2.000
+            1707.000       1.335      -0.718       4.000    8.14%       2.000      3.000
+     GIVLECTURR            2.564      -0.417       0.000    2.76%       2.000      2.000      3.000
+            1740.000       0.885       0.050       4.000   15.52%       3.000      3.000
+     CHOOSEHOWR            1.138       0.451       0.000   34.48%       0.000      1.000      1.000
+            1546.000       1.083      -1.004       3.000   13.71%       1.000      2.000
+     RETAKER               2.105      -0.063       0.000    8.17%       1.000      2.000      2.000
+            1714.000       1.158      -0.428       4.000   11.20%       2.000      3.000
+     DEMOLEARNR            1.792       0.051       0.000   15.55%       1.000      2.000      2.000
+            1556.000       1.258      -0.637       4.000    7.01%       2.000      3.000
+     ADVICER               2.126      -0.118       0.000   10.36%       1.000      2.000      2.000
+            1679.000       1.348      -0.678       4.000   13.70%       2.000      3.000
+     TRACKPROGR            1.918      -0.060       0.000   13.38%       1.000      2.000      2.000
+            1622.000       1.254      -0.601       4.000    8.20%       2.000      3.000
+     ONTIMER               1.932      -0.107       0.000   11.49%       1.000      2.000      2.000
+            1654.000       1.145      -0.525       4.000    6.53%       2.000      3.000
+     PREPGRADR             2.356      -0.308       0.000    7.51%       1.000      2.000      2.000
+            1611.000       1.322      -0.618       4.000   18.06%       3.000      3.000
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+          -34012.040  533738           11
+          -34012.040  27071            15
+          -34012.040  399671           13
+          -34012.040  415931           10
+
+
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       66
+
+Loglikelihood
+
+          H0 Value                      -34012.040
+          H0 Scaling Correction Factor      2.2896
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   68156.080
+          Bayesian (BIC)                 68519.624
+          Sample-Size Adjusted BIC       68309.945
+            (n* = (n + 2) / 24)
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1        558.23691          0.30622
+       2        344.05066          0.18873
+       3        920.71243          0.50505
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON ESTIMATED POSTERIOR PROBABILITIES
+
+    Latent
+   Classes
+
+       1        558.23691          0.30622
+       2        344.05065          0.18873
+       3        920.71244          0.50505
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THEIR MOST LIKELY LATENT CLASS MEMBERSHIP
+
+Class Counts and Proportions
+
+    Latent
+   Classes
+
+       1              562          0.30828
+       2              332          0.18212
+       3              929          0.50960
+
+
+CLASSIFICATION QUALITY
+
+     Entropy                         0.803
+
+
+Average Latent Class Probabilities for Most Likely Latent Class Membership (Row)
+by Latent Class (Column)
+
+           1        2        3
+
+    1   0.913    0.000    0.087
+    2   0.000    0.905    0.095
+    3   0.049    0.047    0.905
+
+
+Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+           1        2        3
+
+    1   0.919    0.000    0.081
+    2   0.000    0.873    0.126
+    3   0.053    0.034    0.913
+
+
+Logits for the Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+              1        2        3
+
+    1      2.431   -6.704    0.000
+    2     -5.917    1.933    0.000
+    3     -2.846   -3.284    0.000
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1
+
+ Means
+    MASTERCOMP         1.214      0.086     14.075      0.000
+    NEXTCOMPR          0.548      0.048     11.420      0.000
+    RUBRICR            1.759      0.100     17.582      0.000
+    ONLINECOMP         0.479      0.053      8.991      0.000
+    PROJCREDR          0.097      0.028      3.459      0.001
+    INTERNCRED         0.348      0.082      4.253      0.000
+    SMALLGRPR          0.970      0.047     20.711      0.000
+    TEACHDIFR          0.867      0.092      9.379      0.000
+    GIVLECTURR         2.791      0.053     53.140      0.000
+    CHOOSEHOWR         0.474      0.041     11.532      0.000
+    RETAKER            1.601      0.122     13.103      0.000
+    DEMOLEARNR         1.000      0.076     13.165      0.000
+    ADVICER            1.187      0.063     18.689      0.000
+    TRACKPROGR         0.862      0.080     10.820      0.000
+    ONTIMER            0.896      0.089     10.114      0.000
+    PREPGRADR          1.622      0.115     14.073      0.000
+
+ Variances
+    MASTERCOMP         1.305      0.043     30.576      0.000
+    NEXTCOMPR          1.294      0.040     32.516      0.000
+    RUBRICR            1.081      0.043     25.345      0.000
+    ONLINECOMP         0.393      0.010     38.382      0.000
+    PROJCREDR          0.254      0.023     11.104      0.000
+    INTERNCRED         0.436      0.019     23.222      0.000
+    SMALLGRPR          0.809      0.035     22.916      0.000
+    TEACHDIFR          0.788      0.023     34.530      0.000
+    GIVLECTURR         0.862      0.037     23.164      0.000
+    CHOOSEHOWR         0.759      0.026     28.757      0.000
+    RETAKER            0.989      0.057     17.481      0.000
+    DEMOLEARNR         0.869      0.032     27.462      0.000
+    ADVICER            0.847      0.051     16.528      0.000
+    TRACKPROGR         0.623      0.057     10.844      0.000
+    ONTIMER            0.559      0.043     12.941      0.000
+    PREPGRADR          1.031      0.021     48.857      0.000
+
+Latent Class 2
+
+ Means
+    MASTERCOMP         3.034      0.081     37.583      0.000
+    NEXTCOMPR          2.611      0.200     13.079      0.000
+    RUBRICR            3.077      0.057     53.562      0.000
+    ONLINECOMP         1.220      0.039     31.294      0.000
+    PROJCREDR          1.063      0.127      8.406      0.000
+    INTERNCRED         1.319      0.099     13.362      0.000
+    SMALLGRPR          2.418      0.138     17.547      0.000
+    TEACHDIFR          2.999      0.070     42.989      0.000
+    GIVLECTURR         2.422      0.094     25.848      0.000
+    CHOOSEHOWR         2.114      0.095     22.303      0.000
+    RETAKER            2.798      0.123     22.769      0.000
+    DEMOLEARNR         2.796      0.099     28.177      0.000
+    ADVICER            3.211      0.036     89.709      0.000
+    TRACKPROGR         3.116      0.055     56.808      0.000
+    ONTIMER            3.044      0.048     63.238      0.000
+    PREPGRADR          3.141      0.041     76.912      0.000
+
+ Variances
+    MASTERCOMP         1.305      0.043     30.576      0.000
+    NEXTCOMPR          1.294      0.040     32.516      0.000
+    RUBRICR            1.081      0.043     25.345      0.000
+    ONLINECOMP         0.393      0.010     38.382      0.000
+    PROJCREDR          0.254      0.023     11.104      0.000
+    INTERNCRED         0.436      0.019     23.222      0.000
+    SMALLGRPR          0.809      0.035     22.916      0.000
+    TEACHDIFR          0.788      0.023     34.530      0.000
+    GIVLECTURR         0.862      0.037     23.164      0.000
+    CHOOSEHOWR         0.759      0.026     28.757      0.000
+    RETAKER            0.989      0.057     17.481      0.000
+    DEMOLEARNR         0.869      0.032     27.462      0.000
+    ADVICER            0.847      0.051     16.528      0.000
+    TRACKPROGR         0.623      0.057     10.844      0.000
+    ONTIMER            0.559      0.043     12.941      0.000
+    PREPGRADR          1.031      0.021     48.857      0.000
+
+Latent Class 3
+
+ Means
+    MASTERCOMP         2.356      0.124     18.958      0.000
+    NEXTCOMPR          1.398      0.068     20.703      0.000
+    RUBRICR            2.347      0.081     29.079      0.000
+    ONLINECOMP         0.815      0.044     18.444      0.000
+    PROJCREDR          0.368      0.044      8.401      0.000
+    INTERNCRED         0.782      0.052     14.915      0.000
+    SMALLGRPR          1.694      0.034     50.244      0.000
+    TEACHDIFR          1.931      0.071     27.162      0.000
+    GIVLECTURR         2.480      0.041     60.246      0.000
+    CHOOSEHOWR         1.179      0.053     22.307      0.000
+    RETAKER            2.150      0.111     19.306      0.000
+    DEMOLEARNR         1.888      0.063     29.959      0.000
+    ADVICER            2.266      0.078     28.889      0.000
+    TRACKPROGR         2.101      0.073     28.592      0.000
+    ONTIMER            2.139      0.081     26.525      0.000
+    PREPGRADR          2.496      0.072     34.633      0.000
+
+ Variances
+    MASTERCOMP         1.305      0.043     30.576      0.000
+    NEXTCOMPR          1.294      0.040     32.516      0.000
+    RUBRICR            1.081      0.043     25.345      0.000
+    ONLINECOMP         0.393      0.010     38.382      0.000
+    PROJCREDR          0.254      0.023     11.104      0.000
+    INTERNCRED         0.436      0.019     23.222      0.000
+    SMALLGRPR          0.809      0.035     22.916      0.000
+    TEACHDIFR          0.788      0.023     34.530      0.000
+    GIVLECTURR         0.862      0.037     23.164      0.000
+    CHOOSEHOWR         0.759      0.026     28.757      0.000
+    RETAKER            0.989      0.057     17.481      0.000
+    DEMOLEARNR         0.869      0.032     27.462      0.000
+    ADVICER            0.847      0.051     16.528      0.000
+    TRACKPROGR         0.623      0.057     10.844      0.000
+    ONTIMER            0.559      0.043     12.941      0.000
+    PREPGRADR          1.031      0.021     48.857      0.000
+
+Categorical Latent Variables
+
+ Means
+    C#1               -0.500      0.104     -4.798      0.000
+    C#2               -0.984      0.137     -7.176      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.780E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR LATENT CLASS 1
+
+
+           NU
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+                    1             2             3             4             5
+
+
+           NU
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+                    6             7             8             9            10
+
+
+           NU
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+                   11            12            13            14            15
+
+
+           NU
+              PREPGRAD
+              ________
+                   16
+
+
+           THETA
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+ MASTERCO          17
+ NEXTCOMP           0            18
+ RUBRICR            0             0            19
+ ONLINECO           0             0             0            20
+ PROJCRED           0             0             0             0            21
+ INTERNCR           0             0             0             0             0
+ SMALLGRP           0             0             0             0             0
+ TEACHDIF           0             0             0             0             0
+ GIVLECTU           0             0             0             0             0
+ CHOOSEHO           0             0             0             0             0
+ RETAKER            0             0             0             0             0
+ DEMOLEAR           0             0             0             0             0
+ ADVICER            0             0             0             0             0
+ TRACKPRO           0             0             0             0             0
+ ONTIMER            0             0             0             0             0
+ PREPGRAD           0             0             0             0             0
+
+
+           THETA
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+ INTERNCR          22
+ SMALLGRP           0            23
+ TEACHDIF           0             0            24
+ GIVLECTU           0             0             0            25
+ CHOOSEHO           0             0             0             0            26
+ RETAKER            0             0             0             0             0
+ DEMOLEAR           0             0             0             0             0
+ ADVICER            0             0             0             0             0
+ TRACKPRO           0             0             0             0             0
+ ONTIMER            0             0             0             0             0
+ PREPGRAD           0             0             0             0             0
+
+
+           THETA
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+ RETAKER           27
+ DEMOLEAR           0            28
+ ADVICER            0             0            29
+ TRACKPRO           0             0             0            30
+ ONTIMER            0             0             0             0            31
+ PREPGRAD           0             0             0             0             0
+
+
+           THETA
+              PREPGRAD
+              ________
+ PREPGRAD          32
+
+
+     PARAMETER SPECIFICATION FOR LATENT CLASS 2
+
+
+           NU
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+                   33            34            35            36            37
+
+
+           NU
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+                   38            39            40            41            42
+
+
+           NU
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+                   43            44            45            46            47
+
+
+           NU
+              PREPGRAD
+              ________
+                   48
+
+
+           THETA
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+ MASTERCO          17
+ NEXTCOMP           0            18
+ RUBRICR            0             0            19
+ ONLINECO           0             0             0            20
+ PROJCRED           0             0             0             0            21
+ INTERNCR           0             0             0             0             0
+ SMALLGRP           0             0             0             0             0
+ TEACHDIF           0             0             0             0             0
+ GIVLECTU           0             0             0             0             0
+ CHOOSEHO           0             0             0             0             0
+ RETAKER            0             0             0             0             0
+ DEMOLEAR           0             0             0             0             0
+ ADVICER            0             0             0             0             0
+ TRACKPRO           0             0             0             0             0
+ ONTIMER            0             0             0             0             0
+ PREPGRAD           0             0             0             0             0
+
+
+           THETA
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+ INTERNCR          22
+ SMALLGRP           0            23
+ TEACHDIF           0             0            24
+ GIVLECTU           0             0             0            25
+ CHOOSEHO           0             0             0             0            26
+ RETAKER            0             0             0             0             0
+ DEMOLEAR           0             0             0             0             0
+ ADVICER            0             0             0             0             0
+ TRACKPRO           0             0             0             0             0
+ ONTIMER            0             0             0             0             0
+ PREPGRAD           0             0             0             0             0
+
+
+           THETA
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+ RETAKER           27
+ DEMOLEAR           0            28
+ ADVICER            0             0            29
+ TRACKPRO           0             0             0            30
+ ONTIMER            0             0             0             0            31
+ PREPGRAD           0             0             0             0             0
+
+
+           THETA
+              PREPGRAD
+              ________
+ PREPGRAD          32
+
+
+     PARAMETER SPECIFICATION FOR LATENT CLASS 3
+
+
+           NU
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+                   49            50            51            52            53
+
+
+           NU
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+                   54            55            56            57            58
+
+
+           NU
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+                   59            60            61            62            63
+
+
+           NU
+              PREPGRAD
+              ________
+                   64
+
+
+           THETA
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+ MASTERCO          17
+ NEXTCOMP           0            18
+ RUBRICR            0             0            19
+ ONLINECO           0             0             0            20
+ PROJCRED           0             0             0             0            21
+ INTERNCR           0             0             0             0             0
+ SMALLGRP           0             0             0             0             0
+ TEACHDIF           0             0             0             0             0
+ GIVLECTU           0             0             0             0             0
+ CHOOSEHO           0             0             0             0             0
+ RETAKER            0             0             0             0             0
+ DEMOLEAR           0             0             0             0             0
+ ADVICER            0             0             0             0             0
+ TRACKPRO           0             0             0             0             0
+ ONTIMER            0             0             0             0             0
+ PREPGRAD           0             0             0             0             0
+
+
+           THETA
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+ INTERNCR          22
+ SMALLGRP           0            23
+ TEACHDIF           0             0            24
+ GIVLECTU           0             0             0            25
+ CHOOSEHO           0             0             0             0            26
+ RETAKER            0             0             0             0             0
+ DEMOLEAR           0             0             0             0             0
+ ADVICER            0             0             0             0             0
+ TRACKPRO           0             0             0             0             0
+ ONTIMER            0             0             0             0             0
+ PREPGRAD           0             0             0             0             0
+
+
+           THETA
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+ RETAKER           27
+ DEMOLEAR           0            28
+ ADVICER            0             0            29
+ TRACKPRO           0             0             0            30
+ ONTIMER            0             0             0             0            31
+ PREPGRAD           0             0             0             0             0
+
+
+           THETA
+              PREPGRAD
+              ________
+ PREPGRAD          32
+
+
+     PARAMETER SPECIFICATION FOR LATENT CLASS REGRESSION MODEL PART
+
+
+           ALPHA(C)
+              C#1           C#2           C#3
+              ________      ________      ________
+                   65            66             0
+
+
+     STARTING VALUES FOR LATENT CLASS 1
+
+
+           NU
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+                0.817         0.022         1.169         0.113        -0.210
+
+
+           NU
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+                0.009         0.578         0.651         1.623         0.098
+
+
+           NU
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+                1.029         0.671         0.965         0.798         0.862
+
+
+           NU
+              PREPGRAD
+              ________
+                1.207
+
+
+           THETA
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+ MASTERCO       0.871
+ NEXTCOMP       0.000         0.898
+ RUBRICR        0.000         0.000         0.642
+ ONLINECO       0.000         0.000         0.000         0.230
+ PROJCRED       0.000         0.000         0.000         0.000         0.181
+ INTERNCR       0.000         0.000         0.000         0.000         0.000
+ SMALLGRP       0.000         0.000         0.000         0.000         0.000
+ TEACHDIF       0.000         0.000         0.000         0.000         0.000
+ GIVLECTU       0.000         0.000         0.000         0.000         0.000
+ CHOOSEHO       0.000         0.000         0.000         0.000         0.000
+ RETAKER        0.000         0.000         0.000         0.000         0.000
+ DEMOLEAR       0.000         0.000         0.000         0.000         0.000
+ ADVICER        0.000         0.000         0.000         0.000         0.000
+ TRACKPRO       0.000         0.000         0.000         0.000         0.000
+ ONTIMER        0.000         0.000         0.000         0.000         0.000
+ PREPGRAD       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+ INTERNCR       0.277
+ SMALLGRP       0.000         0.530
+ TEACHDIF       0.000         0.000         0.667
+ GIVLECTU       0.000         0.000         0.000         0.443
+ CHOOSEHO       0.000         0.000         0.000         0.000         0.542
+ RETAKER        0.000         0.000         0.000         0.000         0.000
+ DEMOLEAR       0.000         0.000         0.000         0.000         0.000
+ ADVICER        0.000         0.000         0.000         0.000         0.000
+ TRACKPRO       0.000         0.000         0.000         0.000         0.000
+ ONTIMER        0.000         0.000         0.000         0.000         0.000
+ PREPGRAD       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+ RETAKER        0.579
+ DEMOLEAR       0.000         0.629
+ ADVICER        0.000         0.000         0.674
+ TRACKPRO       0.000         0.000         0.000         0.627
+ ONTIMER        0.000         0.000         0.000         0.000         0.572
+ PREPGRAD       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              PREPGRAD
+              ________
+ PREPGRAD       0.661
+
+
+     STARTING VALUES FOR LATENT CLASS 2
+
+
+           NU
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+                2.137         1.362         2.302         0.791         0.392
+
+
+           NU
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+                0.754         1.607         1.806         2.564         1.138
+
+
+           NU
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+                2.105         1.792         2.126         1.918         1.932
+
+
+           NU
+              PREPGRAD
+              ________
+                2.356
+
+
+           THETA
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+ MASTERCO       0.871
+ NEXTCOMP       0.000         0.898
+ RUBRICR        0.000         0.000         0.642
+ ONLINECO       0.000         0.000         0.000         0.230
+ PROJCRED       0.000         0.000         0.000         0.000         0.181
+ INTERNCR       0.000         0.000         0.000         0.000         0.000
+ SMALLGRP       0.000         0.000         0.000         0.000         0.000
+ TEACHDIF       0.000         0.000         0.000         0.000         0.000
+ GIVLECTU       0.000         0.000         0.000         0.000         0.000
+ CHOOSEHO       0.000         0.000         0.000         0.000         0.000
+ RETAKER        0.000         0.000         0.000         0.000         0.000
+ DEMOLEAR       0.000         0.000         0.000         0.000         0.000
+ ADVICER        0.000         0.000         0.000         0.000         0.000
+ TRACKPRO       0.000         0.000         0.000         0.000         0.000
+ ONTIMER        0.000         0.000         0.000         0.000         0.000
+ PREPGRAD       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+ INTERNCR       0.277
+ SMALLGRP       0.000         0.530
+ TEACHDIF       0.000         0.000         0.667
+ GIVLECTU       0.000         0.000         0.000         0.443
+ CHOOSEHO       0.000         0.000         0.000         0.000         0.542
+ RETAKER        0.000         0.000         0.000         0.000         0.000
+ DEMOLEAR       0.000         0.000         0.000         0.000         0.000
+ ADVICER        0.000         0.000         0.000         0.000         0.000
+ TRACKPRO       0.000         0.000         0.000         0.000         0.000
+ ONTIMER        0.000         0.000         0.000         0.000         0.000
+ PREPGRAD       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+ RETAKER        0.579
+ DEMOLEAR       0.000         0.629
+ ADVICER        0.000         0.000         0.674
+ TRACKPRO       0.000         0.000         0.000         0.627
+ ONTIMER        0.000         0.000         0.000         0.000         0.572
+ PREPGRAD       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              PREPGRAD
+              ________
+ PREPGRAD       0.661
+
+
+     STARTING VALUES FOR LATENT CLASS 3
+
+
+           NU
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+                3.456         2.703         3.435         1.468         0.993
+
+
+           NU
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+                1.498         2.636         2.962         3.505         2.179
+
+
+           NU
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+                3.181         2.914         3.286         3.038         3.002
+
+
+           NU
+              PREPGRAD
+              ________
+                3.506
+
+
+           THETA
+              MASTERCO      NEXTCOMP      RUBRICR       ONLINECO      PROJCRED
+              ________      ________      ________      ________      ________
+ MASTERCO       0.871
+ NEXTCOMP       0.000         0.898
+ RUBRICR        0.000         0.000         0.642
+ ONLINECO       0.000         0.000         0.000         0.230
+ PROJCRED       0.000         0.000         0.000         0.000         0.181
+ INTERNCR       0.000         0.000         0.000         0.000         0.000
+ SMALLGRP       0.000         0.000         0.000         0.000         0.000
+ TEACHDIF       0.000         0.000         0.000         0.000         0.000
+ GIVLECTU       0.000         0.000         0.000         0.000         0.000
+ CHOOSEHO       0.000         0.000         0.000         0.000         0.000
+ RETAKER        0.000         0.000         0.000         0.000         0.000
+ DEMOLEAR       0.000         0.000         0.000         0.000         0.000
+ ADVICER        0.000         0.000         0.000         0.000         0.000
+ TRACKPRO       0.000         0.000         0.000         0.000         0.000
+ ONTIMER        0.000         0.000         0.000         0.000         0.000
+ PREPGRAD       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              INTERNCR      SMALLGRP      TEACHDIF      GIVLECTU      CHOOSEHO
+              ________      ________      ________      ________      ________
+ INTERNCR       0.277
+ SMALLGRP       0.000         0.530
+ TEACHDIF       0.000         0.000         0.667
+ GIVLECTU       0.000         0.000         0.000         0.443
+ CHOOSEHO       0.000         0.000         0.000         0.000         0.542
+ RETAKER        0.000         0.000         0.000         0.000         0.000
+ DEMOLEAR       0.000         0.000         0.000         0.000         0.000
+ ADVICER        0.000         0.000         0.000         0.000         0.000
+ TRACKPRO       0.000         0.000         0.000         0.000         0.000
+ ONTIMER        0.000         0.000         0.000         0.000         0.000
+ PREPGRAD       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              RETAKER       DEMOLEAR      ADVICER       TRACKPRO      ONTIMER
+              ________      ________      ________      ________      ________
+ RETAKER        0.579
+ DEMOLEAR       0.000         0.629
+ ADVICER        0.000         0.000         0.674
+ TRACKPRO       0.000         0.000         0.000         0.627
+ ONTIMER        0.000         0.000         0.000         0.000         0.572
+ PREPGRAD       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              PREPGRAD
+              ________
+ PREPGRAD       0.661
+
+
+     STARTING VALUES FOR LATENT CLASS REGRESSION MODEL PART
+
+
+           ALPHA(C)
+              C#1           C#2           C#3
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+TECHNICAL 11 OUTPUT
+
+     Random Starts Specifications for the k-1 Class Analysis Model
+        Number of initial stage random starts                  20
+        Number of final stage optimizations                     4
+
+
+
+     VUONG-LO-MENDELL-RUBIN LIKELIHOOD RATIO TEST FOR 2 (H0) VERSUS 3 CLASSES
+
+          H0 Loglikelihood Value                       -34611.545
+          2 Times the Loglikelihood Difference           1199.009
+          Difference in the Number of Parameters               17
+          Mean                                           1621.186
+          Standard Deviation                             2883.508
+          P-Value                                          0.4670
+
+     LO-MENDELL-RUBIN ADJUSTED LRT TEST
+
+          Value                                          1189.689
+          P-Value                                          0.4688
+
+
+TECHNICAL 8 OUTPUT
+
+
+  INITIAL STAGE ITERATIONS
+
+
+  TECHNICAL 8 OUTPUT FOR UNPERTURBED STARTING VALUE SET
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.36936733D+05    0.0000000    0.0000000    357.026  1132.480    EM
+                                                    333.494
+     2 -0.34117413D+05 2819.3201278    0.0763284    402.478  1056.825    EM
+                                                    363.698
+     3 -0.34047560D+05   69.8521542    0.0020474    436.775  1004.280    EM
+                                                    381.946
+     4 -0.34029123D+05   18.4370898    0.0005415    460.454   971.380    EM
+                                                    391.166
+     5 -0.34021987D+05    7.1358824    0.0002097    477.014   951.054    EM
+                                                    394.932
+     6 -0.34018862D+05    3.1254049    0.0000919    488.908   938.618    EM
+                                                    395.474
+     7 -0.34017254D+05    1.6080053    0.0000473    497.777   931.051    EM
+                                                    394.172
+     8 -0.34016260D+05    0.9944945    0.0000292    504.668   926.464    EM
+                                                    391.868
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 1
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.11331803D+06    0.0000000    0.0000000    669.919   178.451    EM
+                                                    974.630
+     2 -0.34711402D+05 ************    0.6936816    714.389   166.903    EM
+                                                    941.708
+     3 -0.34525076D+05  186.3258985    0.0053679    717.607   211.605    EM
+                                                    893.788
+     4 -0.34458030D+05   67.0460722    0.0019420    697.738   287.815    EM
+                                                    837.447
+     5 -0.34382986D+05   75.0440494    0.0021778    662.610   388.282    EM
+                                                    772.108
+     6 -0.34293860D+05   89.1263330    0.0025922    619.450   502.577    EM
+                                                    700.974
+     7 -0.34201071D+05   92.7890287    0.0027057    576.880   614.687    EM
+                                                    631.433
+     8 -0.34123699D+05   77.3722616    0.0022623    541.932   709.339    EM
+                                                    571.728
+     9 -0.34073680D+05   50.0191000    0.0014658    517.400   780.082    EM
+                                                    525.519
+    10 -0.34046773D+05   26.9065201    0.0007897    502.431   829.001    EM
+                                                    491.568
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 2
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.12222996D+06    0.0000000    0.0000000    110.671   685.515    EM
+                                                   1026.813
+     2 -0.35015750D+05 ************    0.7135256    153.688   714.781    EM
+                                                    954.531
+     3 -0.34410875D+05  604.8748469    0.0172744    177.006   733.653    EM
+                                                    912.341
+     4 -0.34296646D+05  114.2297167    0.0033196    190.759   762.617    EM
+                                                    869.624
+     5 -0.34248243D+05   48.4027114    0.0014113    204.133   790.940    EM
+                                                    827.927
+     6 -0.34216516D+05   31.7268027    0.0009264    219.148   814.698    EM
+                                                    789.154
+     7 -0.34190754D+05   25.7618101    0.0007529    235.389   834.189    EM
+                                                    753.422
+     8 -0.34168329D+05   22.4248438    0.0006559    252.210   850.262    EM
+                                                    720.528
+     9 -0.34148513D+05   19.8161287    0.0005800    269.161   863.523    EM
+                                                    690.316
+    10 -0.34131039D+05   17.4746003    0.0005117    285.963   874.379    EM
+                                                    662.659
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 3
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.10835955D+06    0.0000000    0.0000000    592.854   955.880    EM
+                                                    274.267
+     2 -0.34801092D+05 ************    0.6788369    674.484   916.183    EM
+                                                    232.333
+     3 -0.34573434D+05  227.6576836    0.0065417    714.136   859.502    EM
+                                                    249.361
+     4 -0.34459112D+05  114.3226426    0.0033067    719.852   795.328    EM
+                                                    307.820
+     5 -0.34367171D+05   91.9410316    0.0026681    700.134   731.177    EM
+                                                    391.689
+     6 -0.34290732D+05   76.4381000    0.0022242    667.390   669.728    EM
+                                                    485.882
+     7 -0.34219453D+05   71.2796435    0.0020787    630.067   610.673    EM
+                                                    582.260
+     8 -0.34150241D+05   69.2122123    0.0020226    593.612   556.111    EM
+                                                    673.277
+     9 -0.34091879D+05   58.3611717    0.0017090    562.924   510.041    EM
+                                                    750.035
+    10 -0.34053596D+05   38.2836935    0.0011230    540.791   474.460    EM
+                                                    807.748
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 4
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.11282522D+06    0.0000000    0.0000000    196.810   117.433    EM
+                                                   1508.757
+     2 -0.36352576D+05 ************    0.6777974    241.803   144.153    EM
+                                                   1437.044
+     3 -0.35184954D+05 1167.6226004    0.0321194    333.731   193.318    EM
+                                                   1295.951
+     4 -0.34777218D+05  407.7359390    0.0115884    412.339   215.145    EM
+                                                   1195.516
+     5 -0.34632092D+05  145.1262649    0.0041730    472.806   227.602    EM
+                                                   1122.592
+     6 -0.34535408D+05   96.6838809    0.0027917    525.093   233.903    EM
+                                                   1064.004
+     7 -0.34450652D+05   84.7560337    0.0024542    580.443   234.937    EM
+                                                   1007.620
+     8 -0.34372513D+05   78.1385413    0.0022681    639.488   233.892    EM
+                                                    949.621
+     9 -0.34304487D+05   68.0264041    0.0019791    696.306   234.068    EM
+                                                    892.626
+    10 -0.34251727D+05   52.7594535    0.0015380    745.291   237.706    EM
+                                                    840.002
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 5
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.11610764D+06    0.0000000    0.0000000   1539.124    39.794    EM
+                                                    244.082
+     2 -0.35371978D+05 ************    0.6953519   1425.117    42.291    EM
+                                                    355.592
+     3 -0.34816597D+05  555.3801889    0.0157011   1260.530   113.891    EM
+                                                    448.578
+     4 -0.34341536D+05  475.0609694    0.0136447   1127.931   188.221    EM
+                                                    506.848
+     5 -0.34174413D+05  167.1233121    0.0048665   1044.077   244.448    EM
+                                                    534.476
+     6 -0.34116300D+05   58.1134902    0.0017005    993.671   285.231    EM
+                                                    544.097
+     7 -0.34091127D+05   25.1728474    0.0007379    963.148   316.133    EM
+                                                    543.719
+     8 -0.34076542D+05   14.5848474    0.0004278    944.256   340.959    EM
+                                                    537.785
+     9 -0.34066231D+05   10.3107518    0.0003026    932.488   361.741    EM
+                                                    528.771
+    10 -0.34058101D+05    8.1305829    0.0002387    925.232   379.613    EM
+                                                    518.155
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 6
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.10762159D+06    0.0000000    0.0000000    432.319   102.515    EM
+                                                   1288.167
+     2 -0.34913383D+05 ************    0.6755913    521.666    97.405    EM
+                                                   1203.929
+     3 -0.34694867D+05  218.5155924    0.0062588    570.476   129.200    EM
+                                                   1123.324
+     4 -0.34601891D+05   92.9760905    0.0026798    584.953   182.844    EM
+                                                   1055.203
+     5 -0.34522618D+05   79.2730666    0.0022910    573.958   261.509    EM
+                                                    987.533
+     6 -0.34434245D+05   88.3726470    0.0025598    545.390   363.056    EM
+                                                    914.554
+     7 -0.34338093D+05   96.1525898    0.0027924    509.194   476.645    EM
+                                                    837.160
+     8 -0.34246221D+05   91.8714400    0.0026755    474.774   586.889    EM
+                                                    761.337
+     9 -0.34171593D+05   74.6288082    0.0021792    447.941   681.205    EM
+                                                    693.855
+    10 -0.34119615D+05   51.9773619    0.0015211    430.445   754.174    EM
+                                                    638.380
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 7
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.13028324D+06    0.0000000    0.0000000    271.361  1057.781    EM
+                                                    493.858
+     2 -0.34659592D+05 ************    0.7339674    355.896   924.880    EM
+                                                    542.225
+     3 -0.34131298D+05  528.2938270    0.0152424    387.654   895.377    EM
+                                                    539.969
+     4 -0.34061576D+05   69.7225072    0.0020428    401.438   898.767    EM
+                                                    522.795
+     5 -0.34048616D+05   12.9596561    0.0003805    412.374   904.171    EM
+                                                    506.455
+     6 -0.34042316D+05    6.3000678    0.0001850    422.742   908.118    EM
+                                                    492.140
+     7 -0.34037645D+05    4.6714306    0.0001372    432.687   910.846    EM
+                                                    479.466
+     8 -0.34033800D+05    3.8442566    0.0001129    442.125   912.775    EM
+                                                    468.100
+     9 -0.34030556D+05    3.2444073    0.0000953    450.996   914.185    EM
+                                                    457.819
+    10 -0.34027800D+05    2.7557683    0.0000810    459.280   915.248    EM
+                                                    448.472
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 8
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.10130214D+06    0.0000000    0.0000000   1543.432    28.198    EM
+                                                    251.370
+     2 -0.35638507D+05 ************    0.6481959   1408.572    16.621    EM
+                                                    397.807
+     3 -0.34999065D+05  639.4420850    0.0179424   1305.092    15.507    EM
+                                                    502.402
+     4 -0.34846130D+05  152.9351207    0.0043697   1221.505    16.252    EM
+                                                    585.243
+     5 -0.34758914D+05   87.2160463    0.0025029   1150.043    19.193    EM
+                                                    653.764
+     6 -0.34677167D+05   81.7469746    0.0023518   1073.727    39.698    EM
+                                                    709.575
+     7 -0.34428241D+05  248.9257587    0.0071784    977.019    99.709    EM
+                                                    746.272
+     8 -0.34273265D+05  154.9762337    0.0045014    929.519   143.480    EM
+                                                    750.001
+     9 -0.34226450D+05   46.8149835    0.0013659    906.269   177.442    EM
+                                                    739.290
+    10 -0.34195485D+05   30.9648178    0.0009047    894.080   206.937    EM
+                                                    721.983
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 9
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.12953031D+06    0.0000000    0.0000000    602.462  1182.958    EM
+                                                     37.580
+     2 -0.35432024D+05 ************    0.7264577    663.666  1045.699    EM
+                                                    113.634
+     3 -0.34271320D+05 1160.7040308    0.0327586    691.017   975.345    EM
+                                                    156.639
+     4 -0.34090116D+05  181.2043094    0.0052873    690.099   950.872    EM
+                                                    182.029
+     5 -0.34061764D+05   28.3517788    0.0008317    681.949   938.590    EM
+                                                    202.460
+     6 -0.34048400D+05   13.3636956    0.0003923    671.633   931.582    EM
+                                                    219.785
+     7 -0.34039393D+05    9.0076385    0.0002646    660.946   927.622    EM
+                                                    234.433
+     8 -0.34032890D+05    6.5023869    0.0001910    650.720   925.469    EM
+                                                    246.811
+     9 -0.34028115D+05    4.7753026    0.0001403    641.326   924.343    EM
+                                                    257.331
+    10 -0.34024569D+05    3.5456371    0.0001042    632.878   923.767    EM
+                                                    266.355
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 10
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.10919065D+06    0.0000000    0.0000000   1559.508   213.413    EM
+                                                     50.079
+     2 -0.35861848D+05 ************    0.6715667   1402.703   262.305    EM
+                                                    157.992
+     3 -0.34551178D+05 1310.6707276    0.0365478   1184.930   392.039    EM
+                                                    246.031
+     4 -0.34104701D+05  446.4762117    0.0129222   1077.352   455.617    EM
+                                                    290.031
+     5 -0.34042498D+05   62.2035829    0.0018239   1016.180   491.962    EM
+                                                    314.858
+     6 -0.34023111D+05   19.3868959    0.0005695    978.818   514.379    EM
+                                                    329.803
+     7 -0.34016158D+05    6.9523627    0.0002043    955.969   528.322    EM
+                                                    338.709
+     8 -0.34013623D+05    2.5353906    0.0000745    942.053   537.058    EM
+                                                    343.889
+     9 -0.34012688D+05    0.9353831    0.0000275    933.594   542.610    EM
+                                                    346.796
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 11
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.99206687D+05    0.0000000    0.0000000    312.053    62.408    EM
+                                                   1448.539
+     2 -0.35879204D+05 ************    0.6383389    411.423   169.791    EM
+                                                   1241.786
+     3 -0.34338935D+05 1540.2694347    0.0429293    505.974   244.786    EM
+                                                   1072.240
+     4 -0.34066450D+05  272.4849648    0.0079352    541.468   275.222    EM
+                                                   1006.311
+     5 -0.34027605D+05   38.8448012    0.0011403    559.765   292.091    EM
+                                                    971.144
+     6 -0.34017453D+05   10.1522244    0.0002984    569.395   302.744    EM
+                                                    950.861
+     7 -0.34014507D+05    2.9460018    0.0000866    574.064   309.928    EM
+                                                    939.008
+     8 -0.34013502D+05    1.0041722    0.0000295    575.951   315.037    EM
+                                                    932.013
+     9 -0.34013070D+05    0.4323305    0.0000127    576.311   318.848    EM
+                                                    927.841
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 12
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.10737760D+06    0.0000000    0.0000000   1151.115   101.590    EM
+                                                    570.295
+     2 -0.34915455D+05 ************    0.6748348   1089.541    87.627    EM
+                                                    645.832
+     3 -0.34643007D+05  272.4480310    0.0078031   1035.038   107.262    EM
+                                                    680.699
+     4 -0.34589893D+05   53.1142013    0.0015332    986.714   139.002    EM
+                                                    697.284
+     5 -0.34549918D+05   39.9749765    0.0011557    942.778   179.528    EM
+                                                    700.693
+     6 -0.34513153D+05   36.7645463    0.0010641    902.082   228.026    EM
+                                                    692.892
+     7 -0.34476480D+05   36.6728681    0.0010626    862.753   285.243    EM
+                                                    675.004
+     8 -0.34433664D+05   42.8167777    0.0012419    820.993   355.840    EM
+                                                    646.167
+     9 -0.34371503D+05   62.1604784    0.0018052    771.573   447.256    EM
+                                                    604.172
+    10 -0.34278864D+05   92.6388700    0.0026952    714.185   558.045    EM
+                                                    550.770
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 13
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.13058022D+06    0.0000000    0.0000000    687.743   448.390    EM
+                                                    686.867
+     2 -0.34875578D+05 ************    0.7329184    724.987   512.173    EM
+                                                    585.839
+     3 -0.34281509D+05  594.0693460    0.0170340    690.147   491.367    EM
+                                                    641.486
+     4 -0.34119565D+05  161.9442157    0.0047240    644.233   450.348    EM
+                                                    728.419
+     5 -0.34055135D+05   64.4303079    0.0018884    609.235   417.140    EM
+                                                    796.626
+     6 -0.34029258D+05   25.8767406    0.0007598    586.067   394.423    EM
+                                                    842.510
+     7 -0.34018947D+05   10.3107769    0.0003030    571.578   379.558    EM
+                                                    871.864
+     8 -0.34014857D+05    4.0905442    0.0001202    562.810   369.900    EM
+                                                    890.289
+     9 -0.34013236D+05    1.6208974    0.0000477    557.662   363.575    EM
+                                                    901.764
+    10 -0.34012589D+05    0.6464529    0.0000190    554.756   359.359    EM
+                                                    908.884
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 14
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.11369161D+06    0.0000000    0.0000000    215.090  1063.858    EM
+                                                    544.052
+     2 -0.35472115D+05 ************    0.6879971    383.303   940.282    EM
+                                                    499.415
+     3 -0.34755181D+05  716.9334509    0.0202112    496.346   826.281    EM
+                                                    500.373
+     4 -0.34316976D+05  438.2053665    0.0126083    551.337   775.020    EM
+                                                    496.643
+     5 -0.34174303D+05  142.6731008    0.0041575    566.213   782.716    EM
+                                                    474.071
+     6 -0.34115669D+05   58.6339193    0.0017157    565.769   810.907    EM
+                                                    446.324
+     7 -0.34067817D+05   47.8522087    0.0014026    559.774   842.139    EM
+                                                    421.087
+     8 -0.34036247D+05   31.5692705    0.0009267    552.895   867.952    EM
+                                                    402.153
+     9 -0.34021699D+05   14.5486876    0.0004274    547.558   886.320    EM
+                                                    389.121
+    10 -0.34016133D+05    5.5653433    0.0001636    544.261   898.534    EM
+                                                    380.205
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 15
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.11467680D+06    0.0000000    0.0000000    416.882   720.392    EM
+                                                    685.727
+     2 -0.35164548D+05 ************    0.6933595    548.414   638.429    EM
+                                                    636.157
+     3 -0.34689448D+05  475.1000036    0.0135108    629.612   587.809    EM
+                                                    605.579
+     4 -0.34388431D+05  301.0173583    0.0086775    651.213   608.468    EM
+                                                    563.318
+     5 -0.34169201D+05  219.2300286    0.0063751    625.400   685.176    EM
+                                                    512.424
+     6 -0.34079331D+05   89.8699833    0.0026301    591.798   761.785    EM
+                                                    469.417
+     7 -0.34042032D+05   37.2994094    0.0010945    566.952   818.052    EM
+                                                    437.996
+     8 -0.34025707D+05   16.3240671    0.0004795    551.274   855.478    EM
+                                                    416.248
+     9 -0.34018720D+05    6.9872810    0.0002054    542.192   879.459    EM
+                                                    401.349
+    10 -0.34015716D+05    3.0037543    0.0000883    537.403   894.593    EM
+                                                    391.004
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 16
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.11959199D+06    0.0000000    0.0000000    543.090   158.424    EM
+                                                   1121.486
+     2 -0.34825291D+05 ************    0.7087991    640.473   120.216    EM
+                                                   1062.311
+     3 -0.34611603D+05  213.6880584    0.0061360    681.558   145.366    EM
+                                                    996.076
+     4 -0.34532135D+05   79.4682625    0.0022960    687.822   203.519    EM
+                                                    931.659
+     5 -0.34463164D+05   68.9706208    0.0019973    668.735   290.568    EM
+                                                    863.697
+     6 -0.34377731D+05   85.4335950    0.0024790    630.852   403.748    EM
+                                                    788.401
+     7 -0.34274862D+05  102.8688634    0.0029923    584.786   528.184    EM
+                                                    710.030
+     8 -0.34178169D+05   96.6927853    0.0028211    542.911   641.788    EM
+                                                    638.301
+     9 -0.34109162D+05   69.0068619    0.0020190    511.735   731.219    EM
+                                                    580.046
+    10 -0.34068671D+05   40.4911565    0.0011871    491.742   795.269    EM
+                                                    535.988
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 17
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.12993461D+06    0.0000000    0.0000000     75.059  1107.087    EM
+                                                    640.854
+     2 -0.35199419D+05 ************    0.7290990    159.743   972.188    EM
+                                                    691.069
+     3 -0.34293321D+05  906.0972759    0.0257418    207.153   922.622    EM
+                                                    693.225
+     4 -0.34172382D+05  120.9397313    0.0035266    237.571   907.587    EM
+                                                    677.842
+     5 -0.34142433D+05   29.9481097    0.0008764    262.403   901.962    EM
+                                                    658.634
+     6 -0.34123900D+05   18.5336251    0.0005428    284.075   900.444    EM
+                                                    638.482
+     7 -0.34109118D+05   14.7819938    0.0004332    303.624   900.923    EM
+                                                    618.452
+     8 -0.34096514D+05   12.6042898    0.0003695    321.636   902.302    EM
+                                                    599.062
+     9 -0.34085516D+05   10.9975022    0.0003225    338.456   904.000    EM
+                                                    580.544
+    10 -0.34075822D+05    9.6939765    0.0002844    354.276   905.736    EM
+                                                    562.987
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 18
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.13282781D+06    0.0000000    0.0000000    762.187   568.381    EM
+                                                    492.432
+     2 -0.35067440D+05 ************    0.7359932    700.492   531.083    EM
+                                                    591.425
+     3 -0.34787391D+05  280.0484878    0.0079860    658.094   503.643    EM
+                                                    661.262
+     4 -0.34709677D+05   77.7142314    0.0022340    624.837   480.870    EM
+                                                    717.292
+     5 -0.34659313D+05   50.3635449    0.0014510    599.702   460.956    EM
+                                                    762.343
+     6 -0.34592333D+05   66.9806180    0.0019325    579.338   449.491    EM
+                                                    794.171
+     7 -0.34466471D+05  125.8621109    0.0036384    552.497   470.170    EM
+                                                    800.333
+     8 -0.34329319D+05  137.1515010    0.0039793    519.851   531.322    EM
+                                                    771.827
+     9 -0.34234078D+05   95.2410644    0.0027743    489.127   611.985    EM
+                                                    721.888
+    10 -0.34164701D+05   69.3767030    0.0020265    464.008   691.636    EM
+                                                    667.356
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 19
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.14013720D+06    0.0000000    0.0000000    486.711  1209.147    EM
+                                                    127.143
+     2 -0.34625046D+05 ************    0.7529204    581.198  1057.900    EM
+                                                    183.902
+     3 -0.34100560D+05  524.4859531    0.0151476    616.684   984.468    EM
+                                                    221.848
+     4 -0.34041858D+05   58.7018463    0.0017214    625.562   954.779    EM
+                                                    242.659
+     5 -0.34029007D+05   12.8510678    0.0003775    625.815   940.307    EM
+                                                    256.879
+     6 -0.34023809D+05    5.1978257    0.0001527    622.681   932.753    EM
+                                                    267.566
+     7 -0.34020967D+05    2.8421502    0.0000835    618.264   928.624    EM
+                                                    276.112
+     8 -0.34019063D+05    1.9037226    0.0000560    613.498   926.270    EM
+                                                    283.232
+     9 -0.34017657D+05    1.4060835    0.0000413    608.807   924.870    EM
+                                                    289.323
+    10 -0.34016573D+05    1.0839542    0.0000319    604.374   923.998    EM
+                                                    294.628
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 20
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.13004041D+06    0.0000000    0.0000000    190.023   968.354    EM
+                                                    664.623
+     2 -0.35116687D+05 ************    0.7299556    306.489   828.890    EM
+                                                    687.621
+     3 -0.34251957D+05  864.7294626    0.0246245    341.548   821.189    EM
+                                                    660.264
+     4 -0.34118159D+05  133.7986795    0.0039063    350.525   848.036    EM
+                                                    624.439
+     5 -0.34089420D+05   28.7382935    0.0008423    358.976   869.617    EM
+                                                    594.407
+     6 -0.34075281D+05   14.1398698    0.0004148    369.051   884.206    EM
+                                                    569.743
+     7 -0.34065567D+05    9.7138607    0.0002851    380.148   893.937    EM
+                                                    548.914
+     8 -0.34057785D+05    7.7819277    0.0002284    391.641   900.531    EM
+                                                    530.828
+     9 -0.34051192D+05    6.5925827    0.0001936    403.094   905.105    EM
+                                                    514.801
+    10 -0.34045518D+05    5.6741041    0.0001666    414.229   908.360    EM
+                                                    500.411
+
+
+  FINAL STAGE ITERATIONS
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 13
+
+
+    10 -0.34012589D+05    0.6464529    0.0000190    554.756   359.359    EM
+                                                    908.884
+    11 -0.34012325D+05    0.2637545    0.0000078    553.223   356.480    EM
+                                                    913.297
+    12 -0.34012212D+05    0.1133212    0.0000033    552.519   354.451    EM
+                                                    916.030
+    13 -0.34012159D+05    0.0534904    0.0000016    552.306   352.969    EM
+                                                    917.725
+    14 -0.34012130D+05    0.0289360    0.0000009    552.379   351.843    EM
+                                                    918.777
+    15 -0.34012111D+05    0.0181867    0.0000005    552.611   350.955    EM
+                                                    919.434
+    16 -0.34012099D+05    0.0129397    0.0000004    552.925   350.230    EM
+                                                    919.845
+    17 -0.34012089D+05    0.0099757    0.0000003    553.275   349.620    EM
+                                                    920.104
+    18 -0.34012081D+05    0.0080359    0.0000002    553.634   349.095    EM
+                                                    920.270
+    19 -0.34012074D+05    0.0066158    0.0000002    553.987   348.635    EM
+                                                    920.378
+    20 -0.34012068D+05    0.0055023    0.0000002    554.325   348.226    EM
+                                                    920.449
+    21 -0.34012064D+05    0.0045972    0.0000001    554.643   347.860    EM
+                                                    920.498
+    22 -0.34012060D+05    0.0038485    0.0000001    554.939   347.529    EM
+                                                    920.532
+    23 -0.34012057D+05    0.0032244    0.0000001    555.214   347.229    EM
+                                                    920.557
+    24 -0.34012054D+05    0.0027022    0.0000001    555.468   346.956    EM
+                                                    920.576
+    25 -0.34012052D+05    0.0022646    0.0000001    555.701   346.707    EM
+                                                    920.591
+    26 -0.34012050D+05    0.0018978    0.0000001    555.916   346.480    EM
+                                                    920.604
+    27 -0.34012048D+05    0.0015903    0.0000000    556.112   346.273    EM
+                                                    920.614
+    28 -0.34012047D+05    0.0013324    0.0000000    556.293   346.084    EM
+                                                    920.623
+    29 -0.34012046D+05    0.0011162    0.0000000    556.458   345.911    EM
+                                                    920.631
+    30 -0.34012045D+05    0.0009350    0.0000000    556.609   345.752    EM
+                                                    920.639
+    31 -0.34012044D+05    0.0007832    0.0000000    556.748   345.607    EM
+                                                    920.645
+    32 -0.34012043D+05    0.0006559    0.0000000    556.874   345.475    EM
+                                                    920.651
+    33 -0.34012043D+05    0.0005493    0.0000000    556.990   345.353    EM
+                                                    920.656
+    34 -0.34012042D+05    0.0004600    0.0000000    557.097   345.242    EM
+                                                    920.661
+    35 -0.34012042D+05    0.0003851    0.0000000    557.194   345.141    EM
+                                                    920.665
+    36 -0.34012042D+05    0.0003225    0.0000000    557.283   345.048    EM
+                                                    920.669
+    37 -0.34012041D+05    0.0002700    0.0000000    557.364   344.963    EM
+                                                    920.673
+    38 -0.34012041D+05    0.0002260    0.0000000    557.438   344.885    EM
+                                                    920.676
+    39 -0.34012041D+05    0.0001892    0.0000000    557.506   344.814    EM
+                                                    920.679
+    40 -0.34012041D+05    0.0001584    0.0000000    557.569   344.749    EM
+                                                    920.682
+    41 -0.34012041D+05    0.0001326    0.0000000    557.626   344.690    EM
+                                                    920.685
+    42 -0.34012041D+05    0.0001110    0.0000000    557.678   344.635    EM
+                                                    920.687
+    43 -0.34012041D+05    0.0000929    0.0000000    557.725   344.585    EM
+                                                    920.689
+    44 -0.34012040D+05    0.0000777    0.0000000    557.769   344.540    EM
+                                                    920.691
+    45 -0.34012040D+05    0.0001009    0.0000000    557.843   344.464    FS
+                                                    920.693
+    46 -0.34012040D+05    0.0000557    0.0000000    557.891   344.415    FS
+                                                    920.694
+    47 -0.34012040D+05    0.0000555    0.0000000    557.919   344.385    EM
+                                                    920.696
+    48 -0.34012040D+05    0.0000307    0.0000000    557.946   344.356    EM
+                                                    920.698
+    49 -0.34012040D+05    0.0000255    0.0000000    557.970   344.330    EM
+                                                    920.700
+    50 -0.34012040D+05    0.0000213    0.0000000    557.993   344.306    EM
+                                                    920.701
+    51 -0.34012040D+05    0.0000178    0.0000000    558.013   344.285    EM
+                                                    920.702
+    52 -0.34012040D+05    0.0000149    0.0000000    558.032   344.265    EM
+                                                    920.703
+    53 -0.34012040D+05    0.0000125    0.0000000    558.050   344.246    EM
+                                                    920.704
+    54 -0.34012040D+05    0.0000104    0.0000000    558.066   344.230    EM
+                                                    920.705
+    55 -0.34012040D+05    0.0000087    0.0000000    558.080   344.214    EM
+                                                    920.705
+    56 -0.34012040D+05    0.0000073    0.0000000    558.094   344.200    EM
+                                                    920.706
+    57 -0.34012040D+05    0.0000061    0.0000000    558.106   344.188    EM
+                                                    920.706
+    58 -0.34012040D+05    0.0000051    0.0000000    558.117   344.176    EM
+                                                    920.707
+    59 -0.34012040D+05    0.0000043    0.0000000    558.127   344.165    EM
+                                                    920.707
+    60 -0.34012040D+05    0.0000036    0.0000000    558.137   344.156    EM
+                                                    920.708
+    61 -0.34012040D+05    0.0000030    0.0000000    558.145   344.147    EM
+                                                    920.708
+    62 -0.34012040D+05    0.0000025    0.0000000    558.153   344.138    EM
+                                                    920.709
+    63 -0.34012040D+05    0.0000021    0.0000000    558.160   344.131    EM
+                                                    920.709
+    64 -0.34012040D+05    0.0000018    0.0000000    558.167   344.124    EM
+                                                    920.709
+    65 -0.34012040D+05    0.0000015    0.0000000    558.173   344.118    EM
+                                                    920.709
+    66 -0.34012040D+05    0.0000012    0.0000000    558.178   344.112    EM
+                                                    920.710
+    67 -0.34012040D+05    0.0000010    0.0000000    558.183   344.107    EM
+                                                    920.710
+    68 -0.34012040D+05    0.0000009    0.0000000    558.188   344.102    EM
+                                                    920.710
+    69 -0.34012040D+05    0.0000007    0.0000000    558.192   344.098    EM
+                                                    920.710
+    70 -0.34012040D+05    0.0000006    0.0000000    558.196   344.094    EM
+                                                    920.710
+    71 -0.34012040D+05    0.0000005    0.0000000    558.199   344.090    EM
+                                                    920.711
+    72 -0.34012040D+05    0.0000004    0.0000000    558.203   344.087    EM
+                                                    920.711
+    73 -0.34012040D+05    0.0000022    0.0000000    558.237   344.051    QN
+                                                    920.712
+    74 -0.34012040D+05    0.0000000    0.0000000    558.237   344.051    EM
+                                                    920.712
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 10
+
+
+     9 -0.34012688D+05    0.9353831    0.0000275    933.594   542.610    EM
+                                                    346.796
+    10 -0.34012335D+05    0.3526574    0.0000104    928.455   546.211    EM
+                                                    348.333
+    11 -0.34012196D+05    0.1385703    0.0000041    925.335   548.612    EM
+                                                    349.053
+    12 -0.34012138D+05    0.0587216    0.0000017    923.442   550.268    EM
+                                                    349.291
+    13 -0.34012110D+05    0.0281284    0.0000008    922.295   551.454    EM
+                                                    349.251
+    14 -0.34012094D+05    0.0158056    0.0000005    921.602   552.340    EM
+                                                    349.058
+    15 -0.34012083D+05    0.0103787    0.0000003    921.185   553.029    EM
+                                                    348.785
+    16 -0.34012076D+05    0.0076391    0.0000002    920.937   553.587    EM
+                                                    348.477
+    17 -0.34012070D+05    0.0060120    0.0000002    920.790   554.052    EM
+                                                    348.158
+    18 -0.34012065D+05    0.0048954    0.0000001    920.705   554.450    EM
+                                                    347.844
+    19 -0.34012061D+05    0.0040507    0.0000001    920.658   554.798    EM
+                                                    347.544
+    20 -0.34012057D+05    0.0033761    0.0000001    920.633   555.106    EM
+                                                    347.260
+    21 -0.34012055D+05    0.0028229    0.0000001    920.622   555.382    EM
+                                                    346.996
+    22 -0.34012052D+05    0.0023634    0.0000001    920.619   555.631    EM
+                                                    346.750
+    23 -0.34012050D+05    0.0019798    0.0000001    920.620   555.856    EM
+                                                    346.524
+    24 -0.34012049D+05    0.0016587    0.0000000    920.624   556.061    EM
+                                                    346.315
+    25 -0.34012047D+05    0.0013896    0.0000000    920.628   556.248    EM
+                                                    346.124
+    26 -0.34012046D+05    0.0011642    0.0000000    920.634   556.418    EM
+                                                    345.948
+    27 -0.34012045D+05    0.0009752    0.0000000    920.640   556.573    EM
+                                                    345.787
+    28 -0.34012044D+05    0.0008168    0.0000000    920.645   556.715    EM
+                                                    345.640
+    29 -0.34012044D+05    0.0006841    0.0000000    920.650   556.845    EM
+                                                    345.505
+    30 -0.34012043D+05    0.0005729    0.0000000    920.655   556.964    EM
+                                                    345.381
+    31 -0.34012043D+05    0.0004798    0.0000000    920.660   557.072    EM
+                                                    345.268
+    32 -0.34012042D+05    0.0004017    0.0000000    920.664   557.171    EM
+                                                    345.164
+    33 -0.34012042D+05    0.0003363    0.0000000    920.668   557.262    EM
+                                                    345.069
+    34 -0.34012042D+05    0.0002816    0.0000000    920.672   557.345    EM
+                                                    344.983
+    35 -0.34012041D+05    0.0002357    0.0000000    920.676   557.421    EM
+                                                    344.903
+    36 -0.34012041D+05    0.0001973    0.0000000    920.679   557.491    EM
+                                                    344.831
+    37 -0.34012041D+05    0.0001652    0.0000000    920.682   557.554    EM
+                                                    344.764
+    38 -0.34012041D+05    0.0001383    0.0000000    920.684   557.613    EM
+                                                    344.703
+    39 -0.34012041D+05    0.0001157    0.0000000    920.687   557.666    EM
+                                                    344.648
+    40 -0.34012041D+05    0.0000969    0.0000000    920.689   557.715    EM
+                                                    344.597
+    41 -0.34012040D+05    0.0000811    0.0000000    920.691   557.759    EM
+                                                    344.550
+    42 -0.34012040D+05    0.0000679    0.0000000    920.693   557.800    EM
+                                                    344.508
+    43 -0.34012040D+05    0.0000568    0.0000000    920.694   557.837    EM
+                                                    344.469
+    44 -0.34012040D+05    0.0000475    0.0000000    920.696   557.871    EM
+                                                    344.433
+    45 -0.34012040D+05    0.0000617    0.0000000    920.698   557.929    FS
+                                                    344.374
+    46 -0.34012040D+05    0.0000340    0.0000000    920.698   557.967    FS
+                                                    344.336
+    47 -0.34012040D+05    0.0000339    0.0000000    920.700   557.988    EM
+                                                    344.312
+    48 -0.34012040D+05    0.0000188    0.0000000    920.701   558.009    EM
+                                                    344.290
+    49 -0.34012040D+05    0.0000156    0.0000000    920.702   558.028    EM
+                                                    344.269
+    50 -0.34012040D+05    0.0000130    0.0000000    920.703   558.046    EM
+                                                    344.251
+    51 -0.34012040D+05    0.0000109    0.0000000    920.704   558.062    EM
+                                                    344.234
+    52 -0.34012040D+05    0.0000091    0.0000000    920.705   558.077    EM
+                                                    344.218
+    53 -0.34012040D+05    0.0000076    0.0000000    920.706   558.091    EM
+                                                    344.204
+    54 -0.34012040D+05    0.0000064    0.0000000    920.706   558.103    EM
+                                                    344.191
+    55 -0.34012040D+05    0.0000053    0.0000000    920.707   558.115    EM
+                                                    344.179
+    56 -0.34012040D+05    0.0000045    0.0000000    920.707   558.125    EM
+                                                    344.168
+    57 -0.34012040D+05    0.0000037    0.0000000    920.708   558.135    EM
+                                                    344.158
+    58 -0.34012040D+05    0.0000031    0.0000000    920.708   558.143    EM
+                                                    344.149
+    59 -0.34012040D+05    0.0000026    0.0000000    920.708   558.151    EM
+                                                    344.140
+    60 -0.34012040D+05    0.0000022    0.0000000    920.709   558.159    EM
+                                                    344.133
+    61 -0.34012040D+05    0.0000018    0.0000000    920.709   558.165    EM
+                                                    344.126
+    62 -0.34012040D+05    0.0000015    0.0000000    920.709   558.171    EM
+                                                    344.119
+    63 -0.34012040D+05    0.0000013    0.0000000    920.710   558.177    EM
+                                                    344.113
+    64 -0.34012040D+05    0.0000011    0.0000000    920.710   558.182    EM
+                                                    344.108
+    65 -0.34012040D+05    0.0000009    0.0000000    920.710   558.187    EM
+                                                    344.103
+    66 -0.34012040D+05    0.0000008    0.0000000    920.710   558.191    EM
+                                                    344.099
+    67 -0.34012040D+05    0.0000006    0.0000000    920.710   558.195    EM
+                                                    344.095
+    68 -0.34012040D+05    0.0000005    0.0000000    920.711   558.199    EM
+                                                    344.091
+    69 -0.34012040D+05    0.0000004    0.0000000    920.711   558.202    EM
+                                                    344.087
+    70 -0.34012040D+05    0.0000004    0.0000000    920.711   558.205    EM
+                                                    344.084
+    71 -0.34012040D+05    0.0000003    0.0000000    920.711   558.208    EM
+                                                    344.081
+    72 -0.34012040D+05    0.0000003    0.0000000    920.711   558.210    EM
+                                                    344.079
+    73 -0.34012040D+05    0.0000013    0.0000000    920.712   558.237    QN
+                                                    344.051
+    74 -0.34012040D+05    0.0000000    0.0000000    920.712   558.237    EM
+                                                    344.051
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 11
+
+
+     9 -0.34013070D+05    0.4323305    0.0000127    576.311   318.848    EM
+                                                    927.841
+    10 -0.34012833D+05    0.2368355    0.0000070    575.854   321.819    EM
+                                                    925.326
+    11 -0.34012677D+05    0.1564647    0.0000046    574.981   324.225    EM
+                                                    923.794
+    12 -0.34012561D+05    0.1158986    0.0000034    573.917   326.237    EM
+                                                    922.847
+    13 -0.34012470D+05    0.0911131    0.0000027    572.788   327.960    EM
+                                                    922.252
+    14 -0.34012396D+05    0.0737039    0.0000022    571.665   329.465    EM
+                                                    921.870
+    15 -0.34012336D+05    0.0604273    0.0000018    570.585   330.796    EM
+                                                    921.619
+    16 -0.34012286D+05    0.0498633    0.0000015    569.567   331.985    EM
+                                                    921.448
+    17 -0.34012245D+05    0.0412824    0.0000012    568.618   333.054    EM
+                                                    921.328
+    18 -0.34012210D+05    0.0342420    0.0000010    567.740   334.021    EM
+                                                    921.240
+    19 -0.34012182D+05    0.0284363    0.0000008    566.931   334.897    EM
+                                                    921.172
+    20 -0.34012158D+05    0.0236353    0.0000007    566.188   335.693    EM
+                                                    921.118
+    21 -0.34012139D+05    0.0196582    0.0000006    565.508   336.418    EM
+                                                    921.075
+    22 -0.34012122D+05    0.0163598    0.0000005    564.885   337.078    EM
+                                                    921.038
+    23 -0.34012109D+05    0.0136216    0.0000004    564.315   337.680    EM
+                                                    921.006
+    24 -0.34012097D+05    0.0113467    0.0000003    563.793   338.229    EM
+                                                    920.978
+    25 -0.34012088D+05    0.0094556    0.0000003    563.317   338.730    EM
+                                                    920.953
+    26 -0.34012080D+05    0.0078824    0.0000002    562.881   339.188    EM
+                                                    920.931
+    27 -0.34012073D+05    0.0065731    0.0000002    562.483   339.606    EM
+                                                    920.911
+    28 -0.34012068D+05    0.0054829    0.0000002    562.119   339.987    EM
+                                                    920.893
+    29 -0.34012063D+05    0.0045747    0.0000001    561.787   340.336    EM
+                                                    920.877
+    30 -0.34012059D+05    0.0038179    0.0000001    561.483   340.654    EM
+                                                    920.863
+    31 -0.34012056D+05    0.0031870    0.0000001    561.205   340.946    EM
+                                                    920.850
+    32 -0.34012054D+05    0.0026609    0.0000001    560.951   341.212    EM
+                                                    920.838
+    33 -0.34012051D+05    0.0022220    0.0000001    560.719   341.455    EM
+                                                    920.827
+    34 -0.34012050D+05    0.0018558    0.0000001    560.506   341.677    EM
+                                                    920.817
+    35 -0.34012048D+05    0.0015502    0.0000000    560.312   341.880    EM
+                                                    920.808
+    36 -0.34012047D+05    0.0012951    0.0000000    560.135   342.066    EM
+                                                    920.799
+    37 -0.34012046D+05    0.0010822    0.0000000    559.972   342.236    EM
+                                                    920.792
+    38 -0.34012045D+05    0.0009043    0.0000000    559.824   342.391    EM
+                                                    920.785
+    39 -0.34012044D+05    0.0007558    0.0000000    559.688   342.533    EM
+                                                    920.779
+    40 -0.34012043D+05    0.0006317    0.0000000    559.564   342.663    EM
+                                                    920.773
+    41 -0.34012042D+05    0.0008172    0.0000000    559.355   342.878    FS
+                                                    920.766
+    42 -0.34012042D+05    0.0004485    0.0000000    559.218   343.016    FS
+                                                    920.766
+    43 -0.34012042D+05    0.0004515    0.0000000    559.139   343.103    EM
+                                                    920.759
+    44 -0.34012041D+05    0.0002489    0.0000000    559.064   343.184    EM
+                                                    920.753
+    45 -0.34012041D+05    0.0002062    0.0000000    558.994   343.258    EM
+                                                    920.748
+    46 -0.34012041D+05    0.0001721    0.0000000    558.930   343.326    EM
+                                                    920.745
+    47 -0.34012041D+05    0.0001438    0.0000000    558.871   343.387    EM
+                                                    920.742
+    48 -0.34012041D+05    0.0001202    0.0000000    558.817   343.444    EM
+                                                    920.739
+    49 -0.34012041D+05    0.0001005    0.0000000    558.768   343.496    EM
+                                                    920.737
+    50 -0.34012041D+05    0.0000841    0.0000000    558.722   343.543    EM
+                                                    920.734
+    51 -0.34012040D+05    0.0000703    0.0000000    558.681   343.587    EM
+                                                    920.733
+    52 -0.34012040D+05    0.0000588    0.0000000    558.643   343.626    EM
+                                                    920.731
+    53 -0.34012040D+05    0.0000492    0.0000000    558.608   343.662    EM
+                                                    920.729
+    54 -0.34012040D+05    0.0000411    0.0000000    558.577   343.696    EM
+                                                    920.728
+    55 -0.34012040D+05    0.0000344    0.0000000    558.548   343.726    EM
+                                                    920.726
+    56 -0.34012040D+05    0.0000288    0.0000000    558.521   343.754    EM
+                                                    920.725
+    57 -0.34012040D+05    0.0000241    0.0000000    558.497   343.779    EM
+                                                    920.724
+    58 -0.34012040D+05    0.0000201    0.0000000    558.475   343.802    EM
+                                                    920.723
+    59 -0.34012040D+05    0.0000169    0.0000000    558.454   343.823    EM
+                                                    920.722
+    60 -0.34012040D+05    0.0000141    0.0000000    558.436   343.843    EM
+                                                    920.721
+    61 -0.34012040D+05    0.0000118    0.0000000    558.419   343.860    EM
+                                                    920.721
+    62 -0.34012040D+05    0.0000099    0.0000000    558.403   343.877    EM
+                                                    920.720
+    63 -0.34012040D+05    0.0000083    0.0000000    558.389   343.892    EM
+                                                    920.719
+    64 -0.34012040D+05    0.0000069    0.0000000    558.376   343.905    EM
+                                                    920.719
+    65 -0.34012040D+05    0.0000058    0.0000000    558.364   343.918    EM
+                                                    920.718
+    66 -0.34012040D+05    0.0000048    0.0000000    558.354   343.929    EM
+                                                    920.718
+    67 -0.34012040D+05    0.0000040    0.0000000    558.344   343.939    EM
+                                                    920.717
+    68 -0.34012040D+05    0.0000034    0.0000000    558.334   343.949    EM
+                                                    920.717
+    69 -0.34012040D+05    0.0000173    0.0000000    558.237   344.051    QN
+                                                    920.712
+    70 -0.34012040D+05    0.0000000    0.0000000    558.237   344.051    EM
+                                                    920.712
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 15
+
+
+    10 -0.34015716D+05    3.0037543    0.0000883    537.403   894.593    EM
+                                                    391.004
+    11 -0.34014364D+05    1.3527708    0.0000398    535.288   904.086    EM
+                                                    383.626
+    12 -0.34013695D+05    0.6688648    0.0000197    534.790   910.030    EM
+                                                    378.180
+    13 -0.34013317D+05    0.3777741    0.0000111    535.238   913.754    EM
+                                                    374.008
+    14 -0.34013071D+05    0.2458046    0.0000072    536.217   916.091    EM
+                                                    370.692
+    15 -0.34012892D+05    0.1791684    0.0000053    537.469   917.565    EM
+                                                    367.965
+    16 -0.34012752D+05    0.1403813    0.0000041    538.840   918.501    EM
+                                                    365.659
+    17 -0.34012637D+05    0.1143896    0.0000034    540.235   919.100    EM
+                                                    363.665
+    18 -0.34012542D+05    0.0950222    0.0000028    541.601   919.490    EM
+                                                    361.908
+    19 -0.34012463D+05    0.0796349    0.0000023    542.908   919.749    EM
+                                                    360.343
+    20 -0.34012396D+05    0.0669922    0.0000020    544.140   919.925    EM
+                                                    358.935
+    21 -0.34012339D+05    0.0564359    0.0000017    545.291   920.049    EM
+                                                    357.661
+    22 -0.34012292D+05    0.0475583    0.0000014    546.359   920.139    EM
+                                                    356.503
+    23 -0.34012252D+05    0.0400709    0.0000012    547.346   920.208    EM
+                                                    355.447
+    24 -0.34012218D+05    0.0337503    0.0000010    548.256   920.262    EM
+                                                    354.483
+    25 -0.34012189D+05    0.0284144    0.0000008    549.093   920.307    EM
+                                                    353.601
+    26 -0.34012165D+05    0.0239115    0.0000007    549.862   920.344    EM
+                                                    352.794
+    27 -0.34012145D+05    0.0201134    0.0000006    550.568   920.377    EM
+                                                    352.055
+    28 -0.34012128D+05    0.0169116    0.0000005    551.215   920.406    EM
+                                                    351.379
+    29 -0.34012114D+05    0.0142140    0.0000004    551.809   920.432    EM
+                                                    350.759
+    30 -0.34012102D+05    0.0119424    0.0000004    552.353   920.455    EM
+                                                    350.192
+    31 -0.34012092D+05    0.0100305    0.0000003    552.851   920.476    EM
+                                                    349.673
+    32 -0.34012084D+05    0.0084219    0.0000002    553.308   920.496    EM
+                                                    349.197
+    33 -0.34012077D+05    0.0070693    0.0000002    553.726   920.513    EM
+                                                    348.761
+    34 -0.34012071D+05    0.0059324    0.0000002    554.109   920.530    EM
+                                                    348.361
+    35 -0.34012066D+05    0.0049770    0.0000001    554.459   920.545    EM
+                                                    347.996
+    36 -0.34012062D+05    0.0041746    0.0000001    554.780   920.559    EM
+                                                    347.661
+    37 -0.34012058D+05    0.0035008    0.0000001    555.074   920.572    EM
+                                                    347.355
+    38 -0.34012055D+05    0.0029352    0.0000001    555.343   920.583    EM
+                                                    347.074
+    39 -0.34012053D+05    0.0024606    0.0000001    555.589   920.594    EM
+                                                    346.817
+    40 -0.34012051D+05    0.0020624    0.0000001    555.814   920.604    EM
+                                                    346.582
+    41 -0.34012049D+05    0.0017283    0.0000001    556.020   920.613    EM
+                                                    346.367
+    42 -0.34012047D+05    0.0022517    0.0000001    556.369   920.623    FS
+                                                    346.008
+    43 -0.34012045D+05    0.0012482    0.0000000    556.598   920.624    FS
+                                                    345.778
+    44 -0.34012044D+05    0.0012336    0.0000000    556.731   920.636    EM
+                                                    345.633
+    45 -0.34012044D+05    0.0006863    0.0000000    556.856   920.646    EM
+                                                    345.499
+    46 -0.34012043D+05    0.0005698    0.0000000    556.972   920.653    EM
+                                                    345.375
+    47 -0.34012043D+05    0.0004761    0.0000000    557.079   920.659    EM
+                                                    345.263
+    48 -0.34012042D+05    0.0003984    0.0000000    557.177   920.664    EM
+                                                    345.159
+    49 -0.34012042D+05    0.0003335    0.0000000    557.267   920.668    EM
+                                                    345.065
+    50 -0.34012042D+05    0.0002791    0.0000000    557.349   920.672    EM
+                                                    344.978
+    51 -0.34012041D+05    0.0002337    0.0000000    557.425   920.676    EM
+                                                    344.899
+    52 -0.34012041D+05    0.0001956    0.0000000    557.494   920.679    EM
+                                                    344.827
+    53 -0.34012041D+05    0.0001638    0.0000000    557.557   920.682    EM
+                                                    344.761
+    54 -0.34012041D+05    0.0001371    0.0000000    557.615   920.684    EM
+                                                    344.700
+    55 -0.34012041D+05    0.0001147    0.0000000    557.668   920.687    EM
+                                                    344.645
+    56 -0.34012041D+05    0.0000960    0.0000000    557.717   920.689    EM
+                                                    344.594
+    57 -0.34012040D+05    0.0000804    0.0000000    557.761   920.691    EM
+                                                    344.548
+    58 -0.34012040D+05    0.0000673    0.0000000    557.802   920.693    EM
+                                                    344.506
+    59 -0.34012040D+05    0.0000563    0.0000000    557.839   920.694    EM
+                                                    344.467
+    60 -0.34012040D+05    0.0000471    0.0000000    557.873   920.696    EM
+                                                    344.431
+    61 -0.34012040D+05    0.0000394    0.0000000    557.904   920.697    EM
+                                                    344.399
+    62 -0.34012040D+05    0.0000330    0.0000000    557.932   920.699    EM
+                                                    344.369
+    63 -0.34012040D+05    0.0000276    0.0000000    557.958   920.700    EM
+                                                    344.342
+    64 -0.34012040D+05    0.0000231    0.0000000    557.982   920.701    EM
+                                                    344.317
+    65 -0.34012040D+05    0.0000193    0.0000000    558.004   920.702    EM
+                                                    344.294
+    66 -0.34012040D+05    0.0000162    0.0000000    558.024   920.703    EM
+                                                    344.274
+    67 -0.34012040D+05    0.0000135    0.0000000    558.042   920.703    EM
+                                                    344.255
+    68 -0.34012040D+05    0.0000113    0.0000000    558.058   920.704    EM
+                                                    344.237
+    69 -0.34012040D+05    0.0000095    0.0000000    558.074   920.705    EM
+                                                    344.221
+    70 -0.34012040D+05    0.0000079    0.0000000    558.088   920.706    EM
+                                                    344.207
+    71 -0.34012040D+05    0.0000066    0.0000000    558.100   920.706    EM
+                                                    344.194
+    72 -0.34012040D+05    0.0000340    0.0000000    558.237   920.712    QN
+                                                    344.051
+    73 -0.34012040D+05    0.0000000    0.0000000    558.237   920.712    EM
+                                                    344.051
+
+
+  TECHNICAL 8 OUTPUT FOR THE H0 MODEL WITH ONE LESS CLASS
+
+
+  INITIAL STAGE ITERATIONS
+
+
+  TECHNICAL 8 OUTPUT FOR UNPERTURBED STARTING VALUE SET
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.36820263D+05    0.0000000    0.0000000      0.000   345.033    EM
+                                                   1477.967
+     2 -0.35074280D+05 1745.9833217    0.0474191      0.000   446.846    EM
+                                                   1376.154
+     3 -0.34919686D+05  154.5936299    0.0044076      0.000   537.290    EM
+                                                   1285.710
+     4 -0.34816793D+05  102.8938610    0.0029466      0.000   613.869    EM
+                                                   1209.131
+     5 -0.34748282D+05   68.5106292    0.0019677      0.000   677.995    EM
+                                                   1145.005
+     6 -0.34702727D+05   45.5550336    0.0013110      0.000   731.450    EM
+                                                   1091.550
+     7 -0.34672134D+05   30.5928254    0.0008816      0.000   775.916    EM
+                                                   1047.084
+     8 -0.34651354D+05   20.7799100    0.0005993      0.000   812.692    EM
+                                                   1010.308
+     9 -0.34637285D+05   14.0694943    0.0004060      0.000   842.806    EM
+                                                    980.194
+    10 -0.34627898D+05    9.3870214    0.0002710      0.000   867.180    EM
+                                                    955.820
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 1
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.12189684D+06    0.0000000    0.0000000      0.000   264.043    EM
+                                                   1558.957
+     2 -0.35557984D+05 ************    0.7082945      0.000   395.653    EM
+                                                   1427.347
+     3 -0.34997945D+05  560.0392820    0.0157500      0.000   500.292    EM
+                                                   1322.708
+     4 -0.34854895D+05  143.0498778    0.0040874      0.000   584.068    EM
+                                                   1238.932
+     5 -0.34772732D+05   82.1625949    0.0023573      0.000   653.350    EM
+                                                   1169.650
+     6 -0.34718970D+05   53.7625546    0.0015461      0.000   710.959    EM
+                                                   1112.041
+     7 -0.34683107D+05   35.8627164    0.0010329      0.000   758.895    EM
+                                                   1064.105
+     8 -0.34658819D+05   24.2881080    0.0007003      0.000   798.652    EM
+                                                   1024.348
+     9 -0.34642322D+05   16.4971398    0.0004760      0.000   831.350    EM
+                                                    991.650
+    10 -0.34631238D+05   11.0839231    0.0003200      0.000   857.942    EM
+                                                    965.058
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 2
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.11958655D+06    0.0000000    0.0000000      0.000   495.383    EM
+                                                   1327.617
+     2 -0.35464696D+05 ************    0.7034391      0.000   605.231    EM
+                                                   1217.769
+     3 -0.34778007D+05  686.6892331    0.0193626      0.000   678.422    EM
+                                                   1144.578
+     4 -0.34702856D+05   75.1505518    0.0021609      0.000   732.741    EM
+                                                   1090.259
+     5 -0.34671418D+05   31.4384685    0.0009059      0.000   777.168    EM
+                                                   1045.832
+     6 -0.34650803D+05   20.6144536    0.0005946      0.000   813.775    EM
+                                                   1009.225
+     7 -0.34636905D+05   13.8979798    0.0004011      0.000   843.705    EM
+                                                    979.295
+     8 -0.34627645D+05    9.2596444    0.0002673      0.000   867.909    EM
+                                                    955.091
+     9 -0.34621598D+05    6.0474936    0.0001746      0.000   887.266    EM
+                                                    935.734
+    10 -0.34617732D+05    3.8662140    0.0001117      0.000   902.597    EM
+                                                    920.403
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 3
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.12581497D+06    0.0000000    0.0000000      0.000   282.232    EM
+                                                   1540.768
+     2 -0.35276279D+05 ************    0.7196178      0.000   407.094    EM
+                                                   1415.906
+     3 -0.34984313D+05  291.9661607    0.0082766      0.000   502.772    EM
+                                                   1320.228
+     4 -0.34856031D+05  128.2816044    0.0036668      0.000   584.096    EM
+                                                   1238.904
+     5 -0.34773735D+05   82.2966298    0.0023610      0.000   652.832    EM
+                                                   1170.168
+     6 -0.34719566D+05   54.1690698    0.0015578      0.000   710.370    EM
+                                                   1112.630
+     7 -0.34683492D+05   36.0733245    0.0010390      0.000   758.359    EM
+                                                   1064.641
+     8 -0.34659077D+05   24.4150253    0.0007039      0.000   798.195    EM
+                                                   1024.805
+     9 -0.34642496D+05   16.5809780    0.0004784      0.000   830.971    EM
+                                                    992.029
+    10 -0.34631354D+05   11.1420516    0.0003216      0.000   857.634    EM
+                                                    965.366
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 4
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.11866482D+06    0.0000000    0.0000000      0.000   357.856    EM
+                                                   1465.144
+     2 -0.35465893D+05 ************    0.7011255      0.000   490.996    EM
+                                                   1332.004
+     3 -0.34882970D+05  582.9228578    0.0164362      0.000   582.569    EM
+                                                   1240.431
+     4 -0.34774579D+05  108.3914527    0.0031073      0.000   653.062    EM
+                                                   1169.938
+     5 -0.34719178D+05   55.4007420    0.0015931      0.000   710.771    EM
+                                                   1112.229
+     6 -0.34683234D+05   35.9440982    0.0010353      0.000   758.705    EM
+                                                   1064.295
+     7 -0.34658920D+05   24.3139682    0.0007010      0.000   798.472    EM
+                                                   1024.528
+     8 -0.34642395D+05   16.5247103    0.0004768      0.000   831.193    EM
+                                                    991.807
+     9 -0.34631288D+05   11.1071618    0.0003206      0.000   857.811    EM
+                                                    965.189
+    10 -0.34623962D+05    7.3258619    0.0002115      0.000   879.210    EM
+                                                    943.790
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 5
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.14938339D+06    0.0000000    0.0000000      0.000   182.255    EM
+                                                   1640.745
+     2 -0.36834284D+05 ************    0.7534245      0.000   143.183    EM
+                                                   1679.817
+     3 -0.36633911D+05  200.3727295    0.0054398      0.000   213.759    EM
+                                                   1609.241
+     4 -0.35553093D+05 1080.8186792    0.0295032      0.000   383.886    EM
+                                                   1439.114
+     5 -0.35011174D+05  541.9189878    0.0152425      0.000   489.942    EM
+                                                   1333.058
+     6 -0.34867886D+05  143.2876558    0.0040926      0.000   574.811    EM
+                                                   1248.189
+     7 -0.34781300D+05   86.5863075    0.0024833      0.000   645.423    EM
+                                                   1177.577
+     8 -0.34724648D+05   56.6515045    0.0016288      0.000   704.258    EM
+                                                   1118.742
+     9 -0.34686936D+05   37.7128573    0.0010861      0.000   753.283    EM
+                                                   1069.717
+    10 -0.34661424D+05   25.5113914    0.0007355      0.000   793.999    EM
+                                                   1029.001
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 6
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.96148644D+05    0.0000000    0.0000000      0.000    40.938    EM
+                                                   1782.062
+     2 -0.36484402D+05 ************    0.6205417      0.000   123.034    EM
+                                                   1699.966
+     3 -0.35612425D+05  871.9772564    0.0239000      0.000   250.779    EM
+                                                   1572.221
+     4 -0.35253942D+05  358.4832189    0.0100662      0.000   361.737    EM
+                                                   1461.263
+     5 -0.35044876D+05  209.0654940    0.0059303      0.000   461.928    EM
+                                                   1361.072
+     6 -0.34901798D+05  143.0786002    0.0040827      0.000   549.740    EM
+                                                   1273.260
+     7 -0.34804853D+05   96.9443382    0.0027776      0.000   624.223    EM
+                                                   1198.777
+     8 -0.34740295D+05   64.5578840    0.0018549      0.000   686.600    EM
+                                                   1136.400
+     9 -0.34697388D+05   42.9073224    0.0012351      0.000   738.603    EM
+                                                   1084.397
+    10 -0.34668515D+05   28.8725962    0.0008321      0.000   781.847    EM
+                                                   1041.153
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 7
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.12563547D+06    0.0000000    0.0000000      0.000   981.323    EM
+                                                    841.677
+     2 -0.36583436D+05 ************    0.7088128      0.000   983.930    EM
+                                                    839.070
+     3 -0.35257589D+05 1325.8465027    0.0362417      0.000   957.577    EM
+                                                    865.423
+     4 -0.34650382D+05  607.2073721    0.0172220      0.000   934.526    EM
+                                                    888.474
+     5 -0.34619072D+05   31.3104336    0.0009036      0.000   917.984    EM
+                                                    905.016
+     6 -0.34615047D+05    4.0243456    0.0001162      0.000   905.920    EM
+                                                    917.080
+     7 -0.34613536D+05    1.5107986    0.0000436      0.000   896.867    EM
+                                                    926.133
+     8 -0.34612721D+05    0.8157443    0.0000236      0.000   889.967    EM
+                                                    933.033
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 8
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.14463166D+06    0.0000000    0.0000000      0.000   508.804    EM
+                                                   1314.196
+     2 -0.35537314D+05 ************    0.7542909      0.000   610.724    EM
+                                                   1212.276
+     3 -0.34780607D+05  756.7076228    0.0212933      0.000   679.699    EM
+                                                   1143.301
+     4 -0.34703486D+05   77.1203582    0.0022173      0.000   732.989    EM
+                                                   1090.011
+     5 -0.34671529D+05   31.9577911    0.0009209      0.000   777.185    EM
+                                                   1045.815
+     6 -0.34650841D+05   20.6877886    0.0005967      0.000   813.731    EM
+                                                   1009.269
+     7 -0.34636931D+05   13.9097611    0.0004014      0.000   843.648    EM
+                                                    979.352
+     8 -0.34627664D+05    9.2666247    0.0002675      0.000   867.855    EM
+                                                    955.145
+     9 -0.34621611D+05    6.0535485    0.0001748      0.000   887.221    EM
+                                                    935.779
+    10 -0.34617740D+05    3.8707845    0.0001118      0.000   902.560    EM
+                                                    920.440
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 9
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.13565095D+06    0.0000000    0.0000000      0.000  1731.938    EM
+                                                     91.062
+     2 -0.36821642D+05 ************    0.7285560      0.000  1757.142    EM
+                                                     65.858
+     3 -0.36781855D+05   39.7875750    0.0010805      0.000  1746.757    EM
+                                                     76.243
+     4 -0.36306487D+05  475.3681612    0.0129240      0.000  1572.622    EM
+                                                    250.378
+     5 -0.35316023D+05  990.4638351    0.0272806      0.000  1413.382    EM
+                                                    409.618
+     6 -0.34978300D+05  337.7223924    0.0095629      0.000  1291.166    EM
+                                                    531.834
+     7 -0.34797925D+05  180.3754394    0.0051568      0.000  1196.994    EM
+                                                    626.006
+     8 -0.34702127D+05   95.7977073    0.0027530      0.000  1130.852    EM
+                                                    692.148
+     9 -0.34657329D+05   44.7984764    0.0012909      0.000  1084.910    EM
+                                                    738.090
+    10 -0.34635842D+05   21.4871738    0.0006200      0.000  1052.111    EM
+                                                    770.889
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 10
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.15205671D+06    0.0000000    0.0000000      0.000   979.138    EM
+                                                    843.862
+     2 -0.36602281D+05 ************    0.7592853      0.000   974.750    EM
+                                                    848.250
+     3 -0.35216845D+05 1385.4351321    0.0378511      0.000   950.363    EM
+                                                    872.637
+     4 -0.34642227D+05  574.6189159    0.0163166      0.000   934.391    EM
+                                                    888.609
+     5 -0.34618994D+05   23.2326473    0.0006706      0.000   920.356    EM
+                                                    902.644
+     6 -0.34615512D+05    3.4818924    0.0001006      0.000   908.658    EM
+                                                    914.342
+     7 -0.34613884D+05    1.6276393    0.0000470      0.000   899.301    EM
+                                                    923.699
+     8 -0.34612939D+05    0.9449132    0.0000273      0.000   891.958    EM
+                                                    931.042
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 11
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.10977586D+06    0.0000000    0.0000000      0.000   131.013    EM
+                                                   1691.987
+     2 -0.35655060D+05 ************    0.6752013      0.000   244.481    EM
+                                                   1578.519
+     3 -0.35268285D+05  386.7749848    0.0108477      0.000   356.142    EM
+                                                   1466.858
+     4 -0.35052795D+05  215.4906064    0.0061100      0.000   457.689    EM
+                                                   1365.311
+     5 -0.34906427D+05  146.3674259    0.0041756      0.000   546.449    EM
+                                                   1276.551
+     6 -0.34807875D+05   98.5529279    0.0028233      0.000   621.546    EM
+                                                   1201.454
+     7 -0.34742313D+05   65.5612150    0.0018835      0.000   684.390    EM
+                                                   1138.610
+     8 -0.34698738D+05   43.5750020    0.0012542      0.000   736.770    EM
+                                                   1086.230
+     9 -0.34669431D+05   29.3070052    0.0008446      0.000   780.329    EM
+                                                   1042.671
+    10 -0.34649517D+05   19.9138142    0.0005744      0.000   816.322    EM
+                                                   1006.678
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 12
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.12148912D+06    0.0000000    0.0000000      0.000   147.561    EM
+                                                   1675.439
+     2 -0.35957174D+05 ************    0.7040297      0.000   280.249    EM
+                                                   1542.751
+     3 -0.35221476D+05  735.6984769    0.0204604      0.000   392.799    EM
+                                                   1430.201
+     4 -0.35005383D+05  216.0927666    0.0061353      0.000   487.621    EM
+                                                   1335.379
+     5 -0.34873641D+05  131.7423631    0.0037635      0.000   570.973    EM
+                                                   1252.027
+     6 -0.34785522D+05   88.1188310    0.0025268      0.000   641.843    EM
+                                                   1181.157
+     7 -0.34727342D+05   58.1796479    0.0016725      0.000   701.223    EM
+                                                   1121.777
+     8 -0.34688703D+05   38.6392065    0.0011126      0.000   750.752    EM
+                                                   1072.248
+     9 -0.34662618D+05   26.0852811    0.0007520      0.000   791.904    EM
+                                                   1031.096
+    10 -0.34644894D+05   17.7241183    0.0005113      0.000   825.821    EM
+                                                    997.179
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 13
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.15337030D+06    0.0000000    0.0000000      0.000   317.796    EM
+                                                   1505.204
+     2 -0.35227079D+05 ************    0.7703136      0.000   426.301    EM
+                                                   1396.699
+     3 -0.34948699D+05  278.3797846    0.0079024      0.000   522.549    EM
+                                                   1300.451
+     4 -0.34831367D+05  117.3319643    0.0033573      0.000   602.192    EM
+                                                   1220.808
+     5 -0.34757616D+05   73.7508671    0.0021174      0.000   668.313    EM
+                                                   1154.687
+     6 -0.34708970D+05   48.6461582    0.0013996      0.000   723.364    EM
+                                                   1099.636
+     7 -0.34676370D+05   32.5994328    0.0009392      0.000   769.187    EM
+                                                   1053.813
+     8 -0.34654238D+05   22.1327238    0.0006383      0.000   807.142    EM
+                                                   1015.858
+     9 -0.34639228D+05   15.0100922    0.0004331      0.000   838.282    EM
+                                                    984.718
+    10 -0.34629183D+05   10.0446553    0.0002900      0.000   863.536    EM
+                                                    959.464
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 14
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.11905415D+06    0.0000000    0.0000000      0.000   470.663    EM
+                                                   1352.337
+     2 -0.35096194D+05 ************    0.7052081      0.000   567.755    EM
+                                                   1255.245
+     3 -0.34793874D+05  302.3199570    0.0086140      0.000   644.276    EM
+                                                   1178.724
+     4 -0.34725159D+05   68.7157550    0.0019749      0.000   704.298    EM
+                                                   1118.702
+     5 -0.34686717D+05   38.4410935    0.0011070      0.000   753.594    EM
+                                                   1069.406
+     6 -0.34661205D+05   25.5126051    0.0007355      0.000   794.357    EM
+                                                   1028.643
+     7 -0.34643922D+05   17.2829436    0.0004986      0.000   827.871    EM
+                                                    995.129
+     8 -0.34632300D+05   11.6217515    0.0003355      0.000   855.143    EM
+                                                    967.857
+     9 -0.34624622D+05    7.6785603    0.0002217      0.000   877.084    EM
+                                                    945.916
+    10 -0.34619655D+05    4.9668476    0.0001434      0.000   894.551    EM
+                                                    928.449
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 15
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.10051671D+06    0.0000000    0.0000000      0.000   166.463    EM
+                                                   1656.537
+     2 -0.35551367D+05 ************    0.6463138      0.000   294.614    EM
+                                                   1528.386
+     3 -0.35165055D+05  386.3116582    0.0108663      0.000   402.755    EM
+                                                   1420.245
+     4 -0.34981718D+05  183.3368919    0.0052136      0.000   498.401    EM
+                                                   1324.599
+     5 -0.34858594D+05  123.1246667    0.0035197      0.000   580.846    EM
+                                                   1242.154
+     6 -0.34776034D+05   82.5597417    0.0023684      0.000   650.339    EM
+                                                   1172.661
+     7 -0.34721158D+05   54.8765171    0.0015780      0.000   708.392    EM
+                                                   1114.608
+     8 -0.34684564D+05   36.5934173    0.0010539      0.000   756.749    EM
+                                                   1066.251
+     9 -0.34659806D+05   24.7581782    0.0007138      0.000   796.876    EM
+                                                   1026.124
+    10 -0.34642989D+05   16.8169803    0.0004852      0.000   829.897    EM
+                                                    993.103
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 16
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.12217611D+06    0.0000000    0.0000000      0.000   101.946    EM
+                                                   1721.054
+     2 -0.35904186D+05 ************    0.7061276      0.000   218.392    EM
+                                                   1604.608
+     3 -0.35336654D+05  567.5322480    0.0158069      0.000   332.787    EM
+                                                   1490.213
+     4 -0.35095103D+05  241.5515364    0.0068357      0.000   435.946    EM
+                                                   1387.054
+     5 -0.34935494D+05  159.6087337    0.0045479      0.000   527.443    EM
+                                                   1295.557
+     6 -0.34827231D+05  108.2633587    0.0030990      0.000   605.475    EM
+                                                   1217.525
+     7 -0.34755132D+05   72.0989185    0.0020702      0.000   670.939    EM
+                                                   1152.061
+     8 -0.34707277D+05   47.8549129    0.0013769      0.000   725.552    EM
+                                                   1097.448
+     9 -0.34675211D+05   32.0659244    0.0009239      0.000   771.011    EM
+                                                   1051.989
+    10 -0.34653446D+05   21.7648214    0.0006277      0.000   808.649    EM
+                                                   1014.351
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 17
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.13395584D+06    0.0000000    0.0000000      0.000  1081.121    EM
+                                                    741.879
+     2 -0.35165348D+05 ************    0.7374855      0.000  1024.880    EM
+                                                    798.120
+     3 -0.34646202D+05  519.1458540    0.0147630      0.000  1004.534    EM
+                                                    818.466
+     4 -0.34617274D+05   28.9282132    0.0008350      0.000   991.889    EM
+                                                    831.111
+     5 -0.34613635D+05    3.6397025    0.0001051      0.000   982.866    EM
+                                                    840.134
+     6 -0.34612588D+05    1.0469010    0.0000302      0.000   976.246    EM
+                                                    846.754
+     7 -0.34612124D+05    0.4637689    0.0000134      0.000   971.312    EM
+                                                    851.688
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 18
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.13388939D+06    0.0000000    0.0000000      0.000   686.292    EM
+                                                   1136.708
+     2 -0.36379484D+05 ************    0.7282870      0.000   724.654    EM
+                                                   1098.346
+     3 -0.35004222D+05 1375.2619166    0.0378032      0.000   775.211    EM
+                                                   1047.789
+     4 -0.34647653D+05  356.5693544    0.0101865      0.000   801.755    EM
+                                                   1021.245
+     5 -0.34619814D+05   27.8395037    0.0008035      0.000   818.760    EM
+                                                   1004.240
+     6 -0.34615020D+05    4.7934154    0.0001385      0.000   830.868    EM
+                                                    992.132
+     7 -0.34613388D+05    1.6324107    0.0000472      0.000   839.757    EM
+                                                    983.243
+     8 -0.34612586D+05    0.8012832    0.0000231      0.000   846.384    EM
+                                                    976.616
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 19
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.14802010D+06    0.0000000    0.0000000      0.000   419.241    EM
+                                                   1403.759
+     2 -0.35348768D+05 ************    0.7611894      0.000   529.648    EM
+                                                   1293.352
+     3 -0.34838738D+05  510.0300612    0.0144285      0.000   613.285    EM
+                                                   1209.715
+     4 -0.34748931D+05   89.8070431    0.0025778      0.000   678.743    EM
+                                                   1144.257
+     5 -0.34701990D+05   46.9406236    0.0013509      0.000   732.488    EM
+                                                   1090.512
+     6 -0.34671487D+05   30.5031482    0.0008790      0.000   776.928    EM
+                                                   1046.072
+     7 -0.34650889D+05   20.5982113    0.0005941      0.000   813.582    EM
+                                                   1009.418
+     8 -0.34636966D+05   13.9233306    0.0004018      0.000   843.553    EM
+                                                    979.447
+     9 -0.34627686D+05    9.2800924    0.0002679      0.000   867.789    EM
+                                                    955.211
+    10 -0.34621624D+05    6.0616921    0.0001751      0.000   887.172    EM
+                                                    935.828
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 20
+
+
+  ITER  LOGLIKELIHOOD    ABS CHANGE   REL CHANGE      CLASS COUNTS    ALGORITHM
+     1 -0.11641690D+06    0.0000000    0.0000000      0.000   175.291    EM
+                                                   1647.709
+     2 -0.35572014D+05 ************    0.6944429      0.000   310.570    EM
+                                                   1512.430
+     3 -0.35136086D+05  435.9275652    0.0122548      0.000   419.112    EM
+                                                   1403.888
+     4 -0.34959232D+05  176.8541255    0.0050334      0.000   512.748    EM
+                                                   1310.252
+     5 -0.34843024D+05  116.2080834    0.0033241      0.000   593.000    EM
+                                                   1230.000
+     6 -0.34765575D+05   77.4487965    0.0022228      0.000   660.478    EM
+                                                   1162.522
+     7 -0.34714219D+05   51.3564895    0.0014772      0.000   716.819    EM
+                                                   1106.181
+     8 -0.34679899D+05   34.3200586    0.0009886      0.000   763.747    EM
+                                                   1059.253
+     9 -0.34656635D+05   23.2640564    0.0006708      0.000   802.654    EM
+                                                   1020.346
+    10 -0.34640845D+05   15.7897628    0.0004556      0.000   834.619    EM
+                                                    988.381
+
+
+  FINAL STAGE ITERATIONS
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 17
+
+
+     7 -0.34612124D+05    0.4637689    0.0000134      0.000   971.312    EM
+                                                    851.688
+     8 -0.34611877D+05    0.2472318    0.0000071      0.000   967.598    EM
+                                                    855.402
+     9 -0.34611737D+05    0.1398351    0.0000040      0.000   964.786    EM
+                                                    858.214
+    10 -0.34611656D+05    0.0805097    0.0000023      0.000   962.650    EM
+                                                    860.350
+    11 -0.34611610D+05    0.0466391    0.0000013      0.000   961.023    EM
+                                                    861.977
+    12 -0.34611583D+05    0.0270941    0.0000008      0.000   959.783    EM
+                                                    863.217
+    13 -0.34611567D+05    0.0157663    0.0000005      0.000   958.837    EM
+                                                    864.163
+    14 -0.34611558D+05    0.0091853    0.0000003      0.000   958.115    EM
+                                                    864.885
+    15 -0.34611552D+05    0.0053560    0.0000002      0.000   957.563    EM
+                                                    865.437
+    16 -0.34611549D+05    0.0031250    0.0000001      0.000   957.141    EM
+                                                    865.859
+    17 -0.34611547D+05    0.0018243    0.0000001      0.000   956.819    EM
+                                                    866.181
+    18 -0.34611546D+05    0.0010653    0.0000000      0.000   956.573    EM
+                                                    866.427
+    19 -0.34611546D+05    0.0006223    0.0000000      0.000   956.385    EM
+                                                    866.615
+    20 -0.34611545D+05    0.0003636    0.0000000      0.000   956.241    EM
+                                                    866.759
+    21 -0.34611545D+05    0.0002125    0.0000000      0.000   956.131    EM
+                                                    866.869
+    22 -0.34611545D+05    0.0001242    0.0000000      0.000   956.047    EM
+                                                    866.953
+    23 -0.34611545D+05    0.0000726    0.0000000      0.000   955.983    EM
+                                                    867.017
+    24 -0.34611545D+05    0.0000424    0.0000000      0.000   955.934    EM
+                                                    867.066
+    25 -0.34611545D+05    0.0000248    0.0000000      0.000   955.896    EM
+                                                    867.104
+    26 -0.34611545D+05    0.0000145    0.0000000      0.000   955.867    EM
+                                                    867.133
+    27 -0.34611545D+05    0.0000085    0.0000000      0.000   955.845    EM
+                                                    867.155
+    28 -0.34611545D+05    0.0000050    0.0000000      0.000   955.829    EM
+                                                    867.171
+    29 -0.34611545D+05    0.0000029    0.0000000      0.000   955.816    EM
+                                                    867.184
+    30 -0.34611545D+05    0.0000017    0.0000000      0.000   955.806    EM
+                                                    867.194
+    31 -0.34611545D+05    0.0000010    0.0000000      0.000   955.798    EM
+                                                    867.202
+    32 -0.34611545D+05    0.0000006    0.0000000      0.000   955.793    EM
+                                                    867.207
+    33 -0.34611545D+05    0.0000003    0.0000000      0.000   955.788    EM
+                                                    867.212
+    34 -0.34611545D+05    0.0000002    0.0000000      0.000   955.785    EM
+                                                    867.215
+    35 -0.34611545D+05    0.0000001    0.0000000      0.000   955.782    EM
+                                                    867.218
+    36 -0.34611545D+05    0.0000001    0.0000000      0.000   955.780    EM
+                                                    867.220
+    37 -0.34611545D+05    0.0000000    0.0000000      0.000   955.779    EM
+                                                    867.221
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 18
+
+
+     8 -0.34612586D+05    0.8012832    0.0000231      0.000   846.384    EM
+                                                    976.616
+     9 -0.34612144D+05    0.4429038    0.0000128      0.000   851.373    EM
+                                                    971.627
+    10 -0.34611891D+05    0.2525817    0.0000073      0.000   855.148    EM
+                                                    967.852
+    11 -0.34611745D+05    0.1454369    0.0000042      0.000   858.015    EM
+                                                    964.985
+    12 -0.34611661D+05    0.0841083    0.0000024      0.000   860.196    EM
+                                                    962.804
+    13 -0.34611613D+05    0.0487738    0.0000014      0.000   861.859    EM
+                                                    961.141
+    14 -0.34611584D+05    0.0283392    0.0000008      0.000   863.126    EM
+                                                    959.874
+    15 -0.34611568D+05    0.0164904    0.0000005      0.000   864.094    EM
+                                                    958.906
+    16 -0.34611558D+05    0.0096066    0.0000003      0.000   864.832    EM
+                                                    958.168
+    17 -0.34611553D+05    0.0056013    0.0000002      0.000   865.397    EM
+                                                    957.603
+    18 -0.34611549D+05    0.0032680    0.0000001      0.000   865.828    EM
+                                                    957.172
+    19 -0.34611547D+05    0.0019077    0.0000001      0.000   866.157    EM
+                                                    956.843
+    20 -0.34611546D+05    0.0011140    0.0000000      0.000   866.409    EM
+                                                    956.591
+    21 -0.34611546D+05    0.0006507    0.0000000      0.000   866.601    EM
+                                                    956.399
+    22 -0.34611545D+05    0.0003802    0.0000000      0.000   866.748    EM
+                                                    956.252
+    23 -0.34611545D+05    0.0002222    0.0000000      0.000   866.861    EM
+                                                    956.139
+    24 -0.34611545D+05    0.0001299    0.0000000      0.000   866.947    EM
+                                                    956.053
+    25 -0.34611545D+05    0.0000759    0.0000000      0.000   867.013    EM
+                                                    955.987
+    26 -0.34611545D+05    0.0000444    0.0000000      0.000   867.063    EM
+                                                    955.937
+    27 -0.34611545D+05    0.0000259    0.0000000      0.000   867.101    EM
+                                                    955.899
+    28 -0.34611545D+05    0.0000152    0.0000000      0.000   867.131    EM
+                                                    955.869
+    29 -0.34611545D+05    0.0000089    0.0000000      0.000   867.153    EM
+                                                    955.847
+    30 -0.34611545D+05    0.0000052    0.0000000      0.000   867.170    EM
+                                                    955.830
+    31 -0.34611545D+05    0.0000030    0.0000000      0.000   867.183    EM
+                                                    955.817
+    32 -0.34611545D+05    0.0000018    0.0000000      0.000   867.193    EM
+                                                    955.807
+    33 -0.34611545D+05    0.0000010    0.0000000      0.000   867.201    EM
+                                                    955.799
+    34 -0.34611545D+05    0.0000006    0.0000000      0.000   867.207    EM
+                                                    955.793
+    35 -0.34611545D+05    0.0000004    0.0000000      0.000   867.211    EM
+                                                    955.789
+    36 -0.34611545D+05    0.0000002    0.0000000      0.000   867.215    EM
+                                                    955.785
+    37 -0.34611545D+05    0.0000001    0.0000000      0.000   867.218    EM
+                                                    955.782
+    38 -0.34611545D+05    0.0000001    0.0000000      0.000   867.220    EM
+                                                    955.780
+    39 -0.34611545D+05    0.0000000    0.0000000      0.000   867.221    EM
+                                                    955.779
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 7
+
+
+     8 -0.34612721D+05    0.8157443    0.0000236      0.000   889.967    EM
+                                                    933.033
+     9 -0.34612242D+05    0.4788528    0.0000138      0.000   884.675    EM
+                                                    938.325
+    10 -0.34611957D+05    0.2846826    0.0000082      0.000   880.609    EM
+                                                    942.391
+    11 -0.34611788D+05    0.1690504    0.0000049      0.000   877.485    EM
+                                                    945.515
+    12 -0.34611688D+05    0.1000734    0.0000029      0.000   875.086    EM
+                                                    947.914
+    13 -0.34611629D+05    0.0590734    0.0000017      0.000   873.246    EM
+                                                    949.754
+    14 -0.34611594D+05    0.0347930    0.0000010      0.000   871.835    EM
+                                                    951.165
+    15 -0.34611574D+05    0.0204570    0.0000006      0.000   870.754    EM
+                                                    952.246
+    16 -0.34611562D+05    0.0120121    0.0000003      0.000   869.925    EM
+                                                    953.075
+    17 -0.34611555D+05    0.0070464    0.0000002      0.000   869.291    EM
+                                                    953.709
+    18 -0.34611551D+05    0.0041303    0.0000001      0.000   868.806    EM
+                                                    954.194
+    19 -0.34611548D+05    0.0024196    0.0000001      0.000   868.434    EM
+                                                    954.566
+    20 -0.34611547D+05    0.0014168    0.0000000      0.000   868.150    EM
+                                                    954.850
+    21 -0.34611546D+05    0.0008293    0.0000000      0.000   867.933    EM
+                                                    955.067
+    22 -0.34611545D+05    0.0004853    0.0000000      0.000   867.767    EM
+                                                    955.233
+    23 -0.34611545D+05    0.0002839    0.0000000      0.000   867.639    EM
+                                                    955.361
+    24 -0.34611545D+05    0.0001661    0.0000000      0.000   867.542    EM
+                                                    955.458
+    25 -0.34611545D+05    0.0000972    0.0000000      0.000   867.468    EM
+                                                    955.532
+    26 -0.34611545D+05    0.0000568    0.0000000      0.000   867.411    EM
+                                                    955.589
+    27 -0.34611545D+05    0.0000332    0.0000000      0.000   867.367    EM
+                                                    955.633
+    28 -0.34611545D+05    0.0000194    0.0000000      0.000   867.334    EM
+                                                    955.666
+    29 -0.34611545D+05    0.0000114    0.0000000      0.000   867.309    EM
+                                                    955.691
+    30 -0.34611545D+05    0.0000066    0.0000000      0.000   867.289    EM
+                                                    955.711
+    31 -0.34611545D+05    0.0000039    0.0000000      0.000   867.274    EM
+                                                    955.726
+    32 -0.34611545D+05    0.0000023    0.0000000      0.000   867.263    EM
+                                                    955.737
+    33 -0.34611545D+05    0.0000013    0.0000000      0.000   867.254    EM
+                                                    955.746
+    34 -0.34611545D+05    0.0000008    0.0000000      0.000   867.248    EM
+                                                    955.752
+    35 -0.34611545D+05    0.0000005    0.0000000      0.000   867.243    EM
+                                                    955.757
+    36 -0.34611545D+05    0.0000003    0.0000000      0.000   867.239    EM
+                                                    955.761
+    37 -0.34611545D+05    0.0000002    0.0000000      0.000   867.236    EM
+                                                    955.764
+    38 -0.34611545D+05    0.0000001    0.0000000      0.000   867.233    EM
+                                                    955.767
+    39 -0.34611545D+05    0.0000000    0.0000000      0.000   867.232    FS
+                                                    955.768
+    40 -0.34611545D+05    0.0000000    0.0000000      0.000   867.231    FS
+                                                    955.769
+    41 -0.34611545D+05    0.0000000    0.0000000      0.000   867.230    EM
+                                                    955.770
+
+
+  TECHNICAL 8 OUTPUT FOR STARTING VALUE SET 10
+
+
+     8 -0.34612939D+05    0.9449132    0.0000273      0.000   891.958    EM
+                                                    931.042
+     9 -0.34612374D+05    0.5652922    0.0000163      0.000   886.249    EM
+                                                    936.751
+    10 -0.34612036D+05    0.3379584    0.0000098      0.000   881.835    EM
+                                                    941.165
+    11 -0.34611835D+05    0.2011467    0.0000058      0.000   878.432    EM
+                                                    944.568
+    12 -0.34611716D+05    0.1192310    0.0000034      0.000   875.815    EM
+                                                    947.185
+    13 -0.34611645D+05    0.0704471    0.0000020      0.000   873.806    EM
+                                                    949.194
+    14 -0.34611604D+05    0.0415203    0.0000012      0.000   872.264    EM
+                                                    950.736
+    15 -0.34611579D+05    0.0244252    0.0000007      0.000   871.083    EM
+                                                    951.917
+    16 -0.34611565D+05    0.0143479    0.0000004      0.000   870.177    EM
+                                                    952.823
+    17 -0.34611557D+05    0.0084190    0.0000002      0.000   869.484    EM
+                                                    953.516
+    18 -0.34611552D+05    0.0049360    0.0000001      0.000   868.954    EM
+                                                    954.046
+    19 -0.34611549D+05    0.0028922    0.0000001      0.000   868.547    EM
+                                                    954.453
+    20 -0.34611547D+05    0.0016937    0.0000000      0.000   868.237    EM
+                                                    954.763
+    21 -0.34611546D+05    0.0009915    0.0000000      0.000   867.999    EM
+                                                    955.001
+    22 -0.34611546D+05    0.0005803    0.0000000      0.000   867.817    EM
+                                                    955.183
+    23 -0.34611545D+05    0.0003395    0.0000000      0.000   867.678    EM
+                                                    955.322
+    24 -0.34611545D+05    0.0001986    0.0000000      0.000   867.572    EM
+                                                    955.428
+    25 -0.34611545D+05    0.0001162    0.0000000      0.000   867.490    EM
+                                                    955.510
+    26 -0.34611545D+05    0.0000680    0.0000000      0.000   867.428    EM
+                                                    955.572
+    27 -0.34611545D+05    0.0000397    0.0000000      0.000   867.381    EM
+                                                    955.619
+    28 -0.34611545D+05    0.0000232    0.0000000      0.000   867.344    EM
+                                                    955.656
+    29 -0.34611545D+05    0.0000136    0.0000000      0.000   867.316    EM
+                                                    955.684
+    30 -0.34611545D+05    0.0000079    0.0000000      0.000   867.295    EM
+                                                    955.705
+    31 -0.34611545D+05    0.0000046    0.0000000      0.000   867.279    EM
+                                                    955.721
+    32 -0.34611545D+05    0.0000027    0.0000000      0.000   867.266    EM
+                                                    955.734
+    33 -0.34611545D+05    0.0000016    0.0000000      0.000   867.257    EM
+                                                    955.743
+    34 -0.34611545D+05    0.0000009    0.0000000      0.000   867.250    EM
+                                                    955.750
+    35 -0.34611545D+05    0.0000005    0.0000000      0.000   867.244    EM
+                                                    955.756
+    36 -0.34611545D+05    0.0000003    0.0000000      0.000   867.240    EM
+                                                    955.760
+    37 -0.34611545D+05    0.0000002    0.0000000      0.000   867.237    EM
+                                                    955.763
+    38 -0.34611545D+05    0.0000001    0.0000000      0.000   867.234    EM
+                                                    955.766
+    39 -0.34611545D+05    0.0000000    0.0000000      0.000   867.232    FS
+                                                    955.768
+    40 -0.34611545D+05    0.0000000    0.0000000      0.000   867.232    FS
+                                                    955.768
+    41 -0.34611545D+05    0.0000000    0.0000000      0.000   867.230    EM
+                                                    955.770
+
+
+SAVEDATA INFORMATION
+
+
+  Save file
+    m1.data.csv
+
+  Order and format of variables
+
+    MASTERCO       F10.3
+    NEXTCOMP       F10.3
+    RUBRICR        F10.3
+    ONLINECO       F10.3
+    PROJCRED       F10.3
+    INTERNCR       F10.3
+    SMALLGRP       F10.3
+    TEACHDIF       F10.3
+    GIVLECTU       F10.3
+    CHOOSEHO       F10.3
+    RETAKER        F10.3
+    DEMOLEAR       F10.3
+    ADVICER        F10.3
+    TRACKPRO       F10.3
+    ONTIMER        F10.3
+    PREPGRAD       F10.3
+    CPROB1         F10.3
+    CPROB2         F10.3
+    CPROB3         F10.3
+    C              F10.3
+    STUDENT_       I10
+    SCHOOL_ID      I5
+
+  Save file format
+    20F10.3 I10 I5
+
+  Save file record length    10000
+
+
+     Beginning Time:  12:57:45
+        Ending Time:  13:00:00
+       Elapsed Time:  00:02:15
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

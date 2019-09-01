@@ -14,17 +14,80 @@ output:
 
 This script should walk the user through all of the steps necessary to clean and transform the final data frames for any analyses. 
 
- ```{r setup, include=FALSE}
- knitr::opts_knit$set(root.dir = 'rmds')
- ```
-
+Load the data. 
 ```{r, messages=FALSE, warning=FALSE}
-# Load the csv data and tidy it ----
-efa.data <- spss.dat %>%
-  dplyr::select(id, mastercompR, nextcompR, rubricR, onlinecompR, projcredR, interncredR,
-  smallgrpR, teachdifR, choosehowR, retakeR, demolearnR, adviceR, trackprogR, ontimeR, prepgradR, givlecturR)
+# Load the RDS data ----
 
-# Save the tidy-ed data ----
-  saveRDS(efa.data, file = "../data/efa.tidy.rds")
+# load final RDS from Noman
+final.dat <- readRDS("../data/2018-1-17-final-file.rds") 
+
+# load file from John
+spss.dat <- readRDS("../data/spss-from-john.rds") 
 ```
+
+Munge the data: 
+```{r, messages=FALSE, warning=FALSE}
+## set missing variables in the final data set
+final.dat.recode <- final.dat
+final.dat.recode[final.dat.recode == -999] <- NA
+final.dat.recode[final.dat.recode == -777] <- NA
+final.dat.recode[final.dat.recode == -99] <- NA
+final.dat.recode[final.dat.recode == -9] <- NA
+final.dat.recode[final.dat.recode == -8] <- NA
+```
+
+Subset the variables of interest: 
+```{r, messages=FALSE, warning=FALSE}
+# items used in the LCA
+pbe.survey.lc.items <- select(final.dat.recode, Student_ID, School_ID, mastercompR, 
+                              nextcompR,
+                              rubricR, onlinecompR, projcredR, interncredR, 
+                              smallgrpR,teachdifR, givlecturR,choosehowR, retakeR, 
+                              demolearnR, adviceR, trackprogR, ontimeR, prepgradR)
+
+# admin data
+admin <- select(final.dat.recode, Student_ID, School_ID, SAU_ID, genderR, raceR, Grade, 
+                    Daysabsent_2016, Unexcused_daysabsent_2016, Days_present2016, 
+                    Enrolled2015, Enrolled2014, Enrolled2013, Enrolled2012, FRL, IEP,
+                    Graduated)
+
+# assessment data
+assessment <- select(final.dat.recode, Student_ID, School_ID, GPAUnweighted, GPAWeighted, 
+                     PSAT, 
+                     SAT, NECAP_Math,NECAP_ELA)
+
+# engagement data
+engagement <- select(final.dat.recode, School_ID, proudR, respectedR, goodjobR, 
+                     attentionR, participateR, mostimportantR, uselessR, teachcareR, 
+                     anyplaceR, talktoR, usefulR, favoriteR)
+
+# munge John's data for replication
+efa.data <- spss.dat %>%
+  dplyr::select(id, SCHOOL_ID, mastercompR, nextcompR, rubricR, onlinecompR, 
+                projcredR, interncredR,smallgrpR, teachdifR, choosehowR, retakeR, 
+                demolearnR, adviceR, trackprogR, ontimeR, prepgradR, givlecturR)
+```
+
+Munge the data for pbe survey: 
+```{r, messages=FALSE, warning=FALSE}
+## set don't know to missing
+pbe.survey.lc.items[pbe.survey.lc.items == -1] <- NA
+# recode don't know as missing
+# coding 
+# -1 = don't know 
+# 0 = strongly disagree
+# 1 = disagree
+# 2 = agree
+# 3 = strongly agree
+```
+Save cleaned data for subsequent use. 
+```{r, messages=FALSE, warning=FALSE}
+# save RDS ---
+saveRDS(admin, "../data/admin.rds") # final data from Noman
+saveRDS(assessment, "../data/assessment.RDS")
+saveRDS(efa.data, "../data/john-cleaned.RDS")
+saveRDS(engagement, "../data/engagement-items.RDS")
+saveRDS(pbe.survey.lc.items, "../data/pbe-items.RDS")
+```
+
 

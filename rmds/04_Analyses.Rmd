@@ -71,7 +71,8 @@ CBL ~~ 1*CBL
 ```
 
 ## Continuous estimation
-Now, let's actually fit the CFA model. The code below will fit the CFA model specified above using FIML, and ML estimation. Note the use specific request to not standardize all latent variables by fixing their factors to 1 in the `std.lv=FALSE` call.  
+Now, let's actually fit the CFA model. The code below will fit the CFA model specified above using FIML, and ML estimation. Note the use specific request to not standardize all latent variables by fixing their factors to 1 in the `std.lv=FALSE` call.
+
 ```{r, secondOrder.param.cont.1, messages=FALSE, warning=FALSE, tidy=TRUE, results='asis'}
 # fit as continuous
 fit.secondOrder.cont.1 <- cfa(model.secondOrder, data=items, missing='fiml', std.lv=FALSE)
